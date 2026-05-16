@@ -1,0 +1,24 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<footer class:list={['footer', className]}>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <slot name="brand" />
+    </div>
+    <div class="footer-links">
+      <slot />
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <slot name="bottom">
+      <p class="footer-legal">&copy; <span current-year></span></p>
+    </slot>
+    <slot name="social" />
+  </div>
+</footer>

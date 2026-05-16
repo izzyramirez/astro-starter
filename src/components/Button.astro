@@ -1,0 +1,56 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'outline' | 'ghost';
+  size?: 'sm' | 'lg';
+  full?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  disabled?: boolean;
+  target?: string;
+  rel?: string;
+  id?: string;
+  form?: string;
+  name?: string;
+  value?: string;
+  download?: string | boolean;
+  'aria-label'?: string;
+  'aria-controls'?: string;
+  'aria-expanded'?: 'true' | 'false';
+  'aria-haspopup'?: boolean | 'dialog' | 'listbox' | 'tree' | 'grid' | 'menu';
+  'data-module'?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size,
+  full = false,
+  type = 'button',
+  class: className,
+  ...rest
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag
+  class:list={[
+    'btn',
+    variant !== 'primary' && `cc-${variant}`,
+    size && `cc-${size}`,
+    full && 'cc-full',
+    className,
+  ]}
+  href={href}
+  type={!href ? type : undefined}
+  {...rest}
+>
+  {Astro.slots.has('icon-left') && (
+    <span class="btn-icon" aria-hidden="true"><slot name="icon-left" /></span>
+  )}
+  <slot />
+  {Astro.slots.has('icon-right') && (
+    <span class="btn-icon" aria-hidden="true"><slot name="icon-right" /></span>
+  )}
+</Tag>

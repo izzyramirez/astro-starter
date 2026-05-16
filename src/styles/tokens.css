@@ -1,5 +1,7 @@
 :root {
-  /* ─── Colors ─────────────────────────────────────────── */
+  color-scheme: light dark;
+
+  /* ─── Raw palette ─────────────────────────────────────── */
   --color-neutral-100: #f9f9f8;
   --color-neutral-200: #f1f0ed;
   --color-neutral-500: #88867f;
@@ -8,27 +10,40 @@
   --color-brand:       #0059ff;
   --color-error:       #e31700;
 
-  /* Semantic */
-  --color-bg:     var(--color-neutral-100);
-  --color-text:   var(--color-neutral-900);
-  --color-accent: var(--color-brand);
-  --color-border: color-mix(in srgb, var(--color-text), transparent 80%);
+  /* ─── Adaptive semantic colors (light-dark()) ─────────── */
+  --color-bg:      light-dark(var(--color-neutral-100), var(--color-neutral-900));
+  --color-text:    light-dark(var(--color-neutral-900), var(--color-neutral-100));
+  --color-surface: light-dark(var(--color-neutral-200), var(--color-neutral-800));
+  --color-accent:  var(--color-brand);
+  --color-border:  light-dark(
+    color-mix(in srgb, var(--color-neutral-900), transparent 80%),
+    color-mix(in srgb, var(--color-neutral-100), transparent 80%)
+  );
+  --color-soft:    light-dark(
+    color-mix(in srgb, var(--color-neutral-900), transparent 30%),
+    color-mix(in srgb, var(--color-neutral-100), transparent 30%)
+  );
+  --color-muted:   light-dark(
+    color-mix(in srgb, var(--color-neutral-900), transparent 72%),
+    color-mix(in srgb, var(--color-neutral-100), transparent 72%)
+  );
 
   /* ─── Typography ─────────────────────────────────────── */
-  --font-primary: 'General Sans', Arial, sans-serif;
+  /* --font-primary is injected by the Astro fonts API — see astro.config.mjs */
+  --font-fallback: Arial, sans-serif;
 
-  /* Fluid type scale — viewport range 320px (20rem) → 1280px (80rem) */
+  /* Fluid type scale — viewport range 360px (22.5rem) → 1280px (80rem) */
   --text-eyebrow: 0.75rem;
   --text-sm:      0.875rem;
   --text-base:    1rem;
-  --text-lg:      clamp(1.125rem, 1.083rem + 0.208vw, 1.25rem);
-  --text-xl:      clamp(1.25rem,  1.167rem + 0.417vw, 1.5rem);
+  --text-lg:      clamp(1.125rem, 1.076rem + 0.217vw, 1.25rem);
+  --text-xl:      clamp(1.25rem,  1.152rem + 0.435vw, 1.5rem);
   --text-h6:      1rem;
   --text-h5:      1.25rem;
-  --text-h4:      clamp(1.375rem, 1.333rem + 0.208vw, 1.5rem);
-  --text-h3:      clamp(1.5rem,   1.25rem  + 1.25vw,  2.25rem);
-  --text-h2:      clamp(2rem,     1.417rem + 2.917vw, 3.75rem);
-  --text-h1:      clamp(2.8rem,   1.9rem   + 4.5vw,   5.5rem);
+  --text-h4:      clamp(1.375rem, 1.326rem + 0.217vw, 1.5rem);
+  --text-h3:      clamp(1.5rem,   1.207rem + 1.304vw, 2.25rem);
+  --text-h2:      clamp(2rem,     1.315rem + 3.043vw, 3.75rem);
+  --text-h1:      clamp(2.8rem,   1.744rem + 4.696vw, 5.5rem);
 
   /* Line heights */
   --leading-none:    1;
@@ -42,29 +57,36 @@
   --tracking-wide:    0.05em;
   --tracking-widest:  0.1em;
 
+  /* ─── Gap scale ──────────────────────────────────────── */
+  /* --gap is responsive; use for the primary column/grid gap */
+  --gap:    40px;
+  --gap-xs: 8px;
+  --gap-sm: 16px;
+  --gap-md: 24px;
+  --gap-lg: var(--gap);
+  --gap-xl: 64px;
+
   /* ─── Spacing ─────────────────────────────────────────── */
   --space-xs: 0.5em;
   --space-sm: 1em;
   --space-md: 2em;
   --space-lg: 3em;
 
-  /* ─── Layout ──────────────────────────────────────────── */
-  --section-padding:  clamp(4rem, 3.333rem + 3.333vw, 6rem);
-  --container-max:    80rem;
-  --container-margin: 5vw;
-  --grid-gap:         40px;
-  --grid-gap-md:      20px;
-  --grid-gap-sm:      8px;
-
   /* ─── Components ──────────────────────────────────────── */
-  --radius-sm:      0.25rem;
-  --radius-md:      0.5rem;
-  --card-padding:   clamp(1rem, 0.833rem + 0.833vw, 1.5rem);
-  --btn-padding-y:  0.5em;
-  --btn-padding-x:  0.75em;
-  --input-radius:   0.5rem;
+  --radius-sm:    0.25rem;
+  --radius-md:    0.5rem;
+  --radius-lg:    1rem;
+  --card-padding: clamp(1rem, 0.804rem + 0.870vw, 1.5rem);
+  --btn-py:       0.5em;
+  --btn-px:       0.75em;
+  --input-radius: 0.5rem;
 
   /* ─── Accessibility ───────────────────────────────────── */
   --outline-width:  2px;
   --outline-offset: 3px;
 }
+
+/* Responsive gap */
+@media (max-width: 991px) { :root { --gap: 36px; } }
+@media (max-width: 767px) { :root { --gap: 32px; } }
+@media (max-width: 479px) { :root { --gap: 28px; } }

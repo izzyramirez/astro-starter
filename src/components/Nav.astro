@@ -1,0 +1,168 @@
+---
+import Menu from '@assets/icons/Menu.astro';
+import Close from '@assets/icons/Close.astro';
+
+interface Props {
+  logoHref?: string;
+  class?: string;
+}
+
+const { logoHref = '/', class: className } = Astro.props;
+---
+
+<header class:list={['nav', className]} data-module="nav">
+  <a href="#main-content" class="nav-skip-link">Skip to main content</a>
+  <div class="nav-inner">
+    <a class="nav-logo" href={logoHref} aria-label="Home">
+      <slot name="logo" />
+    </a>
+
+    <ul class="nav-menu" id="nav-menu" role="list">
+      <slot />
+    </ul>
+
+    <div class="nav-end">
+      <slot name="cta" />
+      <button
+        class="nav-burger"
+        type="button"
+        aria-expanded="false"
+        aria-controls="nav-menu"
+        aria-label="Open navigation"
+      >
+        <span class="nav-burger-icon--open" aria-hidden="true"><Menu /></span>
+        <span class="nav-burger-icon--close" aria-hidden="true"><Close /></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+import gsap from 'gsap';
+
+const BREAKPOINT = 992;
+
+function isDesktop() {
+  return window.innerWidth >= BREAKPOINT;
+}
+
+const nav = document.querySelector<HTMLElement>('[data-module="nav"]');
+
+if (nav) {
+  const burger = nav.querySelector<HTMLButtonElement>('.nav-burger');
+  const menu = nav.querySelector<HTMLElement>('.nav-menu');
+  const dropdowns = nav.querySelectorAll<HTMLElement>('.nav-dropdown');
+
+  function closeDropdown(dropdown: HTMLElement) {
+    const trigger = dropdown.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
+    const panel = dropdown.querySelector<HTMLElement>('.nav-dropdown-panel');
+    if (!trigger || !panel || trigger.getAttribute('aria-expanded') !== 'true') return;
+
+    trigger.setAttribute('aria-expanded', 'false');
+
+    if (isDesktop()) {
+      gsap.to(panel, {
+        opacity: 0,
+        duration: 0.15,
+        ease: 'power2.in',
+        overwrite: true,
+        onComplete: () => { panel.style.pointerEvents = 'none'; },
+      });
+    } else {
+      gsap.to(panel, { height: 0, duration: 0.2, ease: 'power2.in', overwrite: true });
+    }
+  }
+
+  // Dropdown toggles
+  dropdowns.forEach((dropdown) => {
+    const trigger = dropdown.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
+    const panel = dropdown.querySelector<HTMLElement>('.nav-dropdown-panel');
+    if (!trigger || !panel) return;
+
+    trigger.addEventListener('click', () => {
+      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+      dropdowns.forEach((d) => { if (d !== dropdown) closeDropdown(d); });
+
+      if (isOpen) {
+        closeDropdown(dropdown);
+      } else {
+        trigger.setAttribute('aria-expanded', 'true');
+        if (isDesktop()) {
+          panel.style.pointerEvents = 'auto';
+          gsap.to(panel, { opacity: 1, duration: 0.2, ease: 'power2.out', overwrite: true });
+        } else {
+          gsap.to(panel, { height: 'auto', duration: 0.3, ease: 'power2.out', overwrite: true });
+        }
+      }
+    });
+  });
+
+  // Burger
+  if (burger && menu) {
+    burger.addEventListener('click', () => {
+      const isOpen = burger.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        burger.setAttribute('aria-expanded', 'false');
+        burger.setAttribute('aria-label', 'Open navigation');
+        gsap.to(menu, {
+          height: 0,
+          duration: 0.3,
+          ease: 'power2.in',
+          overwrite: true,
+          onComplete: () => menu.classList.remove('is-open'),
+        });
+      } else {
+        burger.setAttribute('aria-expanded', 'true');
+        burger.setAttribute('aria-label', 'Close navigation');
+        menu.classList.add('is-open');
+        gsap.to(menu, { height: 'auto', duration: 0.35, ease: 'power2.out', overwrite: true });
+      }
+    });
+  }
+
+  // Close all on outside click
+  document.addEventListener('click', (e) => {
+    if (!(e.target as Element).closest('[data-module="nav"]')) {
+      dropdowns.forEach(closeDropdown);
+    }
+  });
+
+  // Close all on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    dropdowns.forEach(closeDropdown);
+    if (burger && menu && burger.getAttribute('aria-expanded') === 'true') {
+      burger.setAttribute('aria-expanded', 'false');
+      burger.setAttribute('aria-label', 'Open navigation');
+      gsap.to(menu, {
+        height: 0,
+        duration: 0.2,
+        ease: 'power2.in',
+        overwrite: true,
+        onComplete: () => menu.classList.remove('is-open'),
+      });
+    }
+  });
+
+  // Resize: clear GSAP overrides so CSS media queries take back control
+  let resizeTimer: ReturnType<typeof setTimeout>;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      dropdowns.forEach((d) => {
+        const t = d.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
+        const p = d.querySelector<HTMLElement>('.nav-dropdown-panel');
+        if (t) t.setAttribute('aria-expanded', 'false');
+        if (p) gsap.set(p, { clearProps: 'height,opacity,pointerEvents' });
+      });
+
+      if (menu && burger) {
+        menu.classList.remove('is-open');
+        burger.setAttribute('aria-expanded', 'false');
+        burger.setAttribute('aria-label', 'Open navigation');
+        gsap.set(menu, { clearProps: 'height' });
+      }
+    }, 150);
+  });
+}
+</script>

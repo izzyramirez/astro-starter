@@ -1,0 +1,15 @@
+---
+interface Props {
+  title: string;
+  class?: string;
+}
+
+const { title, class: className } = Astro.props;
+---
+
+<div class:list={['footer-group', className]}>
+  <p class="footer-group-title">{title}</p>
+  <ul class="footer-group-list">
+    <slot />
+  </ul>
+</div>
