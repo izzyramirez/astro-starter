@@ -1,0 +1,41 @@
+---
+import SEO from './SEO.astro';
+import '@/styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  ogImageAlt?: string;
+  ogType?: string;
+  robots?: string;
+  siteName?: string;
+  sameAs?: string[];
+  datePublished?: Date;
+  dateModified?: Date;
+  articleAuthor?: string;
+  breadcrumbItem?: string;
+  lang?: string;
+}
+
+const { lang = 'en', ...seoProps } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <SEO {...seoProps} />
+    <slot name="head" />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <slot />
+    </div>
+
+    <script>
+      import '@/scripts/main';
+    </script>
+  </body>
+</html>

@@ -1,17 +1,236 @@
 ---
-
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Accordion from '@/components/Accordion.astro';
+import AccordionItem from '@/components/AccordionItem.astro';
+import Dialog from '@/components/Dialog.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Astro Starter"
+  description="A modern Astro 6 starter with CSS layers, General Sans, GSAP, and utility components."
+>
+  <!-- Skip link -->
+  <a href="#main-content" id="skip-link" class="nav-skip-link">Skip to content</a>
+
+  <!-- Nav -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container cc-nav">
+      <a class="nav-logo_link" href="/">Logo</a>
+      <div class="nav-menu">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/about">About</a>
+        <a class="btn" href="/contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <main id="main-content" class="page-main">
+
+    <!-- Hero -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Astro Starter</p>
+        <h1>Build something<br/>worth finishing.</h1>
+        <p class="paragraph-xl u-text-soft">
+          A modern Astro 6 template with CSS cascade layers, fluid typography,
+          GSAP, and accessible components — no Webflow required.
+        </p>
+        <div class="u-d-flex" style="gap: 1rem; flex-wrap: wrap;">
+          <a class="btn" href="#">Get started</a>
+          <a class="btn cc-outline" href="#">View docs</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grid demo -->
+    <section class="section cc-mode-off-base">
+      <div class="container">
+        <p class="eyebrow">Layout</p>
+        <h2>12-column grid</h2>
+        <div class="row u-mt-md">
+          <div class="col col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <p class="eyebrow">Component</p>
+                <h3 class="h5">Card title</h3>
+                <p class="paragraph-sm u-text-soft u-mb-0">
+                  A flexible card component with border, padding, and full-height flex layout.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <p class="eyebrow">Component</p>
+                <h3 class="h5">Card title</h3>
+                <p class="paragraph-sm u-text-soft u-mb-0">
+                  Columns collapse to full-width on mobile automatically via the grid layer.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <p class="eyebrow">Component</p>
+                <h3 class="h5">Card title</h3>
+                <p class="paragraph-sm u-text-soft u-mb-0">
+                  Use <code>.col-md-*</code> for tablet and <code>.col-sm-*</code> for mobile overrides.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accordion demo -->
+    <section class="section">
+      <div class="container">
+        <div class="row row-justify-between">
+          <div class="col col-lg-5">
+            <p class="eyebrow">Components</p>
+            <h2>Accordion</h2>
+            <p class="u-text-soft">
+              Animated with GSAP. Fully accessible with ARIA attributes auto-applied on init.
+            </p>
+          </div>
+          <div class="col col-lg-6">
+            <Accordion>
+              <AccordionItem title="What is this starter template?">
+                <p>
+                  A production-ready Astro 6 base that replaces a Webflow starter.
+                  It includes CSS cascade layers, fluid typography, GSAP components,
+                  and an SEO layout — all without jQuery or Webflow's runtime.
+                </p>
+              </AccordionItem>
+              <AccordionItem title="How do I customize the design tokens?">
+                <p>
+                  All design tokens live in <code>src/styles/tokens.css</code>.
+                  Colors, type scale, spacing, radii, and container sizes are all
+                  CSS custom properties you can override at the <code>:root</code> level.
+                </p>
+              </AccordionItem>
+              <AccordionItem title="Can I add more components?">
+                <p>
+                  Yes. Follow the same pattern as <code>Accordion.astro</code> and
+                  <code>Dialog.astro</code>. Vanilla JS in <code>&lt;script&gt;</code>
+                  tags is bundled by Vite and deduped automatically by Astro.
+                </p>
+              </AccordionItem>
+            </Accordion>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dialog demo -->
+    <section class="section cc-mode-off-base">
+      <div class="container">
+        <p class="eyebrow">Components</p>
+        <h2>Dialog</h2>
+        <p class="u-text-soft u-mb-md">
+          Uses the native <code>&lt;dialog&gt;</code> element. Closes on backdrop click or the close button.
+        </p>
+        <Dialog triggerLabel="Open dialog">
+          <h3 class="h4 u-mb-sm">Dialog title</h3>
+          <p>
+            This dialog uses the native <code>&lt;dialog&gt;</code> element with
+            <code>showModal()</code> and <code>close()</code>. IDs and ARIA
+            attributes are auto-generated on init.
+          </p>
+          <p class="u-mb-0 u-text-soft paragraph-sm">Click outside or the × button to close.</p>
+        </Dialog>
+      </div>
+    </section>
+
+    <!-- Typography demo -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Typography</p>
+        <h2>Type scale</h2>
+        <div class="u-border u-mt-md u-mb-md"></div>
+        <h1>Heading 1</h1>
+        <h2>Heading 2</h2>
+        <h3>Heading 3</h3>
+        <h4>Heading 4</h4>
+        <h5>Heading 5</h5>
+        <h6>Heading 6</h6>
+        <div class="u-border u-mt-md u-mb-md"></div>
+        <p class="paragraph-xl">Paragraph XL — lead copy or hero subtext.</p>
+        <p class="paragraph-lg">Paragraph LG — intro copy or callout text.</p>
+        <p>Paragraph base — body copy. Text wraps with <code>text-wrap: pretty</code> to avoid orphaned words.</p>
+        <p class="paragraph-sm u-text-soft">Paragraph SM — captions, metadata, helper text.</p>
+        <p class="eyebrow">Eyebrow label</p>
+      </div>
+    </section>
+
+    <!-- Color mode demo -->
+    <section class="section cc-mode-invert">
+      <div class="container">
+        <p class="eyebrow">Color modes</p>
+        <h2>Inverted section</h2>
+        <p class="u-text-soft">
+          Add <code>.cc-mode-invert</code>, <code>.cc-mode-off-base</code>, or
+          <code>.cc-mode-off-invert</code> to any element to scope a color mode.
+          All tokens update via CSS custom properties — no extra classes needed on children.
+        </p>
+        <div class="u-d-flex" style="gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
+          <a class="btn" href="#">Primary button</a>
+          <a class="btn cc-outline" href="#">Outline button</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form demo -->
+    <section class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col col-lg-6">
+            <p class="eyebrow">Components</p>
+            <h2>Form</h2>
+            <form class="form" novalidate>
+              <div class="input-group">
+                <label class="input-label" for="name">Full name</label>
+                <input class="input" type="text" id="name" name="name" placeholder="Jane Smith" />
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="email">Email address</label>
+                <input class="input" type="email" id="email" name="email" placeholder="jane@example.com" />
+              </div>
+              <div class="input-group cc-textarea">
+                <label class="input-label" for="message">Message</label>
+                <textarea class="input" id="message" name="message" placeholder="Your message..."></textarea>
+              </div>
+              <button type="submit" class="btn cc-full">Send message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="section cc-footer">
+    <div class="container">
+      <div class="row row-justify-between row-align-center">
+        <div class="col col-lg-6">
+          <!-- TODO: Replace with your name/brand -->
+          <p class="paragraph-sm u-text-soft u-mb-0">
+            &copy; <span current-year></span> Your Name. All rights reserved.
+          </p>
+        </div>
+        <div class="col col-lg-6 u-text-right">
+          <ul class="footer-social_list" style="justify-content: flex-end;">
+            <!-- TODO: Add your social links -->
+            <li><a class="footer-social_link" href="#" aria-label="Twitter">↗</a></li>
+            <li><a class="footer-social_link" href="#" aria-label="GitHub">↗</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
