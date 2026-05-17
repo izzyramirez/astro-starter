@@ -28,9 +28,9 @@ const { triggerLabel = 'Open', class: className } = Astro.props;
 let modalCount = 0;
 
 document.querySelectorAll<HTMLElement>('[data-module="dialog"]').forEach((module) => {
-  const id = `modal-${++modalCount}`;
+  const id      = `modal-${++modalCount}`;
   const dialogEl = module.querySelector<HTMLDialogElement>('dialog');
-  const btnOpen = module.querySelector<HTMLElement>('[aria-controls]');
+  const btnOpen  = module.querySelector<HTMLElement>('[aria-controls]');
   const btnClose = module.querySelector<HTMLButtonElement>('dialog button');
 
   if (!dialogEl || !btnOpen || !btnClose) return;
@@ -47,7 +47,7 @@ document.querySelectorAll<HTMLElement>('[data-module="dialog"]').forEach((module
     if (
       e.clientX < rect.left ||
       e.clientX > rect.right ||
-      e.clientY < rect.top ||
+      e.clientY < rect.top  ||
       e.clientY > rect.bottom
     ) {
       dialogEl.close();
@@ -55,3 +55,76 @@ document.querySelectorAll<HTMLElement>('[data-module="dialog"]').forEach((module
   });
 });
 </script>
+
+<style is:global>
+  body:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  dialog {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0;
+    max-width: min(90vw, 800px);
+    width: 100%;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    position: relative;
+  }
+
+  dialog[open] {
+    animation: dialog-fadein 0.4s ease-out forwards;
+  }
+
+  dialog::backdrop {
+    background: color-mix(in srgb, var(--color-neutral-900) 92%, transparent);
+  }
+
+  @keyframes dialog-fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  dialog::-webkit-scrollbar { width: 10px; }
+
+  dialog::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: transparent;
+  }
+
+  dialog::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    border: 2px solid var(--color-bg);
+    background: var(--color-text);
+  }
+
+  .modal {
+    padding: var(--card-padding);
+    overflow-y: auto;
+    max-height: 90vh;
+  }
+
+  .modal_close-button {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    position: absolute;
+    inset: 0.5rem 0.5rem auto auto;
+    transition: opacity 0.2s;
+    color: inherit;
+  }
+
+  .modal_close-button:hover { opacity: 0.6; }
+
+  .modal_close-button:focus-visible {
+    outline: var(--outline-width) solid var(--color-accent);
+    outline-offset: var(--outline-offset);
+  }
+</style>

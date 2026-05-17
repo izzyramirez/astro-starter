@@ -40,129 +40,390 @@ const { logoHref = '/', class: className } = Astro.props;
 <script>
 import gsap from 'gsap';
 
-const BREAKPOINT = 992;
-
-function isDesktop() {
-  return window.innerWidth >= BREAKPOINT;
-}
-
 const nav = document.querySelector<HTMLElement>('[data-module="nav"]');
 
 if (nav) {
   const burger = nav.querySelector<HTMLButtonElement>('.nav-burger');
-  const menu = nav.querySelector<HTMLElement>('.nav-menu');
-  const dropdowns = nav.querySelectorAll<HTMLElement>('.nav-dropdown');
+  const menu   = nav.querySelector<HTMLElement>('.nav-menu');
+  const drops  = nav.querySelectorAll<HTMLElement>('.nav-dropdown');
 
-  function closeDropdown(dropdown: HTMLElement) {
-    const trigger = dropdown.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
-    const panel = dropdown.querySelector<HTMLElement>('.nav-dropdown-panel');
+  // Keep --nav-h up-to-date so fixed mega panels anchor below the nav
+  const navEl = nav; // non-null reference for closures
+  function syncNavHeight() {
+    navEl.style.setProperty('--nav-h', `${navEl.offsetHeight}px`);
+  }
+  syncNavHeight();
+  window.addEventListener('resize', syncNavHeight, { passive: true });
+
+  const mqDesktop = window.matchMedia('(min-width: 992px)');
+
+  // ── Dropdown helpers ───────────────────────────────────
+
+  function closeDropdown(dd: HTMLElement, instant = false) {
+    const trigger = dd.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
+    const panel   = dd.querySelector<HTMLElement>('.nav-dropdown-panel');
     if (!trigger || !panel || trigger.getAttribute('aria-expanded') !== 'true') return;
 
     trigger.setAttribute('aria-expanded', 'false');
 
-    if (isDesktop()) {
-      gsap.to(panel, {
-        opacity: 0,
-        duration: 0.15,
-        ease: 'power2.in',
-        overwrite: true,
-        onComplete: () => { panel.style.pointerEvents = 'none'; },
-      });
+    if (mqDesktop.matches) {
+      if (instant) {
+        gsap.set(panel, { opacity: 0, y: 0, pointerEvents: 'none' });
+      } else {
+        gsap.to(panel, {
+          opacity: 0, y: -4, duration: 0.15, ease: 'power1.in', overwrite: true,
+          onComplete: () => { panel.style.pointerEvents = 'none'; },
+        });
+      }
     } else {
-      gsap.to(panel, { height: 0, duration: 0.2, ease: 'power2.in', overwrite: true });
+      if (instant) {
+        gsap.set(panel, { height: 0 });
+      } else {
+        gsap.to(panel, { height: 0, duration: 0.2, ease: 'power1.in', overwrite: true });
+      }
     }
   }
 
-  // Dropdown toggles
-  dropdowns.forEach((dropdown) => {
-    const trigger = dropdown.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
-    const panel = dropdown.querySelector<HTMLElement>('.nav-dropdown-panel');
+  function openDropdown(trigger: HTMLButtonElement, panel: HTMLElement) {
+    trigger.setAttribute('aria-expanded', 'true');
+
+    if (mqDesktop.matches) {
+      panel.style.pointerEvents = 'auto';
+      gsap.fromTo(panel,
+        { opacity: 0, y: -6 },
+        { opacity: 1, y: 0, duration: 0.22, ease: 'power2.out', overwrite: true }
+      );
+    } else {
+      gsap.to(panel, { height: 'auto', duration: 0.3, ease: 'power2.out', overwrite: true });
+    }
+  }
+
+  // ── Dropdown click handlers ────────────────────────────
+
+  drops.forEach((dd) => {
+    const trigger = dd.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
+    const panel   = dd.querySelector<HTMLElement>('.nav-dropdown-panel');
     if (!trigger || !panel) return;
 
     trigger.addEventListener('click', () => {
       const isOpen = trigger.getAttribute('aria-expanded') === 'true';
-      dropdowns.forEach((d) => { if (d !== dropdown) closeDropdown(d); });
-
-      if (isOpen) {
-        closeDropdown(dropdown);
-      } else {
-        trigger.setAttribute('aria-expanded', 'true');
-        if (isDesktop()) {
-          panel.style.pointerEvents = 'auto';
-          gsap.to(panel, { opacity: 1, duration: 0.2, ease: 'power2.out', overwrite: true });
-        } else {
-          gsap.to(panel, { height: 'auto', duration: 0.3, ease: 'power2.out', overwrite: true });
-        }
-      }
+      drops.forEach((d) => { if (d !== dd) closeDropdown(d); });
+      if (isOpen) closeDropdown(dd); else openDropdown(trigger, panel);
     });
   });
 
-  // Burger
+  // ── Burger / mobile menu ───────────────────────────────
+
   if (burger && menu) {
-    burger.addEventListener('click', () => {
-      const isOpen = burger.getAttribute('aria-expanded') === 'true';
-      if (isOpen) {
-        burger.setAttribute('aria-expanded', 'false');
-        burger.setAttribute('aria-label', 'Open navigation');
-        gsap.to(menu, {
-          height: 0,
-          duration: 0.3,
-          ease: 'power2.in',
-          overwrite: true,
-          onComplete: () => menu.classList.remove('is-open'),
-        });
-      } else {
-        burger.setAttribute('aria-expanded', 'true');
-        burger.setAttribute('aria-label', 'Close navigation');
-        menu.classList.add('is-open');
-        gsap.to(menu, { height: 'auto', duration: 0.35, ease: 'power2.out', overwrite: true });
-      }
+    const b = burger; // non-null references for closures
+    const m = menu;
+
+    function openMenu() {
+      b.setAttribute('aria-expanded', 'true');
+      b.setAttribute('aria-label', 'Close navigation');
+      gsap.to(m, {
+        height: 'auto', duration: 0.4, ease: 'power2.out', overwrite: true,
+        onComplete: () => { m.style.overflow = 'visible'; },
+      });
+    }
+
+    function closeMenu() {
+      b.setAttribute('aria-expanded', 'false');
+      b.setAttribute('aria-label', 'Open navigation');
+      drops.forEach((d) => closeDropdown(d, true));
+      m.style.overflow = 'hidden';
+      gsap.to(m, { height: 0, duration: 0.3, ease: 'power2.in', overwrite: true });
+    }
+
+    b.addEventListener('click', () => {
+      b.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu();
     });
   }
 
-  // Close all on outside click
+  // ── Global handlers ────────────────────────────────────
+
   document.addEventListener('click', (e) => {
     if (!(e.target as Element).closest('[data-module="nav"]')) {
-      dropdowns.forEach(closeDropdown);
+      drops.forEach((d) => closeDropdown(d));
     }
   });
 
-  // Close all on Escape
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
-    dropdowns.forEach(closeDropdown);
-    if (burger && menu && burger.getAttribute('aria-expanded') === 'true') {
+    drops.forEach((d) => closeDropdown(d));
+    if (burger?.getAttribute('aria-expanded') === 'true' && menu) {
       burger.setAttribute('aria-expanded', 'false');
       burger.setAttribute('aria-label', 'Open navigation');
-      gsap.to(menu, {
-        height: 0,
-        duration: 0.2,
-        ease: 'power2.in',
-        overwrite: true,
-        onComplete: () => menu.classList.remove('is-open'),
-      });
+      drops.forEach((d) => closeDropdown(d, true));
+      menu.style.overflow = 'hidden';
+      gsap.to(menu, { height: 0, duration: 0.2, ease: 'power1.in', overwrite: true });
     }
   });
 
-  // Resize: clear GSAP overrides so CSS media queries take back control
-  let resizeTimer: ReturnType<typeof setTimeout>;
+  // Reset GSAP overrides on resize so CSS media queries take back control
+  let resizeId: ReturnType<typeof setTimeout>;
   window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      dropdowns.forEach((d) => {
-        const t = d.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
-        const p = d.querySelector<HTMLElement>('.nav-dropdown-panel');
-        if (t) t.setAttribute('aria-expanded', 'false');
-        if (p) gsap.set(p, { clearProps: 'height,opacity,pointerEvents' });
-      });
-
-      if (menu && burger) {
-        menu.classList.remove('is-open');
+    clearTimeout(resizeId);
+    resizeId = setTimeout(() => {
+      drops.forEach((d) => closeDropdown(d, true));
+      if (burger && menu) {
         burger.setAttribute('aria-expanded', 'false');
         burger.setAttribute('aria-label', 'Open navigation');
+        menu.style.overflow = '';
         gsap.set(menu, { clearProps: 'height' });
       }
     }, 150);
-  });
+  }, { passive: true });
 }
 </script>
+
+<style is:global>
+  /* ── Nav shell ──────────────────────────────────────── */
+  .nav {
+    z-index: 999;
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    width: 100%;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+  }
+
+  .nav-skip-link {
+    z-index: 9998;
+    background-color: var(--color-accent);
+    color: var(--color-neutral-100);
+    opacity: 0;
+    height: 3em;
+    text-align: center;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -8em;
+    padding: 0.8em 1.5em;
+    font-size: 0.75rem;
+    font-weight: var(--fw-medium);
+    line-height: 1;
+    text-decoration: none;
+    transition: opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
+                margin  0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: absolute;
+    inset: 0 auto auto 50%;
+    transform: translate(-50%);
+  }
+
+  .nav-skip-link:focus-visible {
+    opacity: 1;
+    outline: var(--outline-width) solid var(--color-accent);
+    outline-offset: var(--outline-offset);
+    margin-top: 0.2em;
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 5vw;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    flex-shrink: 0;
+  }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-end {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  /* ── Nav links ──────────────────────────────────────── */
+  .nav-link {
+    padding: var(--btn-py) var(--btn-px);
+    border-radius: var(--radius-md);
+    color: currentColor;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3em;
+    text-decoration: none;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: var(--fw-regular);
+    cursor: pointer;
+    transition: color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .nav-link:hover { color: var(--color-accent); }
+
+  .nav-link:focus-visible {
+    outline: var(--outline-width) solid var(--color-accent);
+    outline-offset: var(--outline-offset);
+  }
+
+  /* ── Dropdown ────────────────────────────────────────── */
+  .nav-dropdown { position: relative; }
+
+  .nav-dropdown-arrow {
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+  }
+
+  .nav-dropdown-trigger[aria-expanded="true"] .nav-dropdown-arrow {
+    transform: rotate(180deg);
+  }
+
+  .nav-dropdown-panel {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.375rem;
+    min-width: 220px;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 4px 24px color-mix(in srgb, var(--color-text), transparent 88%);
+  }
+
+  .nav-dropdown-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.9375rem;
+    transition: background-color 0.15s;
+  }
+
+  .nav-dropdown-link:hover { background-color: var(--color-surface); }
+
+  /* ── Mega dropdown ───────────────────────────────────── */
+  .nav-dropdown-panel.cc-mega {
+    position: fixed;
+    /* --nav-h is set by JS on the .nav element and inherited here */
+    top: var(--nav-h, 61px);
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-width: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-radius: 0;
+    box-shadow: 0 8px 32px color-mix(in srgb, var(--color-text), transparent 88%);
+  }
+
+  .nav-mega-inner {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 2rem 5vw;
+  }
+
+  /* ── Burger ──────────────────────────────────────────── */
+  .nav-burger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .nav-burger:focus-visible {
+    outline: var(--outline-width) solid var(--color-accent);
+    outline-offset: var(--outline-offset);
+  }
+
+  .nav-burger-icon--close { display: none; }
+  .nav-burger[aria-expanded="true"] .nav-burger-icon--open  { display: none; }
+  .nav-burger[aria-expanded="true"] .nav-burger-icon--close { display: flex; }
+
+  /* ── Mobile ──────────────────────────────────────────── */
+  @media (max-width: 991px) {
+    .nav-burger { display: flex; }
+
+    .nav-menu {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 0;
+      overflow: hidden;
+      background-color: var(--color-bg);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-link {
+      justify-content: flex-start;
+      border-radius: 0;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-dropdown { width: 100%; }
+
+    .nav-dropdown-panel {
+      position: static;
+      opacity: 1;
+      pointer-events: auto;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      background-color: var(--color-surface);
+      height: 0;
+      overflow: hidden;
+      padding: 0;
+      min-width: 0;
+    }
+
+    .nav-dropdown-link {
+      padding-left: 2rem;
+      border-radius: 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-dropdown-panel.cc-mega {
+      position: static;
+      top: unset;
+      width: 100%;
+      border: none;
+      box-shadow: none;
+    }
+
+    .nav-mega-inner { padding: 1rem; }
+  }
+</style>

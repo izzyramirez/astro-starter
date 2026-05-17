@@ -32,6 +32,12 @@
   /* --font-primary is injected by the Astro fonts API — see astro.config.mjs */
   --font-fallback: Arial, sans-serif;
 
+  /* Font weights */
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+
   /* Fluid type scale — viewport range 360px (22.5rem) → 1280px (80rem) */
   --text-eyebrow: 0.75rem;
   --text-sm:      0.875rem;
@@ -59,12 +65,12 @@
 
   /* ─── Gap scale ──────────────────────────────────────── */
   /* --gap is responsive; use for the primary column/grid gap */
-  --gap:    40px;
-  --gap-xs: 8px;
-  --gap-sm: 16px;
-  --gap-md: 24px;
+  --gap:    2.5rem;
+  --gap-xs: 0.5rem;
+  --gap-sm: 1rem;
+  --gap-md: 1.5rem;
   --gap-lg: var(--gap);
-  --gap-xl: 64px;
+  --gap-xl: 4rem;
 
   /* ─── Spacing ─────────────────────────────────────────── */
   --space-xs: 0.5em;
@@ -87,6 +93,6 @@
 }
 
 /* Responsive gap */
-@media (max-width: 991px) { :root { --gap: 36px; } }
-@media (max-width: 767px) { :root { --gap: 32px; } }
-@media (max-width: 479px) { :root { --gap: 28px; } }
+@media (max-width: 991px) { :root { --gap: 2.25rem; } }
+@media (max-width: 767px) { :root { --gap: 2rem; } }
+@media (max-width: 479px) { :root { --gap: 1.75rem; } }

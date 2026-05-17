@@ -22,3 +22,111 @@ const { class: className } = Astro.props;
     <slot name="social" />
   </div>
 </footer>
+
+<style is:global>
+  .footer {
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap);
+    padding: 4rem 5vw 2rem;
+    max-width: 80rem;
+    margin: 0 auto;
+  }
+
+  .footer-brand {
+    flex: 0 0 auto;
+    min-width: 200px;
+    max-width: 280px;
+  }
+
+  .footer-logo {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 1rem;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap);
+    flex: 1;
+  }
+
+  .footer-group { flex: 1; min-width: 140px; }
+
+  .footer-group-title {
+    font-size: var(--text-sm);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: var(--color-soft);
+  }
+
+  .footer-group-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .footer-group-list a {
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.9375rem;
+    transition: color 0.2s;
+  }
+
+  .footer-group-list a:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1.5rem 5vw;
+    max-width: 80rem;
+    margin: 0 auto;
+  }
+
+  .footer-legal {
+    font-size: var(--text-sm);
+    color: var(--color-soft);
+    margin-bottom: 0;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    color: var(--color-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-social a:hover { color: var(--color-text); }
+</style>
