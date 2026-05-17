@@ -1,25 +1,33 @@
 ---
-interface Props {
-  class?: string;
-}
-
-const { class: className } = Astro.props;
+import FooterLinkGroup from './FooterLinkGroup.astro';
 ---
 
-<footer class:list={['footer', className]}>
+<footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <slot name="brand" />
+      <a href="/" class="footer-logo" style="font-weight: 500; font-size: 1.125rem;">Starter</a>
     </div>
     <div class="footer-links">
-      <slot />
+      <FooterLinkGroup title="Product">
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Changelog</a></li>
+      </FooterLinkGroup>
+
+      <FooterLinkGroup title="Company">
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+      </FooterLinkGroup>
+
+      <FooterLinkGroup title="Legal">
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+      </FooterLinkGroup>
     </div>
   </div>
   <div class="footer-bottom">
-    <slot name="bottom">
-      <p class="footer-legal">&copy; <span current-year></span></p>
-    </slot>
-    <slot name="social" />
+    <p class="footer-legal">&copy; <span current-year></span> Astro Starter. All rights reserved.</p>
   </div>
 </footer>
 

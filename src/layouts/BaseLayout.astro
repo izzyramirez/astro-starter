@@ -1,6 +1,8 @@
 ---
 import { Font } from 'astro:assets';
 import SEO from './SEO.astro';
+import Nav from '@components/Nav.astro';
+import Footer from '@components/Footer.astro';
 import '@/styles/global.css';
 
 interface Props {
@@ -32,7 +34,11 @@ const { lang = 'en', ...seoProps } = Astro.props;
     <slot name="head" />
   </head>
   <body>
-    <slot />
+    <Nav />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
     <script>
       import '@/scripts/main';
     </script>

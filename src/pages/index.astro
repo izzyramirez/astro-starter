@@ -1,10 +1,5 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import Nav from '@components/Nav.astro';
-import NavDropdown from '@components/NavDropdown.astro';
-import NavMegaDropdown from '@components/NavMegaDropdown.astro';
-import Footer from '@components/Footer.astro';
-import FooterLinkGroup from '@components/FooterLinkGroup.astro';
 import Button from '@components/Button.astro';
 import Accordion from '@components/Accordion.astro';
 import AccordionItem from '@components/AccordionItem.astro';
@@ -15,46 +10,7 @@ import ArrowRight from '@assets/icons/ArrowRight.astro';
 <BaseLayout
   title="Astro Starter"
   description="A modern Astro 6 starter with CSS layers, General Sans, GSAP, and utility components."
->
-  <Nav logoHref="/">
-    <Fragment slot="logo">Starter</Fragment>
-
-    <li><a class="nav-link" href="/">Home</a></li>
-    <li><a class="nav-link" href="#">About</a></li>
-    <NavDropdown label="Resources">
-      <a class="nav-dropdown-link" href="#">Documentation</a>
-      <a class="nav-dropdown-link" href="#">Changelog</a>
-      <a class="nav-dropdown-link" href="#">Blog</a>
-    </NavDropdown>
-    <NavMegaDropdown label="Platform">
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
-        <div>
-          <p style="font-weight: var(--fw-semibold); margin-bottom: 0.5rem;">Build</p>
-          <a class="nav-dropdown-link" href="#">Components</a>
-          <a class="nav-dropdown-link" href="#">Templates</a>
-          <a class="nav-dropdown-link" href="#">Integrations</a>
-        </div>
-        <div>
-          <p style="font-weight: var(--fw-semibold); margin-bottom: 0.5rem;">Learn</p>
-          <a class="nav-dropdown-link" href="#">Documentation</a>
-          <a class="nav-dropdown-link" href="#">Tutorials</a>
-          <a class="nav-dropdown-link" href="#">Blog</a>
-        </div>
-        <div>
-          <p style="font-weight: var(--fw-semibold); margin-bottom: 0.5rem;">Company</p>
-          <a class="nav-dropdown-link" href="#">About</a>
-          <a class="nav-dropdown-link" href="#">Careers</a>
-          <a class="nav-dropdown-link" href="#">Contact</a>
-        </div>
-      </div>
-    </NavMegaDropdown>
-
-    <Button slot="cta" href="#">Get started</Button>
-  </Nav>
-
-  <main id="main-content">
-
-    <!-- Hero -->
+>    <!-- Hero -->
     <section style="padding: 8rem 5vw 6rem; max-width: 80rem; margin: 0 auto;">
       <p class="eyebrow">Astro Starter</p>
       <h1 style="max-width: 16ch;">Build something<br>worth finishing.</h1>
@@ -192,31 +148,4 @@ import ArrowRight from '@assets/icons/ArrowRight.astro';
         <Button type="submit" full>Send message</Button>
       </form>
     </section>
-
-  </main>
-
-  <Footer>
-    <a href="/" class="footer-logo" slot="brand" style="font-weight: 500; font-size: 1.125rem; color: inherit;">Starter</a>
-
-    <FooterLinkGroup title="Product">
-      <li><a href="#">Features</a></li>
-      <li><a href="#">Pricing</a></li>
-      <li><a href="#">Changelog</a></li>
-    </FooterLinkGroup>
-
-    <FooterLinkGroup title="Company">
-      <li><a href="#">About</a></li>
-      <li><a href="#">Blog</a></li>
-      <li><a href="#">Careers</a></li>
-    </FooterLinkGroup>
-
-    <FooterLinkGroup title="Legal">
-      <li><a href="#">Privacy</a></li>
-      <li><a href="#">Terms</a></li>
-    </FooterLinkGroup>
-
-    <Fragment slot="bottom">
-      <p class="footer-legal">&copy; <span current-year></span> Astro Starter. All rights reserved.</p>
-    </Fragment>
-  </Footer>
 </BaseLayout>

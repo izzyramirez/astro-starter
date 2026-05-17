@@ -1,28 +1,59 @@
 ---
+import NavDropdown from './NavDropdown.astro';
+import NavMegaDropdown from './NavMegaDropdown.astro';
+import Button from './Button.astro';
 import Menu from '@assets/icons/Menu.astro';
 import Close from '@assets/icons/Close.astro';
+import BoilerPlate from '@/assets/icons/BoilerPlate.astro';
 
 interface Props {
   logoHref?: string;
-  class?: string;
 }
 
-const { logoHref = '/', class: className } = Astro.props;
+const { logoHref = '/' } = Astro.props;
 ---
 
-<header class:list={['nav', className]} data-module="nav">
+<header class="nav" data-module="nav">
   <a href="#main-content" class="nav-skip-link">Skip to main content</a>
   <div class="nav-inner">
-    <a class="nav-logo" href={logoHref} aria-label="Home">
-      <slot name="logo" />
+    <a class="nav-logo" href="/" aria-label="Home">
+      <BoilerPlate />
     </a>
 
     <ul class="nav-menu" id="nav-menu" role="list">
-      <slot />
+      <li><a class="nav-link" href="/">Home</a></li>
+      <li><a class="nav-link" href="#">About</a></li>
+      <NavDropdown label="Resources">
+        <a class="nav-dropdown-link" href="#">Documentation</a>
+        <a class="nav-dropdown-link" href="#">Changelog</a>
+        <a class="nav-dropdown-link" href="#">Blog</a>
+      </NavDropdown>
+      <NavMegaDropdown label="Platform">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+          <div>
+            <p style="font-weight: var(--fw-semibold); margin-bottom: 0.5rem;">Build</p>
+            <a class="nav-dropdown-link" href="#">Components</a>
+            <a class="nav-dropdown-link" href="#">Templates</a>
+            <a class="nav-dropdown-link" href="#">Integrations</a>
+          </div>
+          <div>
+            <p style="font-weight: var(--fw-semibold); margin-bottom: 0.5rem;">Learn</p>
+            <a class="nav-dropdown-link" href="#">Documentation</a>
+            <a class="nav-dropdown-link" href="#">Tutorials</a>
+            <a class="nav-dropdown-link" href="#">Blog</a>
+          </div>
+          <div>
+            <p style="font-weight: var(--fw-semibold); margin-bottom: 0.5rem;">Company</p>
+            <a class="nav-dropdown-link" href="#">About</a>
+            <a class="nav-dropdown-link" href="#">Careers</a>
+            <a class="nav-dropdown-link" href="#">Contact</a>
+          </div>
+        </div>
+      </NavMegaDropdown>
     </ul>
 
     <div class="nav-end">
-      <slot name="cta" />
+      <Button href="#">Get started</Button>
       <button
         class="nav-burger"
         type="button"
@@ -48,7 +79,7 @@ if (nav) {
   const drops  = nav.querySelectorAll<HTMLElement>('.nav-dropdown');
 
   // Keep --nav-h up-to-date so fixed mega panels anchor below the nav
-  const navEl = nav; // non-null reference for closures
+  const navEl = nav;
   function syncNavHeight() {
     navEl.style.setProperty('--nav-h', `${navEl.offsetHeight}px`);
   }
@@ -118,7 +149,7 @@ if (nav) {
   // ── Burger / mobile menu ───────────────────────────────
 
   if (burger && menu) {
-    const b = burger; // non-null references for closures
+    const b = burger;
     const m = menu;
 
     function openMenu() {
@@ -245,8 +276,10 @@ if (nav) {
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: inherit;
+    color: var(--color-accent);
     flex-shrink: 0;
+    width: 100%;
+    max-width: 3.25rem;
   }
 
   .nav-menu {
