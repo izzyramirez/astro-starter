@@ -76,8 +76,6 @@ document.querySelectorAll<HTMLElement>('[data-module="accordion"]').forEach((mod
   }
 
   .accordion-trigger {
-    all: unset;
-    box-sizing: border-box;
     width: 100%;
     padding: var(--card-padding);
     display: flex;
@@ -92,8 +90,6 @@ document.querySelectorAll<HTMLElement>('[data-module="accordion"]').forEach((mod
   .accordion-trigger:hover { color: var(--color-accent); }
 
   .accordion-trigger:focus-visible {
-    outline: var(--outline-width) solid var(--color-accent);
-    outline-offset: var(--outline-offset);
     border-radius: var(--radius-md);
   }
 

@@ -40,6 +40,7 @@ document.querySelectorAll<HTMLElement>('[data-module="dialog"]').forEach((module
   btnOpen.id = `trigger-${id}`;
 
   btnOpen.addEventListener('click', () => dialogEl.showModal());
+
   btnClose.addEventListener('click', () => dialogEl.close());
 
   dialogEl.addEventListener('click', (e) => {
@@ -57,9 +58,7 @@ document.querySelectorAll<HTMLElement>('[data-module="dialog"]').forEach((module
 </script>
 
 <style is:global>
-  body:has(dialog[open]) {
-    overflow: hidden;
-  }
+  html:has(dialog[open]) { overflow: hidden; }
 
   dialog {
     border: 1px solid var(--color-border);
@@ -69,7 +68,6 @@ document.querySelectorAll<HTMLElement>('[data-module="dialog"]').forEach((module
     width: 100%;
     background-color: var(--color-bg);
     color: var(--color-text);
-    position: relative;
   }
 
   dialog[open] {
@@ -101,30 +99,22 @@ document.querySelectorAll<HTMLElement>('[data-module="dialog"]').forEach((module
   .modal {
     padding: var(--card-padding);
     overflow-y: auto;
-    max-height: 90vh;
+    max-height: 90svh;
+    position: relative;
   }
 
   .modal_close-button {
-    all: unset;
-    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 2rem;
     height: 2rem;
     padding: 0;
-    cursor: pointer;
     border-radius: var(--radius-sm);
     position: absolute;
     inset: 0.5rem 0.5rem auto auto;
     transition: opacity 0.2s;
-    color: inherit;
   }
 
   .modal_close-button:hover { opacity: 0.6; }
-
-  .modal_close-button:focus-visible {
-    outline: var(--outline-width) solid var(--color-accent);
-    outline-offset: var(--outline-offset);
-  }
 </style>

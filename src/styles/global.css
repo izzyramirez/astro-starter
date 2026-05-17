@@ -47,8 +47,16 @@
   }
 
   button {
+    all: unset;
+    box-sizing: border-box;
     cursor: pointer;
     font: inherit;
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: var(--outline-width) solid var(--color-accent);
+    outline-offset: var(--outline-offset);
   }
 
   p, h1, h2, h3, h4, h5, h6 {

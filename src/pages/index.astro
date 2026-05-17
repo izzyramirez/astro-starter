@@ -2,6 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Nav from '@components/Nav.astro';
 import NavDropdown from '@components/NavDropdown.astro';
+import NavMegaDropdown from '@components/NavMegaDropdown.astro';
 import Footer from '@components/Footer.astro';
 import FooterLinkGroup from '@components/FooterLinkGroup.astro';
 import Button from '@components/Button.astro';
@@ -25,6 +26,28 @@ import ArrowRight from '@assets/icons/ArrowRight.astro';
       <a class="nav-dropdown-link" href="#">Changelog</a>
       <a class="nav-dropdown-link" href="#">Blog</a>
     </NavDropdown>
+    <NavMegaDropdown label="Platform">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+        <div>
+          <p style="font-weight: var(--fw-semibold); margin-bottom: 0.5rem;">Build</p>
+          <a class="nav-dropdown-link" href="#">Components</a>
+          <a class="nav-dropdown-link" href="#">Templates</a>
+          <a class="nav-dropdown-link" href="#">Integrations</a>
+        </div>
+        <div>
+          <p style="font-weight: var(--fw-semibold); margin-bottom: 0.5rem;">Learn</p>
+          <a class="nav-dropdown-link" href="#">Documentation</a>
+          <a class="nav-dropdown-link" href="#">Tutorials</a>
+          <a class="nav-dropdown-link" href="#">Blog</a>
+        </div>
+        <div>
+          <p style="font-weight: var(--fw-semibold); margin-bottom: 0.5rem;">Company</p>
+          <a class="nav-dropdown-link" href="#">About</a>
+          <a class="nav-dropdown-link" href="#">Careers</a>
+          <a class="nav-dropdown-link" href="#">Contact</a>
+        </div>
+      </div>
+    </NavMegaDropdown>
 
     <Button slot="cta" href="#">Get started</Button>
   </Nav>

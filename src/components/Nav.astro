@@ -65,35 +65,36 @@ if (nav) {
     if (!trigger || !panel || trigger.getAttribute('aria-expanded') !== 'true') return;
 
     trigger.setAttribute('aria-expanded', 'false');
+    panel.setAttribute('inert', '');
 
-    if (mqDesktop.matches) {
-      if (instant) {
-        gsap.set(panel, { opacity: 0, y: 0, pointerEvents: 'none' });
-      } else {
-        gsap.to(panel, {
-          opacity: 0, y: -4, duration: 0.15, ease: 'power1.in', overwrite: true,
-          onComplete: () => { panel.style.pointerEvents = 'none'; },
-        });
-      }
+    if (instant) {
+      gsap.killTweensOf(panel);
+      panel.style.pointerEvents = '';
+      gsap.set(panel, { clearProps: 'all' });
+    } else if (mqDesktop.matches) {
+      gsap.to(panel, {
+        opacity: 0, y: -4, duration: 0.15, ease: 'power1.in', overwrite: true,
+        onComplete: () => { panel.style.pointerEvents = 'none'; },
+      });
     } else {
-      if (instant) {
-        gsap.set(panel, { height: 0 });
-      } else {
-        gsap.to(panel, { height: 0, duration: 0.2, ease: 'power1.in', overwrite: true });
-      }
+      gsap.to(panel, { height: 0, duration: 0.2, ease: 'power1.in', overwrite: true });
     }
   }
 
   function openDropdown(trigger: HTMLButtonElement, panel: HTMLElement) {
     trigger.setAttribute('aria-expanded', 'true');
+    panel.removeAttribute('inert');
 
     if (mqDesktop.matches) {
+      gsap.set(panel, { clearProps: 'height,overflow' });
       panel.style.pointerEvents = 'auto';
       gsap.fromTo(panel,
         { opacity: 0, y: -6 },
         { opacity: 1, y: 0, duration: 0.22, ease: 'power2.out', overwrite: true }
       );
     } else {
+      gsap.set(panel, { clearProps: 'opacity,y,transform' });
+      panel.style.pointerEvents = '';
       gsap.to(panel, { height: 'auto', duration: 0.3, ease: 'power2.out', overwrite: true });
     }
   }
@@ -104,6 +105,8 @@ if (nav) {
     const trigger = dd.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
     const panel   = dd.querySelector<HTMLElement>('.nav-dropdown-panel');
     if (!trigger || !panel) return;
+
+    panel.setAttribute('inert', '');
 
     trigger.addEventListener('click', () => {
       const isOpen = trigger.getAttribute('aria-expanded') === 'true';
@@ -165,12 +168,21 @@ if (nav) {
   window.addEventListener('resize', () => {
     clearTimeout(resizeId);
     resizeId = setTimeout(() => {
-      drops.forEach((d) => closeDropdown(d, true));
+      drops.forEach((d) => {
+        const trigger = d.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
+        const panel   = d.querySelector<HTMLElement>('.nav-dropdown-panel');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        if (panel) {
+          gsap.killTweensOf(panel);
+          panel.style.pointerEvents = '';
+          gsap.set(panel, { clearProps: 'all' });
+        }
+      });
       if (burger && menu) {
         burger.setAttribute('aria-expanded', 'false');
         burger.setAttribute('aria-label', 'Open navigation');
         menu.style.overflow = '';
-        gsap.set(menu, { clearProps: 'height' });
+        gsap.set(menu, { clearProps: 'all' });
       }
     }, 150);
   }, { passive: true });
@@ -217,8 +229,6 @@ if (nav) {
 
   .nav-skip-link:focus-visible {
     opacity: 1;
-    outline: var(--outline-width) solid var(--color-accent);
-    outline-offset: var(--outline-offset);
     margin-top: 0.2em;
   }
 
@@ -276,11 +286,6 @@ if (nav) {
 
   .nav-link:hover { color: var(--color-accent); }
 
-  .nav-link:focus-visible {
-    outline: var(--outline-width) solid var(--color-accent);
-    outline-offset: var(--outline-offset);
-  }
-
   /* ── Dropdown ────────────────────────────────────────── */
   .nav-dropdown { position: relative; }
 
@@ -305,7 +310,6 @@ if (nav) {
     min-width: 220px;
     opacity: 0;
     pointer-events: none;
-    box-shadow: 0 4px 24px color-mix(in srgb, var(--color-text), transparent 88%);
   }
 
   .nav-dropdown-link {
@@ -333,7 +337,7 @@ if (nav) {
     border-right: none;
     border-top: none;
     border-radius: 0;
-    box-shadow: 0 8px 32px color-mix(in srgb, var(--color-text), transparent 88%);
+    z-index: 999;
   }
 
   .nav-mega-inner {
@@ -347,18 +351,10 @@ if (nav) {
     display: none;
     align-items: center;
     justify-content: center;
-    background: none;
-    border: none;
     padding: 0.5rem;
     border-radius: var(--radius-sm);
-    color: inherit;
-    cursor: pointer;
   }
 
-  .nav-burger:focus-visible {
-    outline: var(--outline-width) solid var(--color-accent);
-    outline-offset: var(--outline-offset);
-  }
 
   .nav-burger-icon--close { display: none; }
   .nav-burger[aria-expanded="true"] .nav-burger-icon--open  { display: none; }
@@ -382,8 +378,6 @@ if (nav) {
       height: 0;
       overflow: hidden;
       background-color: var(--color-bg);
-      border-top: 1px solid var(--color-border);
-      border-bottom: 1px solid var(--color-border);
     }
 
     .nav-link {
