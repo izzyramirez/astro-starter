@@ -21,28 +21,202 @@
       var(--primitive-neutral-800)
    );
    /* -- Text */
+   --color-accent: light-dark(var(--primitive-brand), var(--primitive-brand));
    --color-text-strong: light-dark(
       var(--primitive-neutral-900),
       var(--primitive-neutral-100)
    );
-   --color-text-muted: light-dark(
-      color-mix(in srgb, var(--primitive-neutral-900), transparent 72%),
-      color-mix(in srgb, var(--primitive-neutral-100), transparent 72%)
-   );
    --color-text-soft: light-dark(
-      color-mix(in srgb, var(--primitive-neutral-900), transparent 32%),
-      color-mix(in srgb, var(--primitive-neutral-100), transparent 32%)
+      color-mix(in srgb, var(--color-text-strong) 48%, transparent),
+      color-mix(in srgb, var(--color-text-strong) 48%, transparent)
    );
-   --color-accent: var(--primitive-brand);
-   /* -- Border */
+   --color-text-muted: light-dark(
+      color-mix(in srgb, var(--color-text-strong) 28%, transparent),
+      color-mix(in srgb, var(--color-text-strong) 28%, transparent)
+   );
    --color-border: light-dark(
-      color-mix(in srgb, var(--primitive-neutral-900), transparent 80%),
-      color-mix(in srgb, var(--primitive-neutral-100), transparent 80%)
+      color-mix(in srgb, var(--primitive-neutral-900) 12%, transparent),
+      color-mix(in srgb, var(--primitive-neutral-100) 12%, transparent)
    );
 
    /* Typography */
-   /* -- Only fallback. Main font is registered in astro.config.mjs */
+
+   /* -- Fallback (Primary registered via astro.config.mjs) */
    --font-fallback: Arial, sans-serif;
+
+   /* -- Fluid Range (Needs to be unitless) */
+   --fluid-min-w: 22.5; /* 360px  */
+   --fluid-max-w: 80; /* 1280px */
+
+   /* -- Min/max Styles */
+   /* ----- Eyebrow */
+   --text-eyebrow-max: 0.75;
+   --text-eyebrow-min: 0.75;
+   /* ----- SM */
+   --text-sm-max: 0.875;
+   --text-sm-min: 0.875;
+   /* ----- MD */
+   --text-md-max: 1.125;
+   --text-md-min: 1;
+   /* ----- LG */
+   --text-lg-max: 1.25;
+   --text-lg-min: 1.125;
+   /* ----- XL */
+   --text-xl-max: 1.5;
+   --text-xl-min: 1.25;
+   /* ----- H6 */
+   --text-h6-max: 1;
+   --text-h6-min: 1;
+   /* ----- H5 */
+   --text-h5-max: 1.25;
+   --text-h5-min: 1.25;
+   /* ----- H4 */
+   --text-h4-max: 1.5;
+   --text-h4-min: 1.375;
+   /* ----- H3 */
+   --text-h3-max: 2.25;
+   --text-h3-min: 1.5;
+   /* ----- H2 */
+   --text-h2-max: 3.75;
+   --text-h2-min: 2;
+   /* ----- H1 */
+   --text-h1-max: 5.5;
+   --text-h1-min: 2.8;
+
+   /* -- Compounded Font-Size Tokens (Don't edit) */
+   --text-eyebrow: clamp(
+      calc(var(--text-eyebrow-min) * 1rem),
+      calc(
+         (
+               var(--text-eyebrow-min) -
+                  (var(--text-eyebrow-max) - var(--text-eyebrow-min)) /
+                  (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
+            ) *
+            1rem + (var(--text-eyebrow-max) - var(--text-eyebrow-min)) /
+            (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
+      ),
+      calc(var(--text-eyebrow-max) * 1rem)
+   );
+   --text-sm: clamp(
+      calc(var(--text-sm-min) * 1rem),
+      calc(
+         (
+               var(--text-sm-min) - (var(--text-sm-max) - var(--text-sm-min)) /
+                  (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
+            ) *
+            1rem + (var(--text-sm-max) - var(--text-sm-min)) /
+            (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
+      ),
+      calc(var(--text-sm-max) * 1rem)
+   );
+   --text-md: clamp(
+      calc(var(--text-md-min) * 1rem),
+      calc(
+         (
+               var(--text-md-min) - (var(--text-md-max) - var(--text-md-min)) /
+                  (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
+            ) *
+            1rem + (var(--text-md-max) - var(--text-md-min)) /
+            (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
+      ),
+      calc(var(--text-md-max) * 1rem)
+   );
+   --text-lg: clamp(
+      calc(var(--text-lg-min) * 1rem),
+      calc(
+         (
+               var(--text-lg-min) - (var(--text-lg-max) - var(--text-lg-min)) /
+                  (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
+            ) *
+            1rem + (var(--text-lg-max) - var(--text-lg-min)) /
+            (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
+      ),
+      calc(var(--text-lg-max) * 1rem)
+   );
+   --text-xl: clamp(
+      calc(var(--text-xl-min) * 1rem),
+      calc(
+         (
+               var(--text-xl-min) - (var(--text-xl-max) - var(--text-xl-min)) /
+                  (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
+            ) *
+            1rem + (var(--text-xl-max) - var(--text-xl-min)) /
+            (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
+      ),
+      calc(var(--text-xl-max) * 1rem)
+   );
+   --text-h6: clamp(
+      calc(var(--text-h6-min) * 1rem),
+      calc(
+         (
+               var(--text-h6-min) - (var(--text-h6-max) - var(--text-h6-min)) /
+                  (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
+            ) *
+            1rem + (var(--text-h6-max) - var(--text-h6-min)) /
+            (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
+      ),
+      calc(var(--text-h6-max) * 1rem)
+   );
+   --text-h5: clamp(
+      calc(var(--text-h5-min) * 1rem),
+      calc(
+         (
+               var(--text-h5-min) - (var(--text-h5-max) - var(--text-h5-min)) /
+                  (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
+            ) *
+            1rem + (var(--text-h5-max) - var(--text-h5-min)) /
+            (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
+      ),
+      calc(var(--text-h5-max) * 1rem)
+   );
+   --text-h4: clamp(
+      calc(var(--text-h4-min) * 1rem),
+      calc(
+         (
+               var(--text-h4-min) - (var(--text-h4-max) - var(--text-h4-min)) /
+                  (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
+            ) *
+            1rem + (var(--text-h4-max) - var(--text-h4-min)) /
+            (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
+      ),
+      calc(var(--text-h4-max) * 1rem)
+   );
+   --text-h3: clamp(
+      calc(var(--text-h3-min) * 1rem),
+      calc(
+         (
+               var(--text-h3-min) - (var(--text-h3-max) - var(--text-h3-min)) /
+                  (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
+            ) *
+            1rem + (var(--text-h3-max) - var(--text-h3-min)) /
+            (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
+      ),
+      calc(var(--text-h3-max) * 1rem)
+   );
+   --text-h2: clamp(
+      calc(var(--text-h2-min) * 1rem),
+      calc(
+         (
+               var(--text-h2-min) - (var(--text-h2-max) - var(--text-h2-min)) /
+                  (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
+            ) *
+            1rem + (var(--text-h2-max) - var(--text-h2-min)) /
+            (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
+      ),
+      calc(var(--text-h2-max) * 1rem)
+   );
+   --text-h1: clamp(
+      calc(var(--text-h1-min) * 1rem),
+      calc(
+         (
+               var(--text-h1-min) - (var(--text-h1-max) - var(--text-h1-min)) /
+                  (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
+            ) *
+            1rem + (var(--text-h1-max) - var(--text-h1-min)) /
+            (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
+      ),
+      calc(var(--text-h1-max) * 1rem)
+   );
 
    /* -- Weights */
    --weight-regular: 400;
@@ -50,84 +224,20 @@
    --weight-semibold: 600;
    --weight-bold: 700;
 
-   /*
-    * Fluid type scale
-    *
-    * Two variables drive the entire scale. Update them and every fluid
-    * value recomputes automatically — no regeneration needed.
-    *
-    *   --fluid-min-vp  viewport where scaling begins  (unitless rem)
-    *   --fluid-max-vp  viewport where scaling locks   (unitless rem)
-    *
-    * Each fluid value uses this formula (same pattern as Webflow):
-    *
-    *   clamp(
-    *     {min}rem,
-    *     calc(({min} - ({max}-{min}) / (max-vp - min-vp) * min-vp) * 1rem
-    *       +  ({max}-{min}) / (max-vp - min-vp) * 100vw),
-    *     {max}rem
-    *   )
-    *
-    * CSS calc() resolves the slope and intercept at runtime, so the
-    * browser does the math — nothing to pre-bake.
-    */
-   --fluid-min-vp: 22.5; /* 360px  */
-   --fluid-max-vp: 80;   /* 1280px */
+   /* -- Line Heights */
+   --leading-100: 1;
+   --leading-125: 1.125;
+   --leading-250: 1.25;
+   --leading-375: 1.375;
+   --leading-150: 1.5;
 
-   --text-eyebrow: 0.75rem;
-   --text-sm: 0.875rem;
-   --text-base: 1rem;
-   --text-lg: clamp(
-      1.125rem,
-      calc((1.125 - (1.25 - 1.125) / (var(--fluid-max-vp) - var(--fluid-min-vp)) * var(--fluid-min-vp)) * 1rem
-         + (1.25 - 1.125) / (var(--fluid-max-vp) - var(--fluid-min-vp)) * 100vw),
-      1.25rem
-   );
-   --text-xl: clamp(
-      1.25rem,
-      calc((1.25 - (1.5 - 1.25) / (var(--fluid-max-vp) - var(--fluid-min-vp)) * var(--fluid-min-vp)) * 1rem
-         + (1.5 - 1.25) / (var(--fluid-max-vp) - var(--fluid-min-vp)) * 100vw),
-      1.5rem
-   );
-   --text-h6: 1rem;
-   --text-h5: 1.25rem;
-   --text-h4: clamp(
-      1.375rem,
-      calc((1.375 - (1.5 - 1.375) / (var(--fluid-max-vp) - var(--fluid-min-vp)) * var(--fluid-min-vp)) * 1rem
-         + (1.5 - 1.375) / (var(--fluid-max-vp) - var(--fluid-min-vp)) * 100vw),
-      1.5rem
-   );
-   --text-h3: clamp(
-      1.5rem,
-      calc((1.5 - (2.25 - 1.5) / (var(--fluid-max-vp) - var(--fluid-min-vp)) * var(--fluid-min-vp)) * 1rem
-         + (2.25 - 1.5) / (var(--fluid-max-vp) - var(--fluid-min-vp)) * 100vw),
-      2.25rem
-   );
-   --text-h2: clamp(
-      2rem,
-      calc((2 - (3.75 - 2) / (var(--fluid-max-vp) - var(--fluid-min-vp)) * var(--fluid-min-vp)) * 1rem
-         + (3.75 - 2) / (var(--fluid-max-vp) - var(--fluid-min-vp)) * 100vw),
-      3.75rem
-   );
-   --text-h1: clamp(
-      2.8rem,
-      calc((2.8 - (5.5 - 2.8) / (var(--fluid-max-vp) - var(--fluid-min-vp)) * var(--fluid-min-vp)) * 1rem
-         + (5.5 - 2.8) / (var(--fluid-max-vp) - var(--fluid-min-vp)) * 100vw),
-      5.5rem
-   );
-
-   /* Line heights */
-   --leading-none: 1;
-   --leading-snug: 1.125;
-   --leading-base: 1.375;
-   --leading-relaxed: 1.5;
-
-   /* Letter spacing */
+   /* -- Letter Spacing */
    --tracking-tight: -0.02em;
    --tracking-normal: 0em;
    --tracking-wide: 0.05em;
    --tracking-widest: 0.1em;
 
+   /* TODO: CONITUNUE HERE */
    /* ─── Gap scale ──────────────────────────────────────── */
    --gap: 2.5rem;
    --gap-xs: 0.5rem;
@@ -148,8 +258,13 @@
    --radius-lg: 1rem;
    --card-padding: clamp(
       1rem,
-      calc((1 - (1.5 - 1) / (var(--fluid-max-vp) - var(--fluid-min-vp)) * var(--fluid-min-vp)) * 1rem
-         + (1.5 - 1) / (var(--fluid-max-vp) - var(--fluid-min-vp)) * 100vw),
+      calc(
+         (
+               1 - (1.5 - 1) / (var(--fluid-max-w) - var(--fluid-min-w)) *
+                  var(--fluid-min-w)
+            ) *
+            1rem + (1.5 - 1) / (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
+      ),
       1.5rem
    );
    --btn-py: 0.5em;
