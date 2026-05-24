@@ -141,11 +141,64 @@ import ArrowRight from '@assets/icons/ArrowRight.astro';
           <label class="input-label" for="demo-email">Email address</label>
           <input class="input" type="email" id="demo-email" name="email" placeholder="jane@example.com" />
         </div>
+        <div class="input-group cc-choice">
+          <span class="choice-label">Inquiry type</span>
+          <div class="choice-list cc-inline">
+            <label class="choice-item">
+              <input class="choice-input" type="radio" name="inquiry" value="general" checked />
+              <span>General</span>
+            </label>
+            <label class="choice-item">
+              <input class="choice-input" type="radio" name="inquiry" value="support" />
+              <span>Support</span>
+            </label>
+            <label class="choice-item">
+              <input class="choice-input" type="radio" name="inquiry" value="sales" />
+              <span>Sales</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="input-group cc-file">
+          <label class="input-label" for="demo-file">Attachment <span class="u-text-muted" style="font-weight: 400;">(optional)</span></label>
+          <input class="input-file-hidden" type="file" id="demo-file" name="file" accept="image/*,.pdf,.doc,.docx" />
+          <label class="input-file-trigger" for="demo-file" id="demo-file-trigger">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M10 13V7M10 7L7.5 9.5M10 7L12.5 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M3.33398 13.3333C2.22941 13.3333 1.33398 12.4379 1.33398 11.3333V5C1.33398 3.89543 2.22941 3 3.33398 3H16.6673C17.7719 3 18.6673 3.89543 18.6673 5V11.3333C18.6673 12.4379 17.7719 13.3333 16.6673 13.3333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M6.66602 17H13.3327" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Click to upload or drag and drop</span>
+            <span class="input-file-name" id="demo-file-name"></span>
+          </label>
+        </div>
+
         <div class="input-group cc-textarea">
           <label class="input-label" for="demo-message">Message</label>
           <textarea class="input" id="demo-message" name="message" placeholder="Your message..."></textarea>
         </div>
+
+        <div class="input-group cc-choice" style="padding-bottom: 1.75rem;">
+          <label class="choice-item">
+            <input class="choice-input" type="checkbox" name="newsletter" />
+            <span>Subscribe to product updates and news</span>
+          </label>
+        </div>
+
         <Button type="submit" full>Send message</Button>
       </form>
     </section>
+
+  </main>
+
+  <script>
+    // Update file input label with selected filename
+    document.querySelectorAll<HTMLInputElement>('.input-file-hidden').forEach((input) => {
+      const nameEl = document.getElementById(input.id + '-name');
+      if (!nameEl) return;
+      input.addEventListener('change', () => {
+        nameEl.textContent = input.files?.[0]?.name ?? '';
+      });
+    });
+  </script>
 </BaseLayout>

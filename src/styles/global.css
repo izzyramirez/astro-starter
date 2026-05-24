@@ -24,11 +24,11 @@
    body {
       line-height: var(--leading-relaxed);
       -webkit-font-smoothing: antialiased;
-      background-color: var(--color-bg);
-      color: var(--color-text);
+      background-color: var(--color-background);
+      color: var(--color-text-strong);
       font-family: var(--font-primary, var(--font-fallback));
       font-size: var(--text-base);
-      font-weight: var(--fw-regular);
+      font-weight: var(--weight-regular);
    }
 
    img,
@@ -89,7 +89,7 @@
       font-family: var(--font-primary, var(--font-fallback));
       font-size: var(--text-h1);
       line-height: var(--leading-none);
-      font-weight: var(--fw-medium);
+      font-weight: var(--weight-medium);
       letter-spacing: var(--tracking-tight);
    }
 
@@ -101,7 +101,7 @@
       font-family: var(--font-primary, var(--font-fallback));
       font-size: var(--text-h2);
       line-height: var(--leading-snug);
-      font-weight: var(--fw-medium);
+      font-weight: var(--weight-medium);
       letter-spacing: var(--tracking-tight);
    }
 
@@ -113,7 +113,7 @@
       font-family: var(--font-primary, var(--font-fallback));
       font-size: var(--text-h3);
       line-height: 1.25;
-      font-weight: var(--fw-medium);
+      font-weight: var(--weight-medium);
    }
 
    h4,
@@ -124,7 +124,7 @@
       font-family: var(--font-primary, var(--font-fallback));
       font-size: var(--text-h4);
       line-height: var(--leading-base);
-      font-weight: var(--fw-medium);
+      font-weight: var(--weight-medium);
    }
 
    h5,
@@ -135,7 +135,7 @@
       font-family: var(--font-primary, var(--font-fallback));
       font-size: var(--text-h5);
       line-height: var(--leading-base);
-      font-weight: var(--fw-medium);
+      font-weight: var(--weight-medium);
    }
 
    h6,
@@ -146,7 +146,7 @@
       font-family: var(--font-primary, var(--font-fallback));
       font-size: var(--text-h6);
       line-height: var(--leading-relaxed);
-      font-weight: var(--fw-medium);
+      font-weight: var(--weight-medium);
    }
 
    a {
@@ -190,12 +190,12 @@
    figcaption {
       font-size: var(--text-sm);
       line-height: var(--leading-relaxed);
-      color: var(--color-soft);
+      color: var(--color-text-soft);
       margin-top: 0.5em;
    }
 
    strong {
-      font-weight: var(--fw-bold);
+      font-weight: var(--weight-bold);
    }
 
    label {
@@ -210,8 +210,8 @@
 
    /* Text selection */
    ::selection {
-      background: var(--color-text);
-      color: var(--color-bg);
+      background: var(--color-text-strong);
+      color: var(--color-background);
    }
 }
 
@@ -246,8 +246,8 @@
    }
 
    .form-error {
-      color: var(--color-error);
-      border-top: 1px solid var(--color-error);
+      color: var(--primitive-error);
+      border-top: 1px solid var(--primitive-error);
       margin-top: 1rem;
       padding: 0.5rem 0 0;
    }
@@ -282,7 +282,7 @@
       border: 1px solid var(--color-border);
       border-radius: var(--input-radius);
       background-color: transparent;
-      color: var(--color-text);
+      color: var(--color-text-strong);
       font-size: var(--text-base);
       height: 100%;
       min-height: 4rem;
@@ -294,20 +294,20 @@
    }
 
    .input:focus {
-      border-color: var(--color-text);
+      border-color: var(--color-text-strong);
       outline: var(--outline-width) solid var(--color-accent);
       outline-offset: var(--outline-offset);
    }
 
    .input::placeholder {
-      color: var(--color-muted);
+      color: var(--color-text-muted);
    }
 
    .input-label {
       z-index: 1;
-      color: var(--color-text);
+      color: var(--color-text-strong);
       font-size: 0.9rem;
-      font-weight: var(--fw-medium);
+      font-weight: var(--weight-medium);
       margin-bottom: 0;
       margin-left: 1rem;
       padding-top: 0.75rem;
@@ -315,10 +315,151 @@
       position: relative;
    }
 
+   /* ── Choice (radio + checkbox) ──────────────────────── */
+   .input-group.cc-choice {
+      padding-bottom: 1.25rem;
+   }
+
+   .choice-label {
+      font-size: 0.9rem;
+      font-weight: var(--weight-medium);
+      color: var(--color-text-strong);
+      margin-left: 1rem;
+      padding-top: 0.75rem;
+      padding-bottom: 0.625rem;
+      display: block;
+   }
+
+   .choice-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0 0.75rem 0.25rem;
+   }
+
+   .choice-list.cc-inline {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.25rem;
+   }
+
+   .choice-item {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      cursor: pointer;
+      margin-bottom: 0;
+      font-size: var(--text-base);
+      user-select: none;
+   }
+
+   .choice-input {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 1.125rem;
+      height: 1.125rem;
+      border: 1.5px solid var(--color-border);
+      background-color: transparent;
+      flex-shrink: 0;
+      cursor: pointer;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      transition: border-color 0.15s, background-color 0.15s;
+   }
+
+   [type="radio"].choice-input  { border-radius: 50%; }
+   [type="checkbox"].choice-input { border-radius: var(--radius-sm); }
+
+   .choice-input:checked {
+      border-color: var(--color-accent);
+      background-color: var(--color-accent);
+   }
+
+   /* Radio — filled dot */
+   [type="radio"].choice-input:checked::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      background-color: white;
+      border-radius: 50%;
+   }
+
+   /* Checkbox — checkmark via SVG background */
+   [type="checkbox"].choice-input:checked::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3 8.5L6.5 12L13 5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-size: 80%;
+      background-position: center;
+      background-repeat: no-repeat;
+   }
+
+   .choice-input:focus-visible {
+      outline: var(--outline-width) solid var(--color-accent);
+      outline-offset: var(--outline-offset);
+   }
+
+   /* ── File upload ─────────────────────────────────────── */
+   .input-group.cc-file {
+      padding-bottom: 1.25rem;
+   }
+
+   .input-group.cc-file .input-label {
+      display: block;
+   }
+
+   .input-file-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+   }
+
+   .input-file-trigger {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1.75rem 1.5rem;
+      border: 1.5px dashed var(--color-border);
+      border-radius: var(--input-radius);
+      cursor: pointer;
+      text-align: center;
+      transition: border-color 0.2s, background-color 0.2s;
+      color: var(--color-text-soft);
+      font-size: var(--text-sm);
+      width: 100%;
+   }
+
+   .input-file-trigger:hover {
+      border-color: var(--color-accent);
+      background-color: var(--color-surface);
+   }
+
+   .input-file-name {
+      font-size: var(--text-sm);
+      color: var(--color-text-strong);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+   }
+
+   .input-file-name:empty::before {
+      content: 'No file chosen';
+      color: var(--color-text-muted);
+   }
+
    /* ── Typography helpers ──────────────────────────────── */
    .eyebrow {
       font-size: var(--text-eyebrow);
-      font-weight: var(--fw-medium);
+      font-weight: var(--weight-medium);
       line-height: var(--leading-snug);
       letter-spacing: var(--tracking-widest);
       text-transform: uppercase;
@@ -379,8 +520,8 @@
    }
 
    .rich-text code {
-      background-color: color-mix(in srgb, var(--color-text), transparent 94%);
-      border: 1px solid color-mix(in srgb, var(--color-text), transparent 84%);
+      background-color: color-mix(in srgb, var(--color-text-strong), transparent 94%);
+      border: 1px solid color-mix(in srgb, var(--color-text-strong), transparent 84%);
       border-radius: 4px;
       padding: 0 0.375em;
       font-size: 0.875em;
@@ -640,10 +781,10 @@
       color: var(--color-accent);
    }
    .u-text-soft {
-      color: var(--color-soft);
+      color: var(--color-text-soft);
    }
    .u-text-muted {
-      color: var(--color-muted);
+      color: var(--color-text-muted);
    }
 
    /* Color — background */

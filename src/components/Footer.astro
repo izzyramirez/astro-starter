@@ -34,8 +34,8 @@ import FooterLinkGroup from './FooterLinkGroup.astro';
 <style is:global>
   .footer {
     border-top: 1px solid var(--color-border);
-    background-color: var(--color-bg);
-    color: var(--color-text);
+    background-color: var(--color-background);
+    color: var(--color-text-strong);
   }
 
   .footer-inner {
@@ -71,11 +71,11 @@ import FooterLinkGroup from './FooterLinkGroup.astro';
 
   .footer-group-title {
     font-size: var(--text-sm);
-    font-weight: var(--fw-medium);
+    font-weight: var(--weight-medium);
     letter-spacing: var(--tracking-widest);
     text-transform: uppercase;
     margin-bottom: 1rem;
-    color: var(--color-soft);
+    color: var(--color-text-soft);
   }
 
   .footer-group-list {
@@ -113,7 +113,7 @@ import FooterLinkGroup from './FooterLinkGroup.astro';
 
   .footer-legal {
     font-size: var(--text-sm);
-    color: var(--color-soft);
+    color: var(--color-text-soft);
     margin-bottom: 0;
   }
 
@@ -131,10 +131,10 @@ import FooterLinkGroup from './FooterLinkGroup.astro';
     justify-content: center;
     width: 2rem;
     height: 2rem;
-    color: var(--color-soft);
+    color: var(--color-text-soft);
     text-decoration: none;
     transition: color 0.2s;
   }
 
-  .footer-social a:hover { color: var(--color-text); }
+  .footer-social a:hover { color: var(--color-text-strong); }
 </style>

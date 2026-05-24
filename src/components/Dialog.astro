@@ -66,8 +66,8 @@ document.querySelectorAll<HTMLElement>('[data-module="dialog"]').forEach((module
     padding: 0;
     max-width: min(90vw, 800px);
     width: 100%;
-    background-color: var(--color-bg);
-    color: var(--color-text);
+    background-color: var(--color-background);
+    color: var(--color-text-strong);
   }
 
   dialog[open] {
@@ -75,7 +75,7 @@ document.querySelectorAll<HTMLElement>('[data-module="dialog"]').forEach((module
   }
 
   dialog::backdrop {
-    background: color-mix(in srgb, var(--color-neutral-900) 92%, transparent);
+    background: color-mix(in srgb, var(--primitive-neutral-900) 92%, transparent);
   }
 
   @keyframes dialog-fadein {
@@ -92,8 +92,8 @@ document.querySelectorAll<HTMLElement>('[data-module="dialog"]').forEach((module
 
   dialog::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    border: 2px solid var(--color-bg);
-    background: var(--color-text);
+    border: 2px solid var(--color-background);
+    background: var(--color-text-strong);
   }
 
   .modal {

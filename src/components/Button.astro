@@ -57,10 +57,10 @@ const Tag = href ? 'a' : 'button';
     padding: var(--btn-py) var(--btn-px);
     border-radius: var(--radius-md);
     background-color: var(--color-accent);
-    color: var(--color-neutral-100);
+    color: var(--primitive-neutral-100);
     font-family: var(--font-primary, var(--font-fallback));
     font-size: var(--text-base);
-    font-weight: var(--fw-medium);
+    font-weight: var(--weight-medium);
     line-height: var(--leading-relaxed);
     letter-spacing: var(--tracking-normal);
     text-align: center;
@@ -83,14 +83,14 @@ const Tag = href ? 'a' : 'button';
 
   .btn.cc-outline {
     background-color: transparent;
-    border-color: var(--color-text);
-    color: var(--color-text);
+    border-color: var(--color-text-strong);
+    color: var(--color-text-strong);
   }
 
   .btn.cc-ghost {
     background-color: transparent;
     border-color: transparent;
-    color: var(--color-text);
+    color: var(--color-text-strong);
   }
 
   .btn.cc-ghost:hover {
