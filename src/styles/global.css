@@ -61,7 +61,11 @@
    }
 
    :focus-visible {
-      outline: var(--outline-width) solid var(--color-accent);
+      outline: var(--outline-width) solid;
+      outline-color: light-dark(
+         color-mix(in srgb, var(--color-accent) 20%, rgba(120, 224, 255, 0.4)),
+         color-mix(in srgb, var(--color-accent) 48%, transparent)
+      );
       outline-offset: var(--outline-offset);
    }
 
@@ -158,12 +162,6 @@
       text-decoration-thickness: 1px;
    }
 
-   a:focus-visible {
-      outline: var(--outline-width) solid var(--color-accent);
-      outline-offset: var(--outline-offset);
-      text-decoration: none;
-   }
-
    ul,
    ol {
       margin-top: 0;
@@ -201,11 +199,6 @@
    label {
       display: block;
       margin-bottom: 5px;
-   }
-
-   :focus-visible {
-      outline: var(--outline-width) solid var(--color-accent);
-      outline-offset: var(--outline-offset);
    }
 
    /* Text selection */
@@ -295,8 +288,6 @@
 
    .input:focus {
       border-color: var(--color-text-strong);
-      outline: var(--outline-width) solid var(--color-accent);
-      outline-offset: var(--outline-offset);
    }
 
    .input::placeholder {
@@ -365,11 +356,17 @@
       position: relative;
       margin: 0;
       padding: 0;
-      transition: border-color 0.15s, background-color 0.15s;
+      transition:
+         border-color 0.15s,
+         background-color 0.15s;
    }
 
-   [type="radio"].choice-input  { border-radius: 50%; }
-   [type="checkbox"].choice-input { border-radius: var(--radius-sm); }
+   [type='radio'].choice-input {
+      border-radius: 50%;
+   }
+   [type='checkbox'].choice-input {
+      border-radius: var(--radius-sm);
+   }
 
    .choice-input:checked {
       border-color: var(--color-accent);
@@ -377,7 +374,7 @@
    }
 
    /* Radio — filled dot */
-   [type="radio"].choice-input:checked::after {
+   [type='radio'].choice-input:checked::after {
       content: '';
       position: absolute;
       inset: 3px;
@@ -386,7 +383,7 @@
    }
 
    /* Checkbox — checkmark via SVG background */
-   [type="checkbox"].choice-input:checked::after {
+   [type='checkbox'].choice-input:checked::after {
       content: '';
       position: absolute;
       inset: 0;
@@ -394,11 +391,6 @@
       background-size: 80%;
       background-position: center;
       background-repeat: no-repeat;
-   }
-
-   .choice-input:focus-visible {
-      outline: var(--outline-width) solid var(--color-accent);
-      outline-offset: var(--outline-offset);
    }
 
    /* ── File upload ─────────────────────────────────────── */
@@ -431,7 +423,9 @@
       border-radius: var(--input-radius);
       cursor: pointer;
       text-align: center;
-      transition: border-color 0.2s, background-color 0.2s;
+      transition:
+         border-color 0.2s,
+         background-color 0.2s;
       color: var(--color-text-soft);
       font-size: var(--text-sm);
       width: 100%;
@@ -520,8 +514,13 @@
    }
 
    .rich-text code {
-      background-color: color-mix(in srgb, var(--color-text-strong), transparent 94%);
-      border: 1px solid color-mix(in srgb, var(--color-text-strong), transparent 84%);
+      background-color: color-mix(
+         in srgb,
+         var(--color-text-strong),
+         transparent 94%
+      );
+      border: 1px solid
+         color-mix(in srgb, var(--color-text-strong), transparent 84%);
       border-radius: 4px;
       padding: 0 0.375em;
       font-size: 0.875em;

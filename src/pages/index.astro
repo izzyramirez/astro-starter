@@ -129,7 +129,7 @@ import ArrowRight from '@assets/icons/ArrowRight.astro';
     </section>
 
     <!-- Form -->
-    <section style="padding: 4rem 5vw 8rem; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);">
+    <section style="padding: 4rem 5vw; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);">
       <p class="eyebrow">Components</p>
       <h2>Form</h2>
       <form class="form" novalidate style="max-width: 480px; margin-top: 2rem;">
@@ -187,6 +187,43 @@ import ArrowRight from '@assets/icons/ArrowRight.astro';
 
         <Button type="submit" full>Send message</Button>
       </form>
+    </section>
+
+    <!-- Spacing Scale -->
+    <section style="padding: 4rem 5vw 8rem; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);">
+      <p class="eyebrow">Tokens</p>
+      <h2>Fluid spacing scale</h2>
+      <p class="u-text-soft" style="margin-bottom: 2rem;">Resize the viewport to see each value interpolate between its min and max.</p>
+      <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+        {[
+          { name: '--space-2',  min: 2,  max: 2  },
+          { name: '--space-4',  min: 4,  max: 4  },
+          { name: '--space-6',  min: 6,  max: 6  },
+          { name: '--space-8',  min: 8,  max: 8  },
+          { name: '--space-12', min: 10, max: 12 },
+          { name: '--space-16', min: 12, max: 16 },
+          { name: '--space-20', min: 16, max: 20 },
+          { name: '--space-24', min: 18, max: 24 },
+          { name: '--space-28', min: 20, max: 28 },
+          { name: '--space-32', min: 24, max: 32 },
+          { name: '--space-36', min: 26, max: 36 },
+          { name: '--space-40', min: 28, max: 40 },
+          { name: '--space-44', min: 32, max: 44 },
+          { name: '--space-48', min: 32, max: 48 },
+          { name: '--space-56', min: 36, max: 56 },
+          { name: '--space-64', min: 44, max: 64 },
+          { name: '--space-72', min: 48, max: 72 },
+          { name: '--space-80', min: 56, max: 80 },
+          { name: '--space-88', min: 60, max: 88 },
+          { name: '--space-96', min: 64, max: 96 },
+        ].map(({ name, min, max }) => (
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <code style="flex: 0 0 8.5rem; font-size: 0.8125rem; color: var(--color-text-soft);">{name}</code>
+            <div style={`height: 6px; width: var(${name}); min-width: 2px; background: var(--color-accent); border-radius: 3px; flex-shrink: 0;`}></div>
+            <span style="font-size: 0.8125rem; color: var(--color-text-muted); white-space: nowrap;">{min === max ? `${min}px` : `${min}–${max}px`}</span>
+          </div>
+        ))}
+      </div>
     </section>
 
   </main>
