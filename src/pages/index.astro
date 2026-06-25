@@ -15,7 +15,7 @@ import ArrowRight from '@assets/icons/ArrowRight.astro';
       <p class="eyebrow">Astro Starter</p>
       <h1 style="max-width: 16ch;">Build something<br>worth finishing.</h1>
       <p class="paragraph-xl u-text-muted" style="max-width: 52ch; margin-top: 1rem;">
-        A modern Astro 6 template with CSS cascade layers, fluid typography, GSAP, and accessible components — no Webflow required.
+        A modern <a href="astro.build">Astro 6</a> template with CSS cascade layers, fluid typography, GSAP, and accessible components — no Webflow required.
       </p>
       <div class="u-d-flex gap-sm" style="flex-wrap: wrap; margin-top: 2rem;">
         <Button href="#">
@@ -124,7 +124,55 @@ import ArrowRight from '@assets/icons/ArrowRight.astro';
         <p class="paragraph-lg">Paragraph LG — intro or callout text.</p>
         <p>Paragraph base — body copy. Text wraps with <code>text-wrap: pretty</code> to avoid orphaned words.</p>
         <p class="paragraph-sm u-text-soft">Paragraph SM — captions, metadata, helper text.</p>
+        <p class="paragraph-xs u-text-soft">Paragraph XS — Even smaller elements.</p>
         <p class="eyebrow">Eyebrow label</p>
+      </div>
+    </section>
+
+    <!-- Rich text -->
+    <section style="padding: 4rem 5vw; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);" class="prose">
+      <p class="eyebrow">Typography</p>
+      <h2>Rich text</h2>
+      <div style="max-width: 65ch; margin-top: 2rem;">
+        <h2>Here's what to expect</h2>
+        <p>What follows from here is just a bunch of absolute nonsense. It includes every sensible typographic element I could think of, like <strong>bold text</strong>, unordered lists, ordered lists, <a href="http://google.com">links</a>, block quotes, <code>inline code</code>, and even <em>italics</em>.</p>
+        <p>It's important to cover all of these use cases for a few reasons:</p>
+        <ol>
+          <li>We want everything to look good out of the box.</li>
+          <li>Really just the first reason, that's the whole point of the template.</li>
+          <li>Here's a third pretend reason though a list with three items looks more realistic than a list with two items.</li>
+        </ol>
+        <p>Now we're going to try out another header style.</p>
+        <h3>Typography should be easy</h3>
+        <p>So that's a header for you — with any luck if we've done our job correctly that will look pretty reasonable.</p>
+        <p>Something a wise person once told me about typography is:</p>
+        <blockquote>Typography is pretty important if you don't want your stuff to look like trash. Make it good then it won't be bad.</blockquote>
+        <p>It's probably important that images look okay here by default as well:</p>
+        <figure>
+          <img src="https://cdn.prod.website-files.com/67f70e851318720a65af715b/67feaed59bc34c768ee92ce6_6727c6a3a33d0c93b019f82f_placeholder.webp" loading="lazy" alt="Placeholder image" />
+          <figcaption>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</figcaption>
+        </figure>
+        <p>Now here's an example of an unordered list to make sure that looks good, too:</p>
+        <ul>
+          <li>So here is the first item in this list.</li>
+          <li>In this example we're keeping the items short.</li>
+          <li>Again, just needed one more list item here.</li>
+        </ul>
+        <p>And that's the end of this section.</p>
+        <h2>Let's stack headings</h2>
+        <h3>We should make sure that looks good, too.</h3>
+        <p>Sometimes you have headings directly underneath each other. In those cases you often have to undo the top margin on the second heading because it usually looks better for the headings to be closer together than a paragraph followed by a heading should be.</p>
+        <h3>When a heading comes after a paragraph …</h3>
+        <p>When a heading comes after a paragraph, we need a bit more space, like I already mentioned above. We're almost done.</p>
+        <p>This is just a closing statement or paragraph, because it kinda looks weird jumping right to another heading.</p>
+        <h4>We haven't used an h4 yet</h4>
+        <p>But now we have. Please don't use <strong>h5</strong> or <strong>h6</strong> in your content, Medium only supports two heading levels for a reason.</p>
+        <p>We are not styling them out of the box because <strong>h4</strong> elements are already so small that they are the same size as the body copy. What are we supposed to do with an <strong>h5</strong>, make it <em>smaller</em> than the body copy? No thanks.</p>
+        <h3>We need to think about stacked headings.</h3>
+        <h4>Let's make sure we don't screw that up with h4 elements, either.</h4>
+        <p>Phew, with any luck we have styled the headings above this text and they look good.</p>
+        <p>Let's add a closing paragraph here so things end with a decently sized block of text. I can't explain why I want things to end that way but I have to assume it's because I think things will look weird or unbalanced if there is a heading too close to the end of the document.</p>
+        <p>What we have here is probably long enough, but adding this final sentence can't hurt.</p>
       </div>
     </section>
 
@@ -186,6 +234,7 @@ import ArrowRight from '@assets/icons/ArrowRight.astro';
         </div>
 
         <Button type="submit" full>Send message</Button>
+        <p class="form-error">Something went wrong. Please check your details and try again.</p>
       </form>
     </section>
 

@@ -30,7 +30,7 @@
       color-mix(in srgb, var(--color-text-strong) 48%, transparent),
       color-mix(in srgb, var(--color-text-strong) 48%, transparent)
    );
-   --color-text-muted: light-dark(
+   --color-text-fade: light-dark(
       color-mix(in srgb, var(--color-text-strong) 28%, transparent),
       color-mix(in srgb, var(--color-text-strong) 28%, transparent)
    );
@@ -50,172 +50,198 @@
 
    /* -- Min/max Styles */
    /* ----- Eyebrow */
-   --text-eyebrow-max: 0.75;
-   --text-eyebrow-min: 0.75;
+   --_source-eyebrow-max: 0.75;
+   --_source-eyebrow-min: 0.75;
+   /* ----- XS */
+   --_source-xs-max: 0.875;
+   --_source-xs-min: 0.75;
    /* ----- SM */
-   --text-sm-max: 0.875;
-   --text-sm-min: 0.875;
+   --_source-sm-max: 1;
+   --_source-sm-min: 0.875;
    /* ----- MD */
-   --text-md-max: 1.125;
-   --text-md-min: 1;
+   --_source-md-max: 1.125;
+   --_source-md-min: 1;
    /* ----- LG */
-   --text-lg-max: 1.25;
-   --text-lg-min: 1.125;
+   --_source-lg-max: 1.25;
+   --_source-lg-min: 1.125;
    /* ----- XL */
-   --text-xl-max: 1.5;
-   --text-xl-min: 1.25;
+   --_source-xl-max: 1.5;
+   --_source-xl-min: 1.25;
    /* ----- H6 */
-   --text-h6-max: 1;
-   --text-h6-min: 1;
+   --_source-h6-max: 1;
+   --_source-h6-min: 1;
    /* ----- H5 */
-   --text-h5-max: 1.25;
-   --text-h5-min: 1.25;
+   --_source-h5-max: 1.25;
+   --_source-h5-min: 1.25;
    /* ----- H4 */
-   --text-h4-max: 1.5;
-   --text-h4-min: 1.375;
+   --_source-h4-max: 1.5;
+   --_source-h4-min: 1.375;
    /* ----- H3 */
-   --text-h3-max: 2.25;
-   --text-h3-min: 1.5;
+   --_source-h3-max: 2.25;
+   --_source-h3-min: 1.5;
    /* ----- H2 */
-   --text-h2-max: 3.75;
-   --text-h2-min: 2;
+   --_source-h2-max: 3.75;
+   --_source-h2-min: 2;
    /* ----- H1 */
-   --text-h1-max: 5.5;
-   --text-h1-min: 2.8;
+   --_source-h1-max: 5.5;
+   --_source-h1-min: 2.8;
 
    /* -- Compounded Font-Size Tokens (Don't edit) */
    --text-eyebrow: clamp(
-      calc(var(--text-eyebrow-min) * 1rem),
+      calc(var(--_source-eyebrow-min) * 1rem),
       calc(
          (
-               var(--text-eyebrow-min) -
-                  (var(--text-eyebrow-max) - var(--text-eyebrow-min)) /
+               var(--_source-eyebrow-min) -
+                  (var(--_source-eyebrow-max) - var(--_source-eyebrow-min)) /
                   (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
             ) *
-            1rem + (var(--text-eyebrow-max) - var(--text-eyebrow-min)) /
+            1rem + (var(--_source-eyebrow-max) - var(--_source-eyebrow-min)) /
             (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
       ),
-      calc(var(--text-eyebrow-max) * 1rem)
+      calc(var(--_source-eyebrow-max) * 1rem)
+   );
+   --text-xs: clamp(
+      calc(var(--_source-xs-min) * 1rem),
+      calc(
+         (
+               var(--_source-xs-min) -
+                  (var(--_source-xs-max) - var(--_source-xs-min)) /
+                  (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
+            ) *
+            1rem + (var(--_source-xs-max) - var(--_source-xs-min)) /
+            (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
+      ),
+      calc(var(--_source-xs-max) * 1rem)
    );
    --text-sm: clamp(
-      calc(var(--text-sm-min) * 1rem),
+      calc(var(--_source-sm-min) * 1rem),
       calc(
          (
-               var(--text-sm-min) - (var(--text-sm-max) - var(--text-sm-min)) /
+               var(--_source-sm-min) -
+                  (var(--_source-sm-max) - var(--_source-sm-min)) /
                   (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
             ) *
-            1rem + (var(--text-sm-max) - var(--text-sm-min)) /
+            1rem + (var(--_source-sm-max) - var(--_source-sm-min)) /
             (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
       ),
-      calc(var(--text-sm-max) * 1rem)
+      calc(var(--_source-sm-max) * 1rem)
    );
    --text-md: clamp(
-      calc(var(--text-md-min) * 1rem),
+      calc(var(--_source-md-min) * 1rem),
       calc(
          (
-               var(--text-md-min) - (var(--text-md-max) - var(--text-md-min)) /
+               var(--_source-md-min) -
+                  (var(--_source-md-max) - var(--_source-md-min)) /
                   (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
             ) *
-            1rem + (var(--text-md-max) - var(--text-md-min)) /
+            1rem + (var(--_source-md-max) - var(--_source-md-min)) /
             (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
       ),
-      calc(var(--text-md-max) * 1rem)
+      calc(var(--_source-md-max) * 1rem)
    );
    --text-lg: clamp(
-      calc(var(--text-lg-min) * 1rem),
+      calc(var(--_source-lg-min) * 1rem),
       calc(
          (
-               var(--text-lg-min) - (var(--text-lg-max) - var(--text-lg-min)) /
+               var(--_source-lg-min) -
+                  (var(--_source-lg-max) - var(--_source-lg-min)) /
                   (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
             ) *
-            1rem + (var(--text-lg-max) - var(--text-lg-min)) /
+            1rem + (var(--_source-lg-max) - var(--_source-lg-min)) /
             (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
       ),
-      calc(var(--text-lg-max) * 1rem)
+      calc(var(--_source-lg-max) * 1rem)
    );
    --text-xl: clamp(
-      calc(var(--text-xl-min) * 1rem),
+      calc(var(--_source-xl-min) * 1rem),
       calc(
          (
-               var(--text-xl-min) - (var(--text-xl-max) - var(--text-xl-min)) /
+               var(--_source-xl-min) -
+                  (var(--_source-xl-max) - var(--_source-xl-min)) /
                   (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
             ) *
-            1rem + (var(--text-xl-max) - var(--text-xl-min)) /
+            1rem + (var(--_source-xl-max) - var(--_source-xl-min)) /
             (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
       ),
-      calc(var(--text-xl-max) * 1rem)
+      calc(var(--_source-xl-max) * 1rem)
    );
    --text-h6: clamp(
-      calc(var(--text-h6-min) * 1rem),
+      calc(var(--_source-h6-min) * 1rem),
       calc(
          (
-               var(--text-h6-min) - (var(--text-h6-max) - var(--text-h6-min)) /
+               var(--_source-h6-min) -
+                  (var(--_source-h6-max) - var(--_source-h6-min)) /
                   (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
             ) *
-            1rem + (var(--text-h6-max) - var(--text-h6-min)) /
+            1rem + (var(--_source-h6-max) - var(--_source-h6-min)) /
             (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
       ),
-      calc(var(--text-h6-max) * 1rem)
+      calc(var(--_source-h6-max) * 1rem)
    );
    --text-h5: clamp(
-      calc(var(--text-h5-min) * 1rem),
+      calc(var(--_source-h5-min) * 1rem),
       calc(
          (
-               var(--text-h5-min) - (var(--text-h5-max) - var(--text-h5-min)) /
+               var(--_source-h5-min) -
+                  (var(--_source-h5-max) - var(--_source-h5-min)) /
                   (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
             ) *
-            1rem + (var(--text-h5-max) - var(--text-h5-min)) /
+            1rem + (var(--_source-h5-max) - var(--_source-h5-min)) /
             (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
       ),
-      calc(var(--text-h5-max) * 1rem)
+      calc(var(--_source-h5-max) * 1rem)
    );
    --text-h4: clamp(
-      calc(var(--text-h4-min) * 1rem),
+      calc(var(--_source-h4-min) * 1rem),
       calc(
          (
-               var(--text-h4-min) - (var(--text-h4-max) - var(--text-h4-min)) /
+               var(--_source-h4-min) -
+                  (var(--_source-h4-max) - var(--_source-h4-min)) /
                   (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
             ) *
-            1rem + (var(--text-h4-max) - var(--text-h4-min)) /
+            1rem + (var(--_source-h4-max) - var(--_source-h4-min)) /
             (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
       ),
-      calc(var(--text-h4-max) * 1rem)
+      calc(var(--_source-h4-max) * 1rem)
    );
    --text-h3: clamp(
-      calc(var(--text-h3-min) * 1rem),
+      calc(var(--_source-h3-min) * 1rem),
       calc(
          (
-               var(--text-h3-min) - (var(--text-h3-max) - var(--text-h3-min)) /
+               var(--_source-h3-min) -
+                  (var(--_source-h3-max) - var(--_source-h3-min)) /
                   (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
             ) *
-            1rem + (var(--text-h3-max) - var(--text-h3-min)) /
+            1rem + (var(--_source-h3-max) - var(--_source-h3-min)) /
             (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
       ),
-      calc(var(--text-h3-max) * 1rem)
+      calc(var(--_source-h3-max) * 1rem)
    );
    --text-h2: clamp(
-      calc(var(--text-h2-min) * 1rem),
+      calc(var(--_source-h2-min) * 1rem),
       calc(
          (
-               var(--text-h2-min) - (var(--text-h2-max) - var(--text-h2-min)) /
+               var(--_source-h2-min) -
+                  (var(--_source-h2-max) - var(--_source-h2-min)) /
                   (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
             ) *
-            1rem + (var(--text-h2-max) - var(--text-h2-min)) /
+            1rem + (var(--_source-h2-max) - var(--_source-h2-min)) /
             (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
       ),
-      calc(var(--text-h2-max) * 1rem)
+      calc(var(--_source-h2-max) * 1rem)
    );
    --text-h1: clamp(
-      calc(var(--text-h1-min) * 1rem),
+      calc(var(--_source-h1-min) * 1rem),
       calc(
          (
-               var(--text-h1-min) - (var(--text-h1-max) - var(--text-h1-min)) /
+               var(--_source-h1-min) -
+                  (var(--_source-h1-max) - var(--_source-h1-min)) /
                   (var(--fluid-max-w) - var(--fluid-min-w)) * var(--fluid-min-w)
             ) *
-            1rem + (var(--text-h1-max) - var(--text-h1-min)) /
+            1rem + (var(--_source-h1-max) - var(--_source-h1-min)) /
             (var(--fluid-max-w) - var(--fluid-min-w)) * 100vw
       ),
-      calc(var(--text-h1-max) * 1rem)
+      calc(var(--_source-h1-max) * 1rem)
    );
 
    /* -- Weights */
@@ -226,9 +252,9 @@
 
    /* -- Line Heights */
    --leading-100: 1;
-   --leading-125: 1.125;
-   --leading-250: 1.25;
-   --leading-375: 1.375;
+   --leading-112: 1.125;
+   --leading-125: 1.25;
+   --leading-137: 1.375;
    --leading-150: 1.5;
 
    /* -- Letter Spacing */
@@ -458,6 +484,9 @@
    /* Accessibility */
    --outline-width: 4px;
    --outline-offset: 0px;
+
+   /* Easing */
+   --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
 
    /* TODO: Fix Components */
    /* ─── Components ──────────────────────────────────────── */
