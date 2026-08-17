@@ -1,290 +1,507 @@
 ---
-import BaseLayout from '@layouts/BaseLayout.astro';
-import Button from '@components/Button.astro';
-import Accordion from '@components/Accordion.astro';
-import AccordionItem from '@components/AccordionItem.astro';
-import Dialog from '@components/Dialog.astro';
-import ArrowRight from '@assets/icons/ArrowRight.astro';
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Button from "@components/Button.astro";
+import Accordion from "@components/Accordion.astro";
+import AccordionItem from "@components/AccordionItem.astro";
+import Dialog from "@components/Dialog.astro";
+import ArrowRight from "@assets/icons/ArrowRight.astro";
 ---
 
 <BaseLayout
-  title="Astro Starter"
-  description="A modern Astro 6 starter with CSS layers, General Sans, GSAP, and utility components."
->    <!-- Hero -->
-    <section style="padding: 8rem 5vw 6rem; max-width: 80rem; margin: 0 auto;">
+   title="Astro Starter"
+   description="A modern Astro 6 starter with CSS layers, General Sans, GSAP, and utility components."
+>
+   <!-- Hero -->
+   <section style="padding: 8rem 5vw 6rem; max-width: 80rem; margin: 0 auto;">
       <p class="eyebrow">Astro Starter</p>
-      <h1 style="max-width: 16ch;">Build something<br>worth finishing.</h1>
-      <p class="paragraph-xl u-text-muted" style="max-width: 52ch; margin-top: 1rem;">
-        A modern <a href="astro.build">Astro 6</a> template with CSS cascade layers, fluid typography, GSAP, and accessible components — no Webflow required.
+      <h1 style="max-width: 16ch;">Build something<br />worth finishing.</h1>
+      <p
+         class="paragraph-xl u-text-muted"
+         style="max-width: 52ch; margin-top: 1rem;"
+      >
+         A modern <a href="astro.build">Astro 6</a> template with CSS cascade layers,
+         fluid typography, GSAP, and accessible components — no Webflow required.
       </p>
       <div class="u-d-flex gap-sm" style="flex-wrap: wrap; margin-top: 2rem;">
-        <Button href="#">
-          Get started
-          <ArrowRight slot="icon-right" />
-        </Button>
-        <Button href="#" variant="outline">View docs</Button>
+         <Button href="#">
+            Get started
+            <ArrowRight slot="icon-right" />
+         </Button>
+         <Button href="#" variant="outline">View docs</Button>
       </div>
-    </section>
+   </section>
 
-    <!-- Cards -->
-    <section style="padding: 4rem 5vw; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);">
+   <!-- Cards -->
+   <section
+      style="padding: 4rem 5vw; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);"
+   >
       <p class="eyebrow">Components</p>
       <h2>Cards</h2>
       <div class="u-d-flex gap-lg u-flex-wrap" style="margin-top: 2rem;">
-        <div class="card" style="flex: 1; min-width: 220px;">
-          <div class="card-body">
-            <p class="eyebrow">Token</p>
-            <h3 class="h5">Design tokens</h3>
-            <p class="paragraph-sm u-text-soft u-mb-0">All colors, typography, and spacing live in <code>tokens.css</code> as CSS custom properties.</p>
-          </div>
-        </div>
-        <div class="card" style="flex: 1; min-width: 220px;">
-          <div class="card-body">
-            <p class="eyebrow">CSS</p>
-            <h3 class="h5">Cascade layers</h3>
-            <p class="paragraph-sm u-text-soft u-mb-0">Organized into <code>@layer base, component, utility</code> for predictable specificity without hacks.</p>
-          </div>
-        </div>
-        <div class="card" style="flex: 1; min-width: 220px;">
-          <div class="card-body">
-            <p class="eyebrow">JS</p>
-            <h3 class="h5">GSAP components</h3>
-            <p class="paragraph-sm u-text-soft u-mb-0">Nav dropdowns, accordions, and dialogs powered by GSAP with accessible ARIA attributes.</p>
-          </div>
-        </div>
+         <div class="card" style="flex: 1; min-width: 220px;">
+            <div class="card-body">
+               <p class="eyebrow">Token</p>
+               <h3 class="h5">Design tokens</h3>
+               <p class="paragraph-sm u-text-soft u-mb-0">
+                  All colors, typography, and spacing live in <code
+                     >tokens.css</code
+                  > as CSS custom properties.
+               </p>
+            </div>
+         </div>
+         <div class="card" style="flex: 1; min-width: 220px;">
+            <div class="card-body">
+               <p class="eyebrow">CSS</p>
+               <h3 class="h5">Cascade layers</h3>
+               <p class="paragraph-sm u-text-soft u-mb-0">
+                  Organized into <code>@layer base, component, utility</code> for
+                  predictable specificity without hacks.
+               </p>
+            </div>
+         </div>
+         <div class="card" style="flex: 1; min-width: 220px;">
+            <div class="card-body">
+               <p class="eyebrow">JS</p>
+               <h3 class="h5">GSAP components</h3>
+               <p class="paragraph-sm u-text-soft u-mb-0">
+                  Nav dropdowns, accordions, and dialogs powered by GSAP with
+                  accessible ARIA attributes.
+               </p>
+            </div>
+         </div>
       </div>
-    </section>
+   </section>
 
-    <!-- Buttons -->
-    <section style="padding: 4rem 5vw; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);">
+   <!-- Buttons -->
+   <section
+      style="padding: 4rem 5vw; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);"
+   >
       <p class="eyebrow">Components</p>
       <h2>Buttons</h2>
-      <div class="u-d-flex gap-sm u-flex-wrap" style="margin-top: 2rem; align-items: center;">
-        <Button href="#">Primary</Button>
-        <Button href="#" variant="outline">Outline</Button>
-        <Button href="#" variant="ghost">Ghost</Button>
-        <Button href="#">
-          With icon
-          <ArrowRight slot="icon-right" />
-        </Button>
+      <div
+         class="u-d-flex gap-sm u-flex-wrap"
+         style="margin-top: 2rem; align-items: center;"
+      >
+         <Button href="#">Primary</Button>
+         <Button href="#" variant="outline">Outline</Button>
+         <Button href="#" variant="ghost">Ghost</Button>
+         <Button href="#">
+            With icon
+            <ArrowRight slot="icon-right" />
+         </Button>
       </div>
-    </section>
+   </section>
 
-    <!-- Accordion -->
-    <section style="padding: 4rem 5vw; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);">
+   <!-- Accordion -->
+   <section
+      style="padding: 4rem 5vw; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);"
+   >
       <div class="u-d-flex gap-xl u-flex-wrap">
-        <div style="flex: 1; min-width: 220px;">
-          <p class="eyebrow">Components</p>
-          <h2>Accordion</h2>
-          <p class="u-text-soft">Animated with GSAP. ARIA attributes auto-applied on init.</p>
-        </div>
-        <div style="flex: 2; min-width: 300px;">
-          <Accordion>
-            <AccordionItem title="What is this starter template?">
-              <p>A production-ready Astro 6 base with CSS cascade layers, fluid typography, GSAP components, and an SEO layout — no jQuery or Webflow required.</p>
-            </AccordionItem>
-            <AccordionItem title="How do I customize the design tokens?">
-              <p>All design tokens live in <code>src/styles/tokens.css</code>. Colors, type scale, spacing, and radii are CSS custom properties you can override at <code>:root</code>.</p>
-            </AccordionItem>
-            <AccordionItem title="Can I add more components?">
-              <p>Yes. Follow the pattern in <code>Accordion.astro</code> and <code>Dialog.astro</code>. Scripts are bundled by Vite and deduped automatically by Astro.</p>
-            </AccordionItem>
-          </Accordion>
-        </div>
+         <div style="flex: 1; min-width: 220px;">
+            <p class="eyebrow">Components</p>
+            <h2>Accordion</h2>
+            <p class="u-text-soft">
+               Animated with GSAP. ARIA attributes auto-applied on init.
+            </p>
+         </div>
+         <div style="flex: 2; min-width: 300px;">
+            <Accordion>
+               <AccordionItem title="What is this starter template?">
+                  <p>
+                     A production-ready Astro 6 base with CSS cascade layers,
+                     fluid typography, GSAP components, and an SEO layout — no
+                     jQuery or Webflow required.
+                  </p>
+               </AccordionItem>
+               <AccordionItem title="How do I customize the design tokens?">
+                  <p>
+                     All design tokens live in <code>src/styles/tokens.css</code
+                     >. Colors, type scale, spacing, and radii are CSS custom
+                     properties you can override at <code>:root</code>.
+                  </p>
+               </AccordionItem>
+               <AccordionItem title="Can I add more components?">
+                  <p>
+                     Yes. Follow the pattern in <code>Accordion.astro</code> and <code
+                        >Dialog.astro</code
+                     >. Scripts are bundled by Vite and deduped automatically by
+                     Astro.
+                  </p>
+               </AccordionItem>
+            </Accordion>
+         </div>
       </div>
-    </section>
+   </section>
 
-    <!-- Dialog -->
-    <section style="padding: 4rem 5vw; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);">
+   <!-- Dialog -->
+   <section
+      style="padding: 4rem 5vw; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);"
+   >
       <p class="eyebrow">Components</p>
       <h2>Dialog</h2>
-      <p class="u-text-soft">Uses the native <code>&lt;dialog&gt;</code> element. Closes on backdrop click or Escape.</p>
+      <p class="u-text-soft">
+         Uses the native <code>&lt;dialog&gt;</code> element. Closes on backdrop click
+         or Escape.
+      </p>
       <div style="margin-top: 2rem;">
-        <Dialog triggerLabel="Open dialog">
-          <h3 class="h4 u-mb-sm">Dialog title</h3>
-          <p>This dialog uses the native <code>&lt;dialog&gt;</code> element with <code>showModal()</code> and <code>close()</code>. IDs and ARIA attributes are auto-generated on init.</p>
-          <p class="u-mb-0 u-text-soft paragraph-sm">Click outside or the × button to close.</p>
-        </Dialog>
+         <Dialog triggerLabel="Open dialog">
+            <h3 class="h4 u-mb-sm">Dialog title</h3>
+            <p>
+               This dialog uses the native <code>&lt;dialog&gt;</code> element with
+               <code>showModal()</code> and <code>close()</code>. IDs and ARIA
+               attributes are auto-generated on init.
+            </p>
+            <p class="u-mb-0 u-text-soft paragraph-sm">
+               Click outside or the × button to close.
+            </p>
+         </Dialog>
       </div>
-    </section>
+   </section>
 
-    <!-- Typography -->
-    <section style="padding: 4rem 5vw; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);">
+   <!-- Typography -->
+   <section
+      style="padding: 4rem 5vw; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);"
+   >
       <p class="eyebrow">Typography</p>
       <h2>Type scale</h2>
       <div style="margin-top: 2rem;">
-        <h1>Heading 1</h1>
-        <h2>Heading 2</h2>
-        <h3>Heading 3</h3>
-        <h4>Heading 4</h4>
-        <h5>Heading 5</h5>
-        <h6>Heading 6</h6>
-        <span class="u-divider" style="margin: 2rem 0; display: block;"></span>
-        <p class="paragraph-xl">Paragraph XL — lead copy or hero subtext.</p>
-        <p class="paragraph-lg">Paragraph LG — intro or callout text.</p>
-        <p>Paragraph base — body copy. Text wraps with <code>text-wrap: pretty</code> to avoid orphaned words.</p>
-        <p class="paragraph-sm u-text-soft">Paragraph SM — captions, metadata, helper text.</p>
-        <p class="paragraph-xs u-text-soft">Paragraph XS — Even smaller elements.</p>
-        <p class="eyebrow">Eyebrow label</p>
+         <h1>Heading 1</h1>
+         <h2>Heading 2</h2>
+         <h3>Heading 3</h3>
+         <h4>Heading 4</h4>
+         <h5>Heading 5</h5>
+         <h6>Heading 6</h6>
+         <span class="u-divider" style="margin: 2rem 0; display: block;"></span>
+         <p class="paragraph-xl">Paragraph XL — lead copy or hero subtext.</p>
+         <p class="paragraph-lg">Paragraph LG — intro or callout text.</p>
+         <p>
+            Paragraph base — body copy. Text wraps with <code
+               >text-wrap: pretty</code
+            > to avoid orphaned words.
+         </p>
+         <p class="paragraph-sm u-text-soft">
+            Paragraph SM — captions, metadata, helper text.
+         </p>
+         <p class="paragraph-xs u-text-soft">
+            Paragraph XS — Even smaller elements.
+         </p>
+         <p class="eyebrow">Eyebrow label</p>
       </div>
-    </section>
+   </section>
 
-    <!-- Rich text -->
-    <section style="padding: 4rem 5vw; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);" class="prose">
+   <!-- Rich text -->
+   <section
+      style="padding: 4rem 5vw; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);"
+      class="prose"
+   >
       <p class="eyebrow">Typography</p>
       <h2>Rich text</h2>
       <div style="max-width: 65ch; margin-top: 2rem;">
-        <h2>Here's what to expect</h2>
-        <p>What follows from here is just a bunch of absolute nonsense. It includes every sensible typographic element I could think of, like <strong>bold text</strong>, unordered lists, ordered lists, <a href="http://google.com">links</a>, block quotes, <code>inline code</code>, and even <em>italics</em>.</p>
-        <p>It's important to cover all of these use cases for a few reasons:</p>
-        <ol>
-          <li>We want everything to look good out of the box.</li>
-          <li>Really just the first reason, that's the whole point of the template.</li>
-          <li>Here's a third pretend reason though a list with three items looks more realistic than a list with two items.</li>
-        </ol>
-        <p>Now we're going to try out another header style.</p>
-        <h3>Typography should be easy</h3>
-        <p>So that's a header for you — with any luck if we've done our job correctly that will look pretty reasonable.</p>
-        <p>Something a wise person once told me about typography is:</p>
-        <blockquote>Typography is pretty important if you don't want your stuff to look like trash. Make it good then it won't be bad.</blockquote>
-        <p>It's probably important that images look okay here by default as well:</p>
-        <figure>
-          <img src="https://cdn.prod.website-files.com/67f70e851318720a65af715b/67feaed59bc34c768ee92ce6_6727c6a3a33d0c93b019f82f_placeholder.webp" loading="lazy" alt="Placeholder image" />
-          <figcaption>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</figcaption>
-        </figure>
-        <p>Now here's an example of an unordered list to make sure that looks good, too:</p>
-        <ul>
-          <li>So here is the first item in this list.</li>
-          <li>In this example we're keeping the items short.</li>
-          <li>Again, just needed one more list item here.</li>
-        </ul>
-        <p>And that's the end of this section.</p>
-        <h2>Let's stack headings</h2>
-        <h3>We should make sure that looks good, too.</h3>
-        <p>Sometimes you have headings directly underneath each other. In those cases you often have to undo the top margin on the second heading because it usually looks better for the headings to be closer together than a paragraph followed by a heading should be.</p>
-        <h3>When a heading comes after a paragraph …</h3>
-        <p>When a heading comes after a paragraph, we need a bit more space, like I already mentioned above. We're almost done.</p>
-        <p>This is just a closing statement or paragraph, because it kinda looks weird jumping right to another heading.</p>
-        <h4>We haven't used an h4 yet</h4>
-        <p>But now we have. Please don't use <strong>h5</strong> or <strong>h6</strong> in your content, Medium only supports two heading levels for a reason.</p>
-        <p>We are not styling them out of the box because <strong>h4</strong> elements are already so small that they are the same size as the body copy. What are we supposed to do with an <strong>h5</strong>, make it <em>smaller</em> than the body copy? No thanks.</p>
-        <h3>We need to think about stacked headings.</h3>
-        <h4>Let's make sure we don't screw that up with h4 elements, either.</h4>
-        <p>Phew, with any luck we have styled the headings above this text and they look good.</p>
-        <p>Let's add a closing paragraph here so things end with a decently sized block of text. I can't explain why I want things to end that way but I have to assume it's because I think things will look weird or unbalanced if there is a heading too close to the end of the document.</p>
-        <p>What we have here is probably long enough, but adding this final sentence can't hurt.</p>
+         <h2>Here's what to expect</h2>
+         <p>
+            What follows from here is just a bunch of absolute nonsense. It
+            includes every sensible typographic element I could think of, like <strong
+               >bold text</strong
+            >, unordered lists, ordered lists, <a href="http://google.com"
+               >links</a
+            >, block quotes, <code>inline code</code>, and even <em>italics</em
+            >.
+         </p>
+         <p>
+            It's important to cover all of these use cases for a few reasons:
+         </p>
+         <ol>
+            <li>We want everything to look good out of the box.</li>
+            <li>
+               Really just the first reason, that's the whole point of the
+               template.
+            </li>
+            <li>
+               Here's a third pretend reason though a list with three items
+               looks more realistic than a list with two items.
+            </li>
+         </ol>
+         <p>Now we're going to try out another header style.</p>
+         <h3>Typography should be easy</h3>
+         <p>
+            So that's a header for you — with any luck if we've done our job
+            correctly that will look pretty reasonable.
+         </p>
+         <p>Something a wise person once told me about typography is:</p>
+         <blockquote>
+            Typography is pretty important if you don't want your stuff to look
+            like trash. Make it good then it won't be bad.
+         </blockquote>
+         <p>
+            It's probably important that images look okay here by default as
+            well:
+         </p>
+         <figure>
+            <img
+               src="https://cdn.prod.website-files.com/67f70e851318720a65af715b/67feaed59bc34c768ee92ce6_6727c6a3a33d0c93b019f82f_placeholder.webp"
+               loading="lazy"
+               alt="Placeholder image"
+            />
+            <figcaption>
+               Contrary to popular belief, Lorem Ipsum is not simply random
+               text. It has roots in a piece of classical Latin literature from
+               45 BC, making it over 2000 years old.
+            </figcaption>
+         </figure>
+         <p>
+            Now here's an example of an unordered list to make sure that looks
+            good, too:
+         </p>
+         <ul>
+            <li>So here is the first item in this list.</li>
+            <li>In this example we're keeping the items short.</li>
+            <li>Again, just needed one more list item here.</li>
+         </ul>
+         <p>And that's the end of this section.</p>
+         <h2>Let's stack headings</h2>
+         <h3>We should make sure that looks good, too.</h3>
+         <p>
+            Sometimes you have headings directly underneath each other. In those
+            cases you often have to undo the top margin on the second heading
+            because it usually looks better for the headings to be closer
+            together than a paragraph followed by a heading should be.
+         </p>
+         <h3>When a heading comes after a paragraph …</h3>
+         <p>
+            When a heading comes after a paragraph, we need a bit more space,
+            like I already mentioned above. We're almost done.
+         </p>
+         <p>
+            This is just a closing statement or paragraph, because it kinda
+            looks weird jumping right to another heading.
+         </p>
+         <h4>We haven't used an h4 yet</h4>
+         <p>
+            But now we have. Please don't use <strong>h5</strong> or <strong
+               >h6</strong
+            > in your content, Medium only supports two heading levels for a reason.
+         </p>
+         <p>
+            We are not styling them out of the box because <strong>h4</strong> elements
+            are already so small that they are the same size as the body copy. What
+            are we supposed to do with an <strong>h5</strong>, make it <em
+               >smaller</em
+            > than the body copy? No thanks.
+         </p>
+         <h3>We need to think about stacked headings.</h3>
+         <h4>
+            Let's make sure we don't screw that up with h4 elements, either.
+         </h4>
+         <p>
+            Phew, with any luck we have styled the headings above this text and
+            they look good.
+         </p>
+         <p>
+            Let's add a closing paragraph here so things end with a decently
+            sized block of text. I can't explain why I want things to end that
+            way but I have to assume it's because I think things will look weird
+            or unbalanced if there is a heading too close to the end of the
+            document.
+         </p>
+         <p>
+            What we have here is probably long enough, but adding this final
+            sentence can't hurt.
+         </p>
       </div>
-    </section>
+   </section>
 
-    <!-- Form -->
-    <section style="padding: 4rem 5vw; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);">
+   <!-- Form -->
+   <section
+      style="padding: 4rem 5vw; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);"
+   >
       <p class="eyebrow">Components</p>
       <h2>Form</h2>
       <form class="form" novalidate style="max-width: 480px; margin-top: 2rem;">
-        <div class="input-group">
-          <label class="input-label" for="demo-name">Full name</label>
-          <input class="input" type="text" id="demo-name" name="name" placeholder="Jane Smith" />
-        </div>
-        <div class="input-group">
-          <label class="input-label" for="demo-email">Email address</label>
-          <input class="input" type="email" id="demo-email" name="email" placeholder="jane@example.com" />
-        </div>
-        <div class="input-group cc-choice">
-          <span class="choice-label">Inquiry type</span>
-          <div class="choice-list cc-inline">
-            <label class="choice-item">
-              <input class="choice-input" type="radio" name="inquiry" value="general" checked />
-              <span>General</span>
+         <div class="input-group">
+            <label class="input-label" for="demo-name">Full name</label>
+            <input
+               class="input"
+               type="text"
+               id="demo-name"
+               name="name"
+               placeholder="Jane Smith"
+            />
+         </div>
+         <div class="input-group">
+            <label class="input-label" for="demo-email">Email address</label>
+            <input
+               class="input"
+               type="email"
+               id="demo-email"
+               name="email"
+               placeholder="jane@example.com"
+            />
+         </div>
+         <div class="input-group cc-choice">
+            <span class="choice-label">Inquiry type</span>
+            <div class="choice-list cc-inline">
+               <label class="choice-item">
+                  <input
+                     class="choice-input"
+                     type="radio"
+                     name="inquiry"
+                     value="general"
+                     checked
+                  />
+                  <span>General</span>
+               </label>
+               <label class="choice-item">
+                  <input
+                     class="choice-input"
+                     type="radio"
+                     name="inquiry"
+                     value="support"
+                  />
+                  <span>Support</span>
+               </label>
+               <label class="choice-item">
+                  <input
+                     class="choice-input"
+                     type="radio"
+                     name="inquiry"
+                     value="sales"
+                  />
+                  <span>Sales</span>
+               </label>
+            </div>
+         </div>
+
+         <div class="input-group cc-file">
+            <label class="input-label" for="demo-file"
+               >Attachment <span class="u-text-muted" style="font-weight: 400;"
+                  >(optional)</span
+               ></label
+            >
+            <input
+               class="input-file-hidden"
+               type="file"
+               id="demo-file"
+               name="file"
+               accept="image/*,.pdf,.doc,.docx"
+            />
+            <label
+               class="input-file-trigger"
+               for="demo-file"
+               id="demo-file-trigger"
+            >
+               <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+               >
+                  <path
+                     d="M10 13V7M10 7L7.5 9.5M10 7L12.5 9.5"
+                     stroke="currentColor"
+                     stroke-width="1.5"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"></path>
+                  <path
+                     d="M3.33398 13.3333C2.22941 13.3333 1.33398 12.4379 1.33398 11.3333V5C1.33398 3.89543 2.22941 3 3.33398 3H16.6673C17.7719 3 18.6673 3.89543 18.6673 5V11.3333C18.6673 12.4379 17.7719 13.3333 16.6673 13.3333"
+                     stroke="currentColor"
+                     stroke-width="1.5"
+                     stroke-linecap="round"></path>
+                  <path
+                     d="M6.66602 17H13.3327"
+                     stroke="currentColor"
+                     stroke-width="1.5"
+                     stroke-linecap="round"></path>
+               </svg>
+               <span>Click to upload or drag and drop</span>
+               <span class="input-file-name" id="demo-file-name"></span>
             </label>
+         </div>
+
+         <div class="input-group cc-textarea">
+            <label class="input-label" for="demo-message">Message</label>
+            <textarea
+               class="input"
+               id="demo-message"
+               name="message"
+               placeholder="Your message..."></textarea>
+         </div>
+
+         <div class="input-group cc-choice" style="padding-bottom: 1.75rem;">
             <label class="choice-item">
-              <input class="choice-input" type="radio" name="inquiry" value="support" />
-              <span>Support</span>
+               <input class="choice-input" type="checkbox" name="newsletter" />
+               <span>Subscribe to product updates and news</span>
             </label>
-            <label class="choice-item">
-              <input class="choice-input" type="radio" name="inquiry" value="sales" />
-              <span>Sales</span>
-            </label>
-          </div>
-        </div>
+         </div>
 
-        <div class="input-group cc-file">
-          <label class="input-label" for="demo-file">Attachment <span class="u-text-muted" style="font-weight: 400;">(optional)</span></label>
-          <input class="input-file-hidden" type="file" id="demo-file" name="file" accept="image/*,.pdf,.doc,.docx" />
-          <label class="input-file-trigger" for="demo-file" id="demo-file-trigger">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M10 13V7M10 7L7.5 9.5M10 7L12.5 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M3.33398 13.3333C2.22941 13.3333 1.33398 12.4379 1.33398 11.3333V5C1.33398 3.89543 2.22941 3 3.33398 3H16.6673C17.7719 3 18.6673 3.89543 18.6673 5V11.3333C18.6673 12.4379 17.7719 13.3333 16.6673 13.3333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M6.66602 17H13.3327" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            <span>Click to upload or drag and drop</span>
-            <span class="input-file-name" id="demo-file-name"></span>
-          </label>
-        </div>
-
-        <div class="input-group cc-textarea">
-          <label class="input-label" for="demo-message">Message</label>
-          <textarea class="input" id="demo-message" name="message" placeholder="Your message..."></textarea>
-        </div>
-
-        <div class="input-group cc-choice" style="padding-bottom: 1.75rem;">
-          <label class="choice-item">
-            <input class="choice-input" type="checkbox" name="newsletter" />
-            <span>Subscribe to product updates and news</span>
-          </label>
-        </div>
-
-        <Button type="submit" full>Send message</Button>
-        <p class="form-error">Something went wrong. Please check your details and try again.</p>
+         <Button type="submit" full>Send message</Button>
+         <p class="form-error">
+            Something went wrong. Please check your details and try again.
+         </p>
       </form>
-    </section>
+   </section>
 
-    <!-- Spacing Scale -->
-    <section style="padding: 4rem 5vw 8rem; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);">
+   <!-- Spacing Scale -->
+   <section
+      style="padding: 4rem 5vw 8rem; max-width: 80rem; margin: 0 auto; border-top: 1px solid var(--color-border);"
+   >
       <p class="eyebrow">Tokens</p>
       <h2>Fluid spacing scale</h2>
-      <p class="u-text-soft" style="margin-bottom: 2rem;">Resize the viewport to see each value interpolate between its min and max.</p>
+      <p class="u-text-soft" style="margin-bottom: 2rem;">
+         Resize the viewport to see each value interpolate between its min and
+         max.
+      </p>
       <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-        {[
-          { name: '--space-2',  min: 2,  max: 2  },
-          { name: '--space-4',  min: 4,  max: 4  },
-          { name: '--space-6',  min: 6,  max: 6  },
-          { name: '--space-8',  min: 8,  max: 8  },
-          { name: '--space-12', min: 10, max: 12 },
-          { name: '--space-16', min: 12, max: 16 },
-          { name: '--space-20', min: 16, max: 20 },
-          { name: '--space-24', min: 18, max: 24 },
-          { name: '--space-28', min: 20, max: 28 },
-          { name: '--space-32', min: 24, max: 32 },
-          { name: '--space-36', min: 26, max: 36 },
-          { name: '--space-40', min: 28, max: 40 },
-          { name: '--space-44', min: 32, max: 44 },
-          { name: '--space-48', min: 32, max: 48 },
-          { name: '--space-56', min: 36, max: 56 },
-          { name: '--space-64', min: 44, max: 64 },
-          { name: '--space-72', min: 48, max: 72 },
-          { name: '--space-80', min: 56, max: 80 },
-          { name: '--space-88', min: 60, max: 88 },
-          { name: '--space-96', min: 64, max: 96 },
-        ].map(({ name, min, max }) => (
-          <div style="display: flex; align-items: center; gap: 1rem;">
-            <code style="flex: 0 0 8.5rem; font-size: 0.8125rem; color: var(--color-text-soft);">{name}</code>
-            <div style={`height: 6px; width: var(${name}); min-width: 2px; background: var(--color-accent); border-radius: 3px; flex-shrink: 0;`}></div>
-            <span style="font-size: 0.8125rem; color: var(--color-text-muted); white-space: nowrap;">{min === max ? `${min}px` : `${min}–${max}px`}</span>
-          </div>
-        ))}
+         {
+            [
+               { name: "--space-2", min: 2, max: 2 },
+               { name: "--space-4", min: 4, max: 4 },
+               { name: "--space-6", min: 6, max: 6 },
+               { name: "--space-8", min: 8, max: 8 },
+               { name: "--space-12", min: 10, max: 12 },
+               { name: "--space-16", min: 12, max: 16 },
+               { name: "--space-20", min: 16, max: 20 },
+               { name: "--space-24", min: 18, max: 24 },
+               { name: "--space-28", min: 20, max: 28 },
+               { name: "--space-32", min: 24, max: 32 },
+               { name: "--space-36", min: 26, max: 36 },
+               { name: "--space-40", min: 28, max: 40 },
+               { name: "--space-44", min: 32, max: 44 },
+               { name: "--space-48", min: 32, max: 48 },
+               { name: "--space-56", min: 36, max: 56 },
+               { name: "--space-64", min: 44, max: 64 },
+               { name: "--space-72", min: 48, max: 72 },
+               { name: "--space-80", min: 56, max: 80 },
+               { name: "--space-88", min: 60, max: 88 },
+               { name: "--space-96", min: 64, max: 96 },
+            ].map(({ name, min, max }) => (
+               <div style="display: flex; align-items: center; gap: 1rem;">
+                  <code style="flex: 0 0 8.5rem; font-size: 0.8125rem; color: var(--color-text-soft);">
+                     {name}
+                  </code>
+                  <div
+                     style={`height: 6px; width: var(${name}); min-width: 2px; background: var(--color-accent); border-radius: 3px; flex-shrink: 0;`}
+                  />
+                  <span style="font-size: 0.8125rem; color: var(--color-text-muted); white-space: nowrap;">
+                     {min === max ? `${min}px` : `${min}–${max}px`}
+                  </span>
+               </div>
+            ))
+         }
       </div>
-    </section>
+   </section>
 
-  </main>
-
-  <script>
-    // Update file input label with selected filename
-    document.querySelectorAll<HTMLInputElement>('.input-file-hidden').forEach((input) => {
-      const nameEl = document.getElementById(input.id + '-name');
-      if (!nameEl) return;
-      input.addEventListener('change', () => {
-        nameEl.textContent = input.files?.[0]?.name ?? '';
-      });
-    });
-  </script>
+   <script>
+      // Update file input label with selected filename
+      document
+         .querySelectorAll<HTMLInputElement>(".input-file-hidden")
+         .forEach((input) => {
+            const nameEl = document.getElementById(input.id + "-name");
+            if (!nameEl) return;
+            input.addEventListener("change", () => {
+               nameEl.textContent = input.files?.[0]?.name ?? "";
+            });
+         });
+   </script>
 </BaseLayout>
