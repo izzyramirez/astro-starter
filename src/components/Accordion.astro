@@ -1,121 +1,81 @@
 ---
 interface Props {
-  class?: string;
+   class?: string;
 }
 
 const { class: className } = Astro.props;
 ---
 
-<div class:list={['accordion', className]} data-module="accordion">
-  <slot />
+<div class:list={["accordion", className]} data-module="accordion">
+   <slot />
 </div>
 
 <script>
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+   import gsap from "gsap";
+   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+   gsap.registerPlugin(ScrollTrigger);
 
-document.querySelectorAll<HTMLElement>('[data-module="accordion"]').forEach((module) => {
-  const items = module.querySelectorAll<HTMLElement>('.accordion-item');
+   document
+      .querySelectorAll<HTMLElement>('[data-module="accordion"]')
+      .forEach((module) => {
+         const items = module.querySelectorAll<HTMLElement>(".accordion-item");
 
-  items.forEach((item, i) => {
-    const id      = `accordion-${i + 1}`;
-    const btn     = item.querySelector<HTMLButtonElement>('.accordion-trigger');
-    const content = item.querySelector<HTMLElement>('.accordion-content');
-    const icon    = item.querySelector<HTMLElement>('.accordion-icon_right');
+         items.forEach((item, i) => {
+            const id = `accordion-${i + 1}`;
+            const btn =
+               item.querySelector<HTMLButtonElement>(".accordion-trigger");
+            const content =
+               item.querySelector<HTMLElement>(".accordion-content");
+            const icon = item.querySelector<HTMLElement>(".accordion-icon");
 
-    if (!btn || !content) return;
+            if (!btn || !content) return;
 
-    btn.id = `trigger-${id}`;
-    btn.setAttribute('aria-controls', `content-${id}`);
-    btn.setAttribute('aria-expanded', 'false');
-    content.id = `content-${id}`;
-    content.setAttribute('aria-labelledby', `trigger-${id}`);
-    content.setAttribute('aria-hidden', 'true');
+            btn.id = `trigger-${id}`;
+            btn.setAttribute("aria-controls", `content-${id}`);
+            btn.setAttribute("aria-expanded", "false");
+            content.id = `content-${id}`;
+            content.setAttribute("aria-labelledby", `trigger-${id}`);
+            content.setAttribute("aria-hidden", "true");
 
-    gsap.set(content, { height: 0 });
+            gsap.set(content, { height: 0 });
 
-    let tl: gsap.core.Timeline | undefined;
+            let tl: gsap.core.Timeline | undefined;
 
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (tl) tl.kill();
+            btn.addEventListener("click", (e) => {
+               e.preventDefault();
+               if (tl) tl.kill();
 
-      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!isExpanded));
-      content.setAttribute('aria-hidden', String(isExpanded));
+               const isExpanded = btn.getAttribute("aria-expanded") === "true";
+               btn.setAttribute("aria-expanded", String(!isExpanded));
+               content.setAttribute("aria-hidden", String(isExpanded));
 
-      if (!isExpanded) item.setAttribute('data-open', '');
+               if (!isExpanded) item.setAttribute("data-open", "");
 
-      tl = gsap.timeline({
-        onComplete: () => {
-          if (isExpanded) item.removeAttribute('data-open');
-          ScrollTrigger.refresh();
-        },
+               tl = gsap.timeline({
+                  onComplete: () => {
+                     if (isExpanded) item.removeAttribute("data-open");
+                     ScrollTrigger.refresh();
+                  },
+               });
+
+               tl.to(content, {
+                  height: isExpanded ? 0 : "auto",
+                  duration: 0.4,
+                  ease: "power2.inOut",
+               });
+               if (icon) {
+                  tl.to(
+                     icon,
+                     {
+                        rotateZ: isExpanded ? 0 : 45,
+                        duration: 0.4,
+                        ease: "power2.inOut",
+                     },
+                     "<",
+                  );
+               }
+            });
+         });
       });
-
-      tl.to(content, { height: isExpanded ? 0 : 'auto', duration: 0.4, ease: 'power2.inOut' });
-      if (icon) {
-        tl.to(icon, { rotateZ: isExpanded ? 0 : 45, duration: 0.4, ease: 'power2.inOut' }, '<');
-      }
-    });
-  });
-});
 </script>
-
-<style is:global>
-  .accordion-item {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    margin-bottom: 1rem;
-    overflow: hidden;
-  }
-
-  .accordion-trigger {
-    width: 100%;
-    padding: var(--card-padding);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5em;
-    cursor: pointer;
-    font-weight: var(--weight-medium);
-    transition: color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
-
-  .accordion-trigger:hover { color: var(--color-accent); }
-
-  .accordion-trigger:focus-visible {
-    border-radius: var(--radius-md);
-  }
-
-  .accordion-title {
-    text-align: left;
-    margin-bottom: 0;
-    padding-right: 0.5em;
-  }
-
-  .accordion-icon_right {
-    flex: none;
-    width: 1.25rem;
-    height: 1.25rem;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    transform-origin: center;
-  }
-
-  .accordion-content {
-    width: 100%;
-    height: 0;
-    overflow: hidden;
-  }
-
-  .accordion-content_spacer {
-    padding: 0 var(--card-padding) var(--card-padding);
-  }
-</style>

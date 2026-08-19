@@ -1,24 +1,86 @@
 ---
-import Plus from '@assets/icons/Plus.astro';
+import Plus from "@assets/icons/Plus.astro";
 
 interface Props {
-  title: string;
-  class?: string;
+   title: string;
+   class?: string;
 }
 
 const { title, class: className } = Astro.props;
 ---
 
-<div class:list={['accordion-item', className]}>
-  <button class="accordion-trigger" type="button">
-    <span class="accordion-title">{title}</span>
-    <span class="accordion-icon_right" aria-hidden="true">
-      <Plus />
-    </span>
-  </button>
-  <div class="accordion-content">
-    <div class="accordion-content_spacer">
-      <slot />
-    </div>
-  </div>
+<div class:list={["accordion-item", className]}>
+   <button class="accordion-trigger" type="button">
+      <span class="accordion-title">{title}</span>
+      <span class="accordion-icon" aria-hidden="true">
+         <Plus />
+      </span>
+   </button>
+   <div class="accordion-content">
+      <div class="accordion-content_inner rich-text">
+         <slot />
+      </div>
+   </div>
 </div>
+
+<style>
+   @layer base, component, utility;
+
+   @layer component {
+      .accordion-item {
+         border: 1px solid var(--color-border);
+         border-radius: var(--radius-md);
+         display: flex;
+         flex-direction: column;
+         text-align: left;
+         margin-bottom: var(--space-16);
+         overflow: hidden;
+      }
+
+      .accordion-trigger {
+         width: 100%;
+         padding: var(--card-p);
+         display: flex;
+         justify-content: space-between;
+         align-items: flex-start;
+         gap: var(--space-8);
+         transition: color var(--duration-sm) var(--ease-out-cubic);
+      }
+
+      .accordion-trigger:focus-visible {
+         outline: none;
+      }
+
+      .accordion-item:has(.accordion-trigger:focus-visible) {
+         outline: var(--outline-width) solid;
+         outline-offset: var(--outline-offset);
+         outline-color: var(--outline-color);
+         border-color: var(--color-text-strong);
+      }
+
+      .accordion-title {
+         font-weight: var(--weight-medium);
+      }
+
+      .accordion-icon {
+         flex: none;
+         width: 1em;
+         height: 1em;
+         margin-top: 0.265em;
+         display: inline-flex;
+         justify-content: center;
+         align-items: center;
+         transform-origin: center;
+      }
+
+      .accordion-content {
+         width: 100%;
+         height: 0;
+         overflow: hidden;
+      }
+
+      .accordion-content_inner {
+         padding: 0 var(--card-p) var(--card-p);
+      }
+   }
+</style>

@@ -15,6 +15,10 @@
       margin: 0;
    }
 
+   html {
+      -webkit-tap-highlight-color: transparent; /* Blue highlight taps */
+   }
+
    /* Enable keyboard animations */
    @media (prefers-reduced-motion: no-preference) {
       html {
@@ -66,14 +70,7 @@
    :focus-visible {
       outline: var(--outline-width) solid;
       outline-offset: var(--outline-offset);
-      outline-color: light-dark(
-         color-mix(
-            in srgb,
-            var(--color-text-accent) 20%,
-            rgba(120, 224, 255, 0.4)
-         ),
-         color-mix(in srgb, var(--color-text-accent) 48%, transparent)
-      );
+      outline-color: var(--outline-color);
    }
 
    /* Break long overflowing words in separate lines */

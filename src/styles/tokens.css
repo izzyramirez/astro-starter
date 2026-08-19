@@ -509,6 +509,14 @@
    /* Accessibility */
    --outline-width: 4px;
    --outline-offset: 0px;
+   --outline-color: light-dark(
+      color-mix(
+         in srgb,
+         var(--color-text-accent) 20%,
+         rgba(120, 224, 255, 0.4)
+      ),
+      color-mix(in srgb, var(--color-text-accent) 48%, transparent)
+   );
 
    /* Easing */
    --ease-out-sine: cubic-bezier(0.39, 0.575, 0.565, 1);
