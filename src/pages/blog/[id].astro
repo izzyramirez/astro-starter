@@ -1,0 +1,92 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+interface Props {
+   post: CollectionEntry<"blog">;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+   // Annotated explicitly so `post`/`data` don't fall back to implicit `any`
+   // if the generated `astro:content` types haven't been synced yet.
+   const posts: CollectionEntry<"blog">[] = await getCollection("blog");
+
+   return posts
+      .filter((post) => !post.data.draft)
+      .map((post) => ({
+         params: { id: post.data.slug },
+         props: { post },
+      }));
+};
+
+const { post } = Astro.props;
+const { title, description, pubDate, updatedDate, author, ogImage } = post.data;
+const { Content } = await render(post);
+
+const dateFormat = new Intl.DateTimeFormat("en-US", {
+   year: "numeric",
+   month: "long",
+   day: "numeric",
+   timeZone: "UTC",
+});
+---
+
+<BaseLayout
+   title={title}
+   description={description}
+   ogType="article"
+   ogImage={ogImage}
+   datePublished={pubDate}
+   dateModified={updatedDate}
+   breadcrumbItem={title}
+>
+   <section class="section">
+      <article class="article">
+         <header>
+            <p class="eyebrow u-text-soft">Blog</p>
+
+            <h1 style="margin-top: 1rem;">{title}</h1>
+
+            <p class="paragraph-lg u-text-soft" style="margin-top: 1rem;">
+               {description}
+            </p>
+
+            <p class="paragraph-sm u-text-soft" style="margin-top: 1.5rem;">
+               By {author} ·{" "}
+               <time datetime={pubDate.toISOString()}
+                  >{dateFormat.format(pubDate)}</time
+               >
+               {
+                  updatedDate && (
+                     <>
+                        {" "}
+                        · Updated{" "}
+                        <time datetime={updatedDate.toISOString()}>
+                           {dateFormat.format(updatedDate)}
+                        </time>
+                     </>
+                  )
+               }
+            </p>
+
+            <span class="u-divider" style="margin: 2.5rem 0;"></span>
+         </header>
+
+         <div class="rich-text" style="max-width: 65ch;">
+            <Content />
+         </div>
+      </article>
+   </section>
+</BaseLayout>
+
+<style>
+   .section {
+      /* TODO: Update global margins */
+      padding: 4rem 5vw;
+   }
+   .article {
+      max-width: 40rem;
+      margin: 0 auto;
+   }
+</style>

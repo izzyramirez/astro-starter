@@ -1,109 +1,139 @@
 ---
 interface Props {
-  href?: string;
-  variant?: 'primary' | 'outline' | 'ghost';
-  full?: boolean;
-  type?: 'button' | 'submit' | 'reset';
-  class?: string;
-  disabled?: boolean;
-  target?: string;
-  rel?: string;
-  id?: string;
-  form?: string;
-  name?: string;
-  value?: string;
-  download?: string | boolean;
-  'aria-label'?: string;
-  'aria-controls'?: string;
-  'aria-expanded'?: 'true' | 'false';
-  'aria-haspopup'?: boolean | 'dialog' | 'listbox' | 'tree' | 'grid' | 'menu';
-  'data-module'?: string;
+   href?: string;
+   variant?: "primary" | "outline" | "ghost";
+   full?: boolean;
+   type?: "button" | "submit" | "reset";
+   class?: string;
+   disabled?: boolean;
+   target?: string;
+   rel?: string;
+   id?: string;
+   form?: string;
+   name?: string;
+   value?: string;
+   download?: string | boolean;
+   "aria-label"?: string;
+   "aria-controls"?: string;
+   "aria-expanded"?: "true" | "false";
+   "aria-haspopup"?: boolean | "dialog" | "listbox" | "tree" | "grid" | "menu";
+   "data-module"?: string;
 }
 
 const {
-  href,
-  variant = 'primary',
-  full = false,
-  type = 'button',
-  class: className,
-  ...rest
+   href,
+   variant = "primary",
+   full = false,
+   type = "button",
+   class: className,
+   ...rest
 } = Astro.props;
 
-const Tag = href ? 'a' : 'button';
+const Tag = href ? "a" : "button";
 ---
 
 <Tag
-  class:list={[
-    'btn',
-    variant !== 'primary' && `cc-${variant}`,
-    full && 'cc-full',
-    className,
-  ]}
-  href={href}
-  type={!href ? type : undefined}
-  {...rest}
+   class:list={[
+      "btn",
+      variant !== "primary" && `cc-${variant}`,
+      full && "cc-full",
+      className,
+   ]}
+   href={href}
+   type={!href ? type : undefined}
+   {...rest}
 >
-  {Astro.slots.has('icon-left') && (
-    <span class="btn-icon" aria-hidden="true"><slot name="icon-left" /></span>
-  )}
-  <slot />
-  {Astro.slots.has('icon-right') && (
-    <span class="btn-icon" aria-hidden="true"><slot name="icon-right" /></span>
-  )}
+   {
+      Astro.slots.has("icon-left") && (
+         <span class="btn-icon" aria-hidden="true">
+            <slot name="icon-left" />
+         </span>
+      )
+   }
+   <slot />
+   {
+      Astro.slots.has("icon-right") && (
+         <span class="btn-icon" aria-hidden="true">
+            <slot name="icon-right" />
+         </span>
+      )
+   }
 </Tag>
 
 <style is:global>
-  .btn {
-    padding: var(--btn-py) var(--btn-px);
-    border-radius: var(--radius-md);
-    background-color: var(--color-accent);
-    color: var(--primitive-neutral-100);
-    font-family: var(--font-primary, var(--font-fallback));
-    font-size: var(--text-md);
-    font-weight: var(--weight-medium);
-    line-height: var(--leading-150);
-    letter-spacing: var(--tracking-normal);
-    text-align: center;
-    text-decoration: none;
-    border: 1px solid transparent;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.375em;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: box-shadow 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
-                border-color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
-                opacity 0.3s;
-  }
+   @layer base, component, utility;
 
-  .btn:hover { box-shadow: inset 0 0 0 100px rgba(0, 0, 0, 0.15); }
+   @layer component {
+      .btn {
+         padding: var(--btn-py) var(--btn-px);
+         border-radius: var(--btn-radius);
+         background-color: var(--color-text-accent);
+         color: var(--primitive-neutral-0);
+         font-family: var(--font-primary, var(--font-fallback));
+         font-size: var(--text-sm);
+         font-weight: var(--weight-medium);
+         line-height: var(--leading-150);
+         letter-spacing: var(--tracking-normal);
+         text-align: center;
+         text-decoration: none;
+         border: 1px solid transparent;
+         display: inline-flex;
+         justify-content: center;
+         align-items: center;
+         gap: 0.375em;
+         cursor: pointer;
+         white-space: nowrap;
+         transition:
+            background-color var(--duration-sm) var(--ease-out-cubic),
+            border-color var(--duration-sm) var(--ease-out-cubic),
+            opacity var(--duration-sm) var(--ease-out-cubic);
+      }
 
-  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+      .btn.cc-outline {
+         background-color: transparent;
+         border-color: var(--color-text-strong);
+         color: var(--color-text-strong);
+      }
 
-  .btn.cc-outline {
-    background-color: transparent;
-    border-color: var(--color-text-strong);
-    color: var(--color-text-strong);
-  }
+      .btn.cc-ghost {
+         background-color: transparent;
+         border-color: transparent;
+         color: var(--color-text-strong);
+      }
 
-  .btn.cc-ghost {
-    background-color: transparent;
-    border-color: transparent;
-    color: var(--color-text-strong);
-  }
+      .btn:disabled {
+         opacity: 0.5;
+         cursor: not-allowed;
+      }
 
-  .btn.cc-ghost:hover {
-    background-color: var(--color-surface);
-    box-shadow: none;
-  }
+      .btn.cc-full {
+         width: 100%;
+      }
 
-  .btn.cc-full { width: 100%; }
+      .btn-icon {
+         display: inline-flex;
+         align-items: center;
+         flex-shrink: 0;
+         width: 1em;
+         height: 1em;
+      }
 
-  .btn-icon {
-    display: inline-flex;
-    align-items: center;
-    flex-shrink: 0;
-    line-height: 1;
-  }
+      @media (hover: hover) and (pointer: fine) {
+         .btn:not(:disabled):hover {
+            background-color: color-mix(
+               in srgb,
+               var(--color-text-accent) 72%,
+               var(--color-text-strong)
+            );
+         }
+         .btn.cc-outline:not(:disabled):hover,
+         .btn.cc-ghost:not(:disabled):hover {
+            background-color: color-mix(
+               in srgb,
+               var(--color-text-strong) 6%,
+               transparent
+            );
+         }
+      }
+   }
 </style>
