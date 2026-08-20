@@ -518,6 +518,10 @@
       color-mix(in srgb, var(--color-text-accent) 48%, transparent)
    );
 
+   /* Layout */
+   --section-padding: max(4vw, 1.25rem);
+   --container-max-default: 78rem;
+
    /* Easing */
    --ease-out-sine: cubic-bezier(0.39, 0.575, 0.565, 1);
    --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);

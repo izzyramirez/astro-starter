@@ -1,120 +1,137 @@
 ---
-import Button from './Button.astro';
-import Close from '@assets/icons/Close.astro';
+import Button from "./Button.astro";
+import Close from "@assets/icons/Close.astro";
 
 interface Props {
-  triggerLabel?: string;
-  class?: string;
+   triggerLabel?: string;
+   class?: string;
 }
 
-const { triggerLabel = 'Open', class: className } = Astro.props;
+const { triggerLabel = "Open", class: className } = Astro.props;
 ---
 
-<div class:list={['dialog-component', className]} data-module="dialog">
-  <Button type="button" aria-controls="">
-    {triggerLabel}
-  </Button>
-  <dialog>
-    <div class="modal">
-      <button class="modal_close-button" type="button" aria-label="Close dialog">
-        <Close />
-      </button>
-      <slot />
-    </div>
-  </dialog>
+<div class:list={["dialog-component", className]} data-module="dialog">
+   <Button type="button" aria-controls="">
+      {triggerLabel}
+   </Button>
+   <dialog>
+      <div class="modal">
+         <button
+            class="modal_close-button"
+            type="button"
+            aria-label="Close dialog"
+         >
+            <Close stroke={1.5} />
+         </button>
+         <slot />
+      </div>
+   </dialog>
 </div>
 
 <script>
-let modalCount = 0;
+   // TODO: Check code
+   let modalCount = 0;
 
-document.querySelectorAll<HTMLElement>('[data-module="dialog"]').forEach((module) => {
-  const id      = `modal-${++modalCount}`;
-  const dialogEl = module.querySelector<HTMLDialogElement>('dialog');
-  const btnOpen  = module.querySelector<HTMLElement>('[aria-controls]');
-  const btnClose = module.querySelector<HTMLButtonElement>('dialog button');
+   document
+      .querySelectorAll<HTMLElement>('[data-module="dialog"]')
+      .forEach((module) => {
+         const id = `modal-${++modalCount}`;
+         const dialogEl = module.querySelector<HTMLDialogElement>("dialog");
+         const btnOpen = module.querySelector<HTMLElement>("[aria-controls]");
+         const btnClose =
+            module.querySelector<HTMLButtonElement>("dialog button");
 
-  if (!dialogEl || !btnOpen || !btnClose) return;
+         if (!dialogEl || !btnOpen || !btnClose) return;
 
-  dialogEl.id = id;
-  btnOpen.setAttribute('aria-controls', id);
-  btnOpen.id = `trigger-${id}`;
+         dialogEl.id = id;
+         btnOpen.setAttribute("aria-controls", id);
+         btnOpen.id = `trigger-${id}`;
 
-  btnOpen.addEventListener('click', () => dialogEl.showModal());
+         btnOpen.addEventListener("click", () => dialogEl.showModal());
 
-  btnClose.addEventListener('click', () => dialogEl.close());
+         btnClose.addEventListener("click", () => dialogEl.close());
 
-  dialogEl.addEventListener('click', (e) => {
-    const rect = dialogEl.getBoundingClientRect();
-    if (
-      e.clientX < rect.left ||
-      e.clientX > rect.right ||
-      e.clientY < rect.top  ||
-      e.clientY > rect.bottom
-    ) {
-      dialogEl.close();
-    }
-  });
-});
+         dialogEl.addEventListener("click", (e) => {
+            const rect = dialogEl.getBoundingClientRect();
+            if (
+               e.clientX < rect.left ||
+               e.clientX > rect.right ||
+               e.clientY < rect.top ||
+               e.clientY > rect.bottom
+            ) {
+               dialogEl.close();
+            }
+         });
+      });
 </script>
 
-<style is:global>
-  html:has(dialog[open]) { overflow: hidden; }
+<style>
+   @layer base, component, utility;
 
-  dialog {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: 0;
-    max-width: min(90vw, 800px);
-    width: 100%;
-    background-color: var(--color-background);
-    color: var(--color-text-strong);
-  }
+   @layer component {
+      html:has(dialog[open]) {
+         overflow: hidden;
+      }
 
-  dialog[open] {
-    animation: dialog-fadein 0.4s ease-out forwards;
-  }
+      dialog {
+         background-color: var(--color-bg-page);
+         border-radius: var(--radius-lg);
+         border: 1px solid var(--color-border);
+         width: 100%;
+         max-width: min(calc(100% - (var(--section-padding) * 2)), 50rem);
+         max-height: calc(100svh - (var(--section-padding) * 2));
+         padding: 0;
+      }
 
-  dialog::backdrop {
-    background: color-mix(in srgb, var(--primitive-neutral-900) 92%, transparent);
-  }
+      dialog[open],
+      dialog[open]::backdrop {
+         animation: dialog-fadein var(--duration-sm) var(--ease-out-sine)
+            forwards;
+      }
 
-  @keyframes dialog-fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
+      dialog::backdrop {
+         background: color-mix(
+            in srgb,
+            var(--primitive-neutral-900) 96%,
+            transparent
+         );
+      }
 
-  dialog::-webkit-scrollbar { width: 10px; }
+      @keyframes dialog-fadein {
+         from {
+            opacity: 0;
+         }
+         to {
+            opacity: 1;
+         }
+      }
 
-  dialog::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: transparent;
-  }
+      .modal {
+         padding: var(--space-20);
+         position: relative;
+      }
 
-  dialog::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    border: 2px solid var(--color-background);
-    background: var(--color-text-strong);
-  }
+      .modal_close-button {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         width: var(--space-32);
+         height: var(--space-32);
+         padding: var(--space-4);
+         border-radius: var(--radius-sm);
+         position: absolute;
+         inset: 0.5rem 0.5rem auto auto;
+         transition: background-color var(--duration-sm) var(--ease-out-sine);
+      }
 
-  .modal {
-    padding: var(--card-padding);
-    overflow-y: auto;
-    max-height: 90svh;
-    position: relative;
-  }
-
-  .modal_close-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 2rem;
-    height: 2rem;
-    padding: 0;
-    border-radius: var(--radius-sm);
-    position: absolute;
-    inset: 0.5rem 0.5rem auto auto;
-    transition: opacity 0.2s;
-  }
-
-  .modal_close-button:hover { opacity: 0.6; }
+      @media (hover: hover) and (pointer: fine) {
+         .modal_close-button:hover {
+            background-color: color-mix(
+               in srgb,
+               var(--color-text-strong) 6%,
+               transparent
+            );
+         }
+      }
+   }
 </style>

@@ -1,46 +1,48 @@
 ---
-import { Font } from 'astro:assets';
-import SEO from './SEO.astro';
-import Nav from '@components/Nav.astro';
-import Footer from '@components/Footer.astro';
-import '@/styles/global.css';
+import { Font } from "astro:assets";
+import SEO from "./SEO.astro";
+import Nav from "@components/Nav.astro";
+import Footer from "@components/Footer.astro";
+import "@/styles/global.css";
 
 interface Props {
-  title?: string;
-  description?: string;
-  ogImage?: string;
-  ogImageWidth?: number;
-  ogImageHeight?: number;
-  ogImageAlt?: string;
-  ogType?: string;
-  robots?: string;
-  siteName?: string;
-  sameAs?: string[];
-  datePublished?: Date;
-  dateModified?: Date;
-  articleAuthor?: string;
-  breadcrumbItem?: string;
-  lang?: string;
+   title?: string;
+   description?: string;
+   ogImage?: string;
+   ogImageWidth?: number;
+   ogImageHeight?: number;
+   ogImageAlt?: string;
+   ogType?: string;
+   robots?: string;
+   siteName?: string;
+   sameAs?: string[];
+   datePublished?: Date;
+   dateModified?: Date;
+   articleAuthor?: string;
+   breadcrumbItem?: string;
+   lang?: string;
 }
 
-const { lang = 'en', ...seoProps } = Astro.props;
+const { lang = "en", ...seoProps } = Astro.props;
 ---
 
 <!doctype html>
 <html lang={lang}>
-  <head>
-    <Font cssVariable="--font-primary" preload />
-    <SEO {...seoProps} />
-    <slot name="head" />
-  </head>
-  <body>
-    <Nav />
-    <main id="main-content">
-      <slot />
-    </main>
-    <Footer />
-    <script>
-      import '@/scripts/main';
-    </script>
-  </body>
+   <head>
+      <Font cssVariable="--font-primary" preload />
+      <SEO {...seoProps} />
+      <slot name="head" />
+   </head>
+   <body>
+      <div class="page-wrap">
+         <Nav />
+         <main id="main-content">
+            <slot />
+         </main>
+         <Footer />
+      </div>
+      <script>
+         import "@/scripts/main";
+      </script>
+   </body>
 </html>
