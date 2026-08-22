@@ -5,11 +5,18 @@ interface Props {
    class?: string;
    "aria-hidden"?: "true" | "false";
 }
-const { class: className, "aria-hidden": ariaHidden = "true" } = Astro.props;
+const {
+   width = 24,
+   height = 24,
+   class: className,
+   "aria-hidden": ariaHidden = "true",
+} = Astro.props;
 ---
 
 <svg
    class={className}
+   width={width}
+   height={height}
    viewBox="0 0 24 24"
    fill="none"
    xmlns="http://www.w3.org/2000/svg"

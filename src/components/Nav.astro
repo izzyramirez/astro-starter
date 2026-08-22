@@ -1,456 +1,552 @@
 ---
-import NavDropdown from './NavDropdown.astro';
-import NavMegaDropdown from './NavMegaDropdown.astro';
-import Button from './Button.astro';
-import Menu from '@assets/icons/Menu.astro';
-import Close from '@assets/icons/Close.astro';
-import BoilerPlate from '@/assets/icons/BoilerPlate.astro';
+import NavDropdown from "./NavDropdown.astro";
+import NavMegaDropdown from "./NavMegaDropdown.astro";
+import Button from "./Button.astro";
+import Menu from "@assets/icons/Menu.astro";
+import Close from "@assets/icons/Close.astro";
+import Company from "@/assets/icons/Company.astro";
 
 interface Props {
-  logoHref?: string;
+   logoHref?: string;
 }
 
-const { logoHref = '/' } = Astro.props;
+const { logoHref = "/" } = Astro.props;
 ---
 
 <header class="nav" data-module="nav">
-  <a href="#main-content" class="nav-skip-link">Skip to main content</a>
-  <div class="nav-inner">
-    <a class="nav-logo" href="/" aria-label="Home">
-      <BoilerPlate />
-    </a>
+   <a href="#main-content" class="nav-skip-link">Skip to main content</a>
+   <div class="nav-inner">
+      <a class="nav-logo" href="/" aria-label="Home">
+         <Company />
+      </a>
 
-    <ul class="nav-menu" id="nav-menu" role="list">
-      <li><a class="nav-link" href="/">Home</a></li>
-      <li><a class="nav-link" href="#">About</a></li>
-      <NavDropdown label="Resources">
-        <a class="nav-dropdown-link" href="#">Documentation</a>
-        <a class="nav-dropdown-link" href="#">Changelog</a>
-        <a class="nav-dropdown-link" href="#">Blog</a>
-      </NavDropdown>
-      <NavMegaDropdown label="Platform">
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
-          <div>
-            <p style="font-weight: var(--weight-semibold); margin-bottom: 0.5rem;">Build</p>
-            <a class="nav-dropdown-link" href="#">Components</a>
-            <a class="nav-dropdown-link" href="#">Templates</a>
-            <a class="nav-dropdown-link" href="#">Integrations</a>
-          </div>
-          <div>
-            <p style="font-weight: var(--weight-semibold); margin-bottom: 0.5rem;">Learn</p>
+      <ul class="nav-menu" id="nav-menu" role="list">
+         <li><a class="nav-link" href="/">Home</a></li>
+         <li><a class="nav-link" href="#">About</a></li>
+         <NavDropdown label="Resources">
             <a class="nav-dropdown-link" href="#">Documentation</a>
-            <a class="nav-dropdown-link" href="#">Tutorials</a>
+            <a class="nav-dropdown-link" href="#">Changelog</a>
             <a class="nav-dropdown-link" href="#">Blog</a>
-          </div>
-          <div>
-            <p style="font-weight: var(--weight-semibold); margin-bottom: 0.5rem;">Company</p>
-            <a class="nav-dropdown-link" href="#">About</a>
-            <a class="nav-dropdown-link" href="#">Careers</a>
-            <a class="nav-dropdown-link" href="#">Contact</a>
-          </div>
-        </div>
-      </NavMegaDropdown>
-    </ul>
+         </NavDropdown>
+         <NavMegaDropdown label="Platform">
+            <div
+               style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;"
+            >
+               <div>
+                  <p
+                     style="font-weight: var(--weight-semibold); margin-bottom: 0.5rem;"
+                  >
+                     Build
+                  </p>
+                  <a class="nav-dropdown-link" href="#">Components</a>
+                  <a class="nav-dropdown-link" href="#">Templates</a>
+                  <a class="nav-dropdown-link" href="#">Integrations</a>
+               </div>
+               <div>
+                  <p
+                     style="font-weight: var(--weight-semibold); margin-bottom: 0.5rem;"
+                  >
+                     Learn
+                  </p>
+                  <a class="nav-dropdown-link" href="#">Documentation</a>
+                  <a class="nav-dropdown-link" href="#">Tutorials</a>
+                  <a class="nav-dropdown-link" href="#">Blog</a>
+               </div>
+               <div>
+                  <p
+                     style="font-weight: var(--weight-semibold); margin-bottom: 0.5rem;"
+                  >
+                     Company
+                  </p>
+                  <a class="nav-dropdown-link" href="#">About</a>
+                  <a class="nav-dropdown-link" href="#">Careers</a>
+                  <a class="nav-dropdown-link" href="#">Contact</a>
+               </div>
+            </div>
+         </NavMegaDropdown>
+      </ul>
 
-    <div class="nav-end">
-      <Button href="#">Get started</Button>
-      <button
-        class="nav-burger"
-        type="button"
-        aria-expanded="false"
-        aria-controls="nav-menu"
-        aria-label="Open navigation"
-      >
-        <span class="nav-burger-icon--open" aria-hidden="true"><Menu /></span>
-        <span class="nav-burger-icon--close" aria-hidden="true"><Close /></span>
-      </button>
-    </div>
-  </div>
+      <div class="nav-end">
+         <Button href="#">Get started</Button>
+         <button
+            class="nav-burger"
+            type="button"
+            aria-expanded="false"
+            aria-controls="nav-menu"
+            aria-label="Open navigation"
+         >
+            <span class="nav-burger-icon--open" aria-hidden="true"
+               ><Menu /></span
+            >
+            <span class="nav-burger-icon--close" aria-hidden="true"
+               ><Close /></span
+            >
+         </button>
+      </div>
+   </div>
 </header>
 
 <script>
-import gsap from 'gsap';
+   import gsap from "gsap";
 
-const nav = document.querySelector<HTMLElement>('[data-module="nav"]');
+   const nav = document.querySelector<HTMLElement>('[data-module="nav"]');
 
-if (nav) {
-  const burger = nav.querySelector<HTMLButtonElement>('.nav-burger');
-  const menu   = nav.querySelector<HTMLElement>('.nav-menu');
-  const drops  = nav.querySelectorAll<HTMLElement>('.nav-dropdown');
+   if (nav) {
+      const burger = nav.querySelector<HTMLButtonElement>(".nav-burger");
+      const menu = nav.querySelector<HTMLElement>(".nav-menu");
+      const drops = nav.querySelectorAll<HTMLElement>(".nav-dropdown");
 
-  // Keep --nav-h up-to-date so fixed mega panels anchor below the nav
-  const navEl = nav;
-  function syncNavHeight() {
-    navEl.style.setProperty('--nav-h', `${navEl.offsetHeight}px`);
-  }
-  syncNavHeight();
-  window.addEventListener('resize', syncNavHeight, { passive: true });
-
-  const mqDesktop = window.matchMedia('(min-width: 992px)');
-
-  // ── Dropdown helpers ───────────────────────────────────
-
-  function closeDropdown(dd: HTMLElement, instant = false) {
-    const trigger = dd.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
-    const panel   = dd.querySelector<HTMLElement>('.nav-dropdown-panel');
-    if (!trigger || !panel || trigger.getAttribute('aria-expanded') !== 'true') return;
-
-    trigger.setAttribute('aria-expanded', 'false');
-    panel.setAttribute('inert', '');
-
-    if (instant) {
-      gsap.killTweensOf(panel);
-      panel.style.pointerEvents = '';
-      gsap.set(panel, { clearProps: 'all' });
-    } else if (mqDesktop.matches) {
-      gsap.to(panel, {
-        opacity: 0, y: -4, duration: 0.15, ease: 'power1.in', overwrite: true,
-        onComplete: () => { panel.style.pointerEvents = 'none'; },
-      });
-    } else {
-      gsap.to(panel, { height: 0, duration: 0.2, ease: 'power1.in', overwrite: true });
-    }
-  }
-
-  function openDropdown(trigger: HTMLButtonElement, panel: HTMLElement) {
-    trigger.setAttribute('aria-expanded', 'true');
-    panel.removeAttribute('inert');
-
-    if (mqDesktop.matches) {
-      gsap.set(panel, { clearProps: 'height,overflow' });
-      panel.style.pointerEvents = 'auto';
-      gsap.fromTo(panel,
-        { opacity: 0, y: -6 },
-        { opacity: 1, y: 0, duration: 0.22, ease: 'power2.out', overwrite: true }
-      );
-    } else {
-      gsap.set(panel, { clearProps: 'opacity,y,transform' });
-      panel.style.pointerEvents = '';
-      gsap.to(panel, { height: 'auto', duration: 0.3, ease: 'power2.out', overwrite: true });
-    }
-  }
-
-  // ── Dropdown click handlers ────────────────────────────
-
-  drops.forEach((dd) => {
-    const trigger = dd.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
-    const panel   = dd.querySelector<HTMLElement>('.nav-dropdown-panel');
-    if (!trigger || !panel) return;
-
-    panel.setAttribute('inert', '');
-
-    trigger.addEventListener('click', () => {
-      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
-      drops.forEach((d) => { if (d !== dd) closeDropdown(d); });
-      if (isOpen) closeDropdown(dd); else openDropdown(trigger, panel);
-    });
-  });
-
-  // ── Burger / mobile menu ───────────────────────────────
-
-  if (burger && menu) {
-    const b = burger;
-    const m = menu;
-
-    function openMenu() {
-      b.setAttribute('aria-expanded', 'true');
-      b.setAttribute('aria-label', 'Close navigation');
-      gsap.to(m, {
-        height: 'auto', duration: 0.4, ease: 'power2.out', overwrite: true,
-        onComplete: () => { m.style.overflow = 'visible'; },
-      });
-    }
-
-    function closeMenu() {
-      b.setAttribute('aria-expanded', 'false');
-      b.setAttribute('aria-label', 'Open navigation');
-      drops.forEach((d) => closeDropdown(d, true));
-      m.style.overflow = 'hidden';
-      gsap.to(m, { height: 0, duration: 0.3, ease: 'power2.in', overwrite: true });
-    }
-
-    b.addEventListener('click', () => {
-      b.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu();
-    });
-  }
-
-  // ── Global handlers ────────────────────────────────────
-
-  document.addEventListener('click', (e) => {
-    if (!(e.target as Element).closest('[data-module="nav"]')) {
-      drops.forEach((d) => closeDropdown(d));
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape') return;
-    drops.forEach((d) => closeDropdown(d));
-    if (burger?.getAttribute('aria-expanded') === 'true' && menu) {
-      burger.setAttribute('aria-expanded', 'false');
-      burger.setAttribute('aria-label', 'Open navigation');
-      drops.forEach((d) => closeDropdown(d, true));
-      menu.style.overflow = 'hidden';
-      gsap.to(menu, { height: 0, duration: 0.2, ease: 'power1.in', overwrite: true });
-    }
-  });
-
-  // Reset GSAP overrides on resize so CSS media queries take back control
-  let resizeId: ReturnType<typeof setTimeout>;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeId);
-    resizeId = setTimeout(() => {
-      drops.forEach((d) => {
-        const trigger = d.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
-        const panel   = d.querySelector<HTMLElement>('.nav-dropdown-panel');
-        if (trigger) trigger.setAttribute('aria-expanded', 'false');
-        if (panel) {
-          gsap.killTweensOf(panel);
-          panel.style.pointerEvents = '';
-          gsap.set(panel, { clearProps: 'all' });
-        }
-      });
-      if (burger && menu) {
-        burger.setAttribute('aria-expanded', 'false');
-        burger.setAttribute('aria-label', 'Open navigation');
-        menu.style.overflow = '';
-        gsap.set(menu, { clearProps: 'all' });
+      // Keep --nav-h up-to-date so fixed mega panels anchor below the nav
+      const navEl = nav;
+      function syncNavHeight() {
+         navEl.style.setProperty("--nav-h", `${navEl.offsetHeight}px`);
       }
-    }, 150);
-  }, { passive: true });
-}
+      syncNavHeight();
+      window.addEventListener("resize", syncNavHeight, { passive: true });
+
+      const mqDesktop = window.matchMedia("(min-width: 992px)");
+
+      // ── Dropdown helpers ───────────────────────────────────
+
+      function closeDropdown(dd: HTMLElement, instant = false) {
+         const trigger = dd.querySelector<HTMLButtonElement>(
+            ".nav-dropdown-trigger",
+         );
+         const panel = dd.querySelector<HTMLElement>(".nav-dropdown-panel");
+         if (
+            !trigger ||
+            !panel ||
+            trigger.getAttribute("aria-expanded") !== "true"
+         )
+            return;
+
+         trigger.setAttribute("aria-expanded", "false");
+         panel.setAttribute("inert", "");
+
+         if (instant) {
+            gsap.killTweensOf(panel);
+            panel.style.pointerEvents = "";
+            gsap.set(panel, { clearProps: "all" });
+         } else if (mqDesktop.matches) {
+            gsap.to(panel, {
+               opacity: 0,
+               y: -4,
+               duration: 0.15,
+               ease: "power1.in",
+               overwrite: true,
+               onComplete: () => {
+                  panel.style.pointerEvents = "none";
+               },
+            });
+         } else {
+            gsap.to(panel, {
+               height: 0,
+               duration: 0.2,
+               ease: "power1.in",
+               overwrite: true,
+            });
+         }
+      }
+
+      function openDropdown(trigger: HTMLButtonElement, panel: HTMLElement) {
+         trigger.setAttribute("aria-expanded", "true");
+         panel.removeAttribute("inert");
+
+         if (mqDesktop.matches) {
+            gsap.set(panel, { clearProps: "height,overflow" });
+            panel.style.pointerEvents = "auto";
+            gsap.fromTo(
+               panel,
+               { opacity: 0, y: -6 },
+               {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.22,
+                  ease: "power2.out",
+                  overwrite: true,
+               },
+            );
+         } else {
+            gsap.set(panel, { clearProps: "opacity,y,transform" });
+            panel.style.pointerEvents = "";
+            gsap.to(panel, {
+               height: "auto",
+               duration: 0.3,
+               ease: "power2.out",
+               overwrite: true,
+            });
+         }
+      }
+
+      // ── Dropdown click handlers ────────────────────────────
+
+      drops.forEach((dd) => {
+         const trigger = dd.querySelector<HTMLButtonElement>(
+            ".nav-dropdown-trigger",
+         );
+         const panel = dd.querySelector<HTMLElement>(".nav-dropdown-panel");
+         if (!trigger || !panel) return;
+
+         panel.setAttribute("inert", "");
+
+         trigger.addEventListener("click", () => {
+            const isOpen = trigger.getAttribute("aria-expanded") === "true";
+            drops.forEach((d) => {
+               if (d !== dd) closeDropdown(d);
+            });
+            if (isOpen) closeDropdown(dd);
+            else openDropdown(trigger, panel);
+         });
+      });
+
+      // ── Burger / mobile menu ───────────────────────────────
+
+      if (burger && menu) {
+         const b = burger;
+         const m = menu;
+
+         function openMenu() {
+            b.setAttribute("aria-expanded", "true");
+            b.setAttribute("aria-label", "Close navigation");
+            gsap.to(m, {
+               height: "auto",
+               duration: 0.4,
+               ease: "power2.out",
+               overwrite: true,
+               onComplete: () => {
+                  m.style.overflow = "visible";
+               },
+            });
+         }
+
+         function closeMenu() {
+            b.setAttribute("aria-expanded", "false");
+            b.setAttribute("aria-label", "Open navigation");
+            drops.forEach((d) => closeDropdown(d, true));
+            m.style.overflow = "hidden";
+            gsap.to(m, {
+               height: 0,
+               duration: 0.3,
+               ease: "power2.in",
+               overwrite: true,
+            });
+         }
+
+         b.addEventListener("click", () => {
+            b.getAttribute("aria-expanded") === "true"
+               ? closeMenu()
+               : openMenu();
+         });
+      }
+
+      // ── Global handlers ────────────────────────────────────
+
+      document.addEventListener("click", (e) => {
+         if (!(e.target as Element).closest('[data-module="nav"]')) {
+            drops.forEach((d) => closeDropdown(d));
+         }
+      });
+
+      document.addEventListener("keydown", (e) => {
+         if (e.key !== "Escape") return;
+         drops.forEach((d) => closeDropdown(d));
+         if (burger?.getAttribute("aria-expanded") === "true" && menu) {
+            burger.setAttribute("aria-expanded", "false");
+            burger.setAttribute("aria-label", "Open navigation");
+            drops.forEach((d) => closeDropdown(d, true));
+            menu.style.overflow = "hidden";
+            gsap.to(menu, {
+               height: 0,
+               duration: 0.2,
+               ease: "power1.in",
+               overwrite: true,
+            });
+         }
+      });
+
+      // Reset GSAP overrides on resize so CSS media queries take back control
+      let resizeId: ReturnType<typeof setTimeout>;
+      window.addEventListener(
+         "resize",
+         () => {
+            clearTimeout(resizeId);
+            resizeId = setTimeout(() => {
+               drops.forEach((d) => {
+                  const trigger = d.querySelector<HTMLButtonElement>(
+                     ".nav-dropdown-trigger",
+                  );
+                  const panel = d.querySelector<HTMLElement>(
+                     ".nav-dropdown-panel",
+                  );
+                  if (trigger) trigger.setAttribute("aria-expanded", "false");
+                  if (panel) {
+                     gsap.killTweensOf(panel);
+                     panel.style.pointerEvents = "";
+                     gsap.set(panel, { clearProps: "all" });
+                  }
+               });
+               if (burger && menu) {
+                  burger.setAttribute("aria-expanded", "false");
+                  burger.setAttribute("aria-label", "Open navigation");
+                  menu.style.overflow = "";
+                  gsap.set(menu, { clearProps: "all" });
+               }
+            }, 150);
+         },
+         { passive: true },
+      );
+   }
 </script>
 
 <style is:global>
-  /* ── Nav shell ──────────────────────────────────────── */
-  .nav {
-    z-index: 999;
-    border-bottom: 1px solid var(--color-border);
-    background-color: var(--color-background);
-    color: var(--color-text-strong);
-    width: 100%;
-    padding: 10px 0;
-    position: sticky;
-    top: 0;
-  }
-
-  .nav-skip-link {
-    z-index: 9998;
-    background-color: var(--color-accent);
-    color: var(--primitive-neutral-100);
-    opacity: 0;
-    height: 3em;
-    text-align: center;
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: -8em;
-    padding: 0.8em 1.5em;
-    font-size: 0.75rem;
-    font-weight: var(--weight-medium);
-    line-height: 1;
-    text-decoration: none;
-    transition: opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
-                margin  0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-    position: absolute;
-    inset: 0 auto auto 50%;
-    transform: translate(-50%);
-  }
-
-  .nav-skip-link:focus-visible {
-    opacity: 1;
-    margin-top: 0.2em;
-  }
-
-  .nav-inner {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 0 5vw;
-  }
-
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: var(--color-accent);
-    flex-shrink: 0;
-    width: 100%;
-    max-width: 3.25rem;
-  }
-
-  .nav-menu {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .nav-end {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-left: auto;
-    flex-shrink: 0;
-  }
-
-  /* ── Nav links ──────────────────────────────────────── */
-  .nav-link {
-    padding: var(--btn-py) var(--btn-px);
-    border-radius: var(--radius-md);
-    color: currentColor;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.3em;
-    text-decoration: none;
-    background: none;
-    border: none;
-    font-size: 1rem;
-    font-weight: var(--weight-regular);
-    cursor: pointer;
-    transition: color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
-
-  .nav-link:hover { color: var(--color-accent); }
-
-  /* ── Dropdown ────────────────────────────────────────── */
-  .nav-dropdown { position: relative; }
-
-  .nav-dropdown-arrow {
-    display: inline-flex;
-    align-items: center;
-    transition: transform 0.2s ease;
-  }
-
-  .nav-dropdown-trigger[aria-expanded="true"] .nav-dropdown-arrow {
-    transform: rotate(180deg);
-  }
-
-  .nav-dropdown-panel {
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    left: 0;
-    background-color: var(--color-background);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: 0.375rem;
-    min-width: 220px;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .nav-dropdown-link {
-    display: block;
-    padding: 0.5rem 0.75rem;
-    border-radius: var(--radius-sm);
-    color: inherit;
-    text-decoration: none;
-    font-size: 0.9375rem;
-    transition: background-color 0.15s;
-  }
-
-  .nav-dropdown-link:hover { background-color: var(--color-surface); }
-
-  /* ── Mega dropdown ───────────────────────────────────── */
-  .nav-dropdown-panel.cc-mega {
-    position: fixed;
-    /* --nav-h is set by JS on the .nav element and inherited here */
-    top: var(--nav-h, 61px);
-    left: 0;
-    right: 0;
-    width: 100%;
-    min-width: 0;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    border-radius: 0;
-    z-index: 999;
-  }
-
-  .nav-mega-inner {
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 2rem 5vw;
-  }
-
-  /* ── Burger ──────────────────────────────────────────── */
-  .nav-burger {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    border-radius: var(--radius-sm);
-  }
-
-
-  .nav-burger-icon--close { display: none; }
-  .nav-burger[aria-expanded="true"] .nav-burger-icon--open  { display: none; }
-  .nav-burger[aria-expanded="true"] .nav-burger-icon--close { display: flex; }
-
-  /* ── Mobile ──────────────────────────────────────────── */
-  @media (max-width: 991px) {
-    .nav-burger { display: flex; }
-
-    .nav-menu {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      height: 0;
-      overflow: hidden;
+   /* ── Nav shell ──────────────────────────────────────── */
+   .nav {
+      z-index: 999;
+      border-bottom: 1px solid var(--color-border);
       background-color: var(--color-background);
-    }
-
-    .nav-link {
-      justify-content: flex-start;
-      border-radius: 0;
+      color: var(--color-text-strong);
       width: 100%;
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid var(--color-border);
-    }
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+   }
 
-    .nav-dropdown { width: 100%; }
+   .nav-skip-link {
+      z-index: 9998;
+      background-color: var(--color-accent);
+      color: var(--primitive-neutral-100);
+      opacity: 0;
+      height: 3em;
+      text-align: center;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: -8em;
+      padding: 0.8em 1.5em;
+      font-size: 0.75rem;
+      font-weight: var(--weight-medium);
+      line-height: 1;
+      text-decoration: none;
+      transition:
+         opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
+         margin 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: absolute;
+      inset: 0 auto auto 50%;
+      transform: translate(-50%);
+   }
 
-    .nav-dropdown-panel {
-      position: static;
+   .nav-skip-link:focus-visible {
       opacity: 1;
-      pointer-events: auto;
-      border: none;
-      border-radius: 0;
-      box-shadow: none;
-      background-color: var(--color-surface);
-      height: 0;
-      overflow: hidden;
-      padding: 0;
-      min-width: 0;
-    }
+      margin-top: 0.2em;
+   }
 
-    .nav-dropdown-link {
-      padding-left: 2rem;
-      border-radius: 0;
-      border-bottom: 1px solid var(--color-border);
-    }
+   .nav-inner {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: 0 5vw;
+   }
 
-    .nav-dropdown-panel.cc-mega {
-      position: static;
-      top: unset;
+   .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--color-accent);
+      flex-shrink: 0;
       width: 100%;
-      border: none;
-      box-shadow: none;
-    }
+      max-width: 3.25rem;
+   }
 
-    .nav-mega-inner { padding: 1rem; }
-  }
+   .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+   }
+
+   .nav-end {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-left: auto;
+      flex-shrink: 0;
+   }
+
+   /* ── Nav links ──────────────────────────────────────── */
+   .nav-link {
+      padding: var(--btn-py) var(--btn-px);
+      border-radius: var(--radius-md);
+      color: currentColor;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.3em;
+      text-decoration: none;
+      background: none;
+      border: none;
+      font-size: 1rem;
+      font-weight: var(--weight-regular);
+      cursor: pointer;
+      transition: color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+   }
+
+   .nav-link:hover {
+      color: var(--color-accent);
+   }
+
+   /* ── Dropdown ────────────────────────────────────────── */
+   .nav-dropdown {
+      position: relative;
+   }
+
+   .nav-dropdown-arrow {
+      display: inline-flex;
+      align-items: center;
+      transition: transform 0.2s ease;
+   }
+
+   .nav-dropdown-trigger[aria-expanded="true"] .nav-dropdown-arrow {
+      transform: rotate(180deg);
+   }
+
+   .nav-dropdown-panel {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      left: 0;
+      background-color: var(--color-background);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 0.375rem;
+      min-width: 220px;
+      opacity: 0;
+      pointer-events: none;
+   }
+
+   .nav-dropdown-link {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-sm);
+      color: inherit;
+      text-decoration: none;
+      font-size: 0.9375rem;
+      transition: background-color 0.15s;
+   }
+
+   .nav-dropdown-link:hover {
+      background-color: var(--color-surface);
+   }
+
+   /* ── Mega dropdown ───────────────────────────────────── */
+   .nav-dropdown-panel.cc-mega {
+      position: fixed;
+      /* --nav-h is set by JS on the .nav element and inherited here */
+      top: var(--nav-h, 61px);
+      left: 0;
+      right: 0;
+      width: 100%;
+      min-width: 0;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      border-radius: 0;
+      z-index: 999;
+   }
+
+   .nav-mega-inner {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: 2rem 5vw;
+   }
+
+   /* ── Burger ──────────────────────────────────────────── */
+   .nav-burger {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      border-radius: var(--radius-sm);
+   }
+
+   .nav-burger-icon--close {
+      display: none;
+   }
+   .nav-burger[aria-expanded="true"] .nav-burger-icon--open {
+      display: none;
+   }
+   .nav-burger[aria-expanded="true"] .nav-burger-icon--close {
+      display: flex;
+   }
+
+   /* ── Mobile ──────────────────────────────────────────── */
+   @media (max-width: 991px) {
+      .nav-burger {
+         display: flex;
+      }
+
+      .nav-menu {
+         flex-direction: column;
+         align-items: stretch;
+         gap: 0;
+         margin: 0;
+         padding: 0;
+         list-style: none;
+         position: absolute;
+         top: 100%;
+         left: 0;
+         width: 100%;
+         height: 0;
+         overflow: hidden;
+         background-color: var(--color-background);
+      }
+
+      .nav-link {
+         justify-content: flex-start;
+         border-radius: 0;
+         width: 100%;
+         padding: 0.75rem 1rem;
+         border-bottom: 1px solid var(--color-border);
+      }
+
+      .nav-dropdown {
+         width: 100%;
+      }
+
+      .nav-dropdown-panel {
+         position: static;
+         opacity: 1;
+         pointer-events: auto;
+         border: none;
+         border-radius: 0;
+         box-shadow: none;
+         background-color: var(--color-surface);
+         height: 0;
+         overflow: hidden;
+         padding: 0;
+         min-width: 0;
+      }
+
+      .nav-dropdown-link {
+         padding-left: 2rem;
+         border-radius: 0;
+         border-bottom: 1px solid var(--color-border);
+      }
+
+      .nav-dropdown-panel.cc-mega {
+         position: static;
+         top: unset;
+         width: 100%;
+         border: none;
+         box-shadow: none;
+      }
+
+      .nav-mega-inner {
+         padding: 1rem;
+      }
+   }
 </style>

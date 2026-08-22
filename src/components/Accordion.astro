@@ -65,11 +65,12 @@ const { class: className } = Astro.props;
                   duration: 0.4,
                   ease: "power2.inOut",
                });
+               // Can we add class to icon instead? better perf?
                if (icon) {
                   tl.to(
                      icon,
                      {
-                        rotateZ: isExpanded ? 0 : 45,
+                        rotateZ: isExpanded ? 0 : -45,
                         duration: 0.4,
                         ease: "power2.inOut",
                      },

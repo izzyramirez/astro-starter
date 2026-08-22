@@ -44,7 +44,7 @@ const { title, class: className } = Astro.props;
          justify-content: space-between;
          align-items: flex-start;
          gap: var(--space-8);
-         transition: color var(--duration-sm) var(--ease-out-cubic);
+         transition: color var(--duration-sm) var(--ease-out-power-2);
       }
 
       .accordion-trigger:focus-visible {
@@ -71,6 +71,7 @@ const { title, class: className } = Astro.props;
          justify-content: center;
          align-items: center;
          transform-origin: center;
+         will-change: transform;
       }
 
       .accordion-content {
