@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Button from "@components/Button.astro";
-import Accordion from "@components/Accordion.astro";
+import AccordionList from "@components/AccordionList.astro";
 import AccordionItem from "@components/AccordionItem.astro";
 import Dialog from "@components/Dialog.astro";
 import ArrowRight from "@assets/icons/ArrowRight.astro";
@@ -103,7 +103,7 @@ import ArrowRight from "@assets/icons/ArrowRight.astro";
                </p>
             </div>
             <div style="flex: 2; min-width: 300px;">
-               <Accordion>
+               <AccordionList>
                   <AccordionItem title="What is this starter template?">
                      <p>
                         A production-ready Astro 7 base with CSS cascade layers,
@@ -126,7 +126,7 @@ import ArrowRight from "@assets/icons/ArrowRight.astro";
                         and deduped automatically by Astro.
                      </p>
                   </AccordionItem>
-               </Accordion>
+               </AccordionList>
             </div>
          </div>
       </div>

@@ -6,7 +6,7 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<div class:list={["accordion", className]} data-module="accordion">
+<div class:list={["accordion-list", className]} data-module="accordion">
    <slot />
 </div>
 
@@ -81,3 +81,15 @@ const { class: className } = Astro.props;
          });
       });
 </script>
+
+<style>
+   @layer base, component, utility;
+
+   @layer component {
+      .accordion-list {
+         display: flex;
+         flex-direction: column;
+         gap: var(--space-16);
+      }
+   }
+</style>
