@@ -60,7 +60,7 @@ const Tag = href ? "a" : "button";
    }
 </Tag>
 
-<style is:global>
+<style>
    @layer base, component, utility;
 
    @layer component {
@@ -84,9 +84,9 @@ const Tag = href ? "a" : "button";
          cursor: pointer;
          white-space: nowrap;
          transition:
-            background-color var(--duration-sm) var(--ease-out-cubic),
-            border-color var(--duration-sm) var(--ease-out-cubic),
-            opacity var(--duration-sm) var(--ease-out-cubic);
+            background-color var(--duration-sm) var(--ease-out-power-2),
+            border-color var(--duration-sm) var(--ease-out-power-2),
+            opacity var(--duration-sm) var(--ease-out-power-2);
       }
 
       .btn.cc-outline {

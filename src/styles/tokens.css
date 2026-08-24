@@ -21,6 +21,10 @@
       var(--primitive-neutral-200),
       var(--primitive-neutral-800)
    );
+   --color-bg-overlay: light-dark(
+      color-mix(in srgb, var(--primitive-neutral-900) 88%, transparent),
+      color-mix(in srgb, var(--primitive-neutral-900) 92%, transparent)
+   );
    /* -- Text */
    --color-text-accent: light-dark(
       var(--primitive-brand),
@@ -520,7 +524,7 @@
 
    /* Layout */
    --section-padding: max(4vw, 1.25rem);
-   --container-max-default: 78rem;
+   --container-max-default: 80rem;
 
    /* Easing */
    /* From gentle -> snappiest */

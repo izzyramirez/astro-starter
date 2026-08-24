@@ -90,11 +90,7 @@ const { triggerLabel = "Open", class: className } = Astro.props;
       }
 
       dialog::backdrop {
-         background: color-mix(
-            in srgb,
-            var(--primitive-neutral-900) 96%,
-            transparent
-         );
+         background: var(--color-bg-overlay);
       }
 
       @keyframes dialog-fadein {
