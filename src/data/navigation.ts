@@ -8,19 +8,17 @@ export interface NavGroup {
    links: NavLink[];
 }
 
-/**
- * A main-menu entry. The shape decides how it renders:
- *   href    -> plain link
- *   links   -> dropdown panel
- *   columns -> full-width mega panel
- */
+// Main-menu entry. Shape decides how it renders:
+// href    -> plain link
+// links   -> dropdown panel
+// columns -> full-width mega panel
+
 export type NavItem =
    | { label: string; href: string }
    | { label: string; links: NavLink[] }
    | { label: string; columns: NavGroup[] };
 
 export const mainMenu: NavItem[] = [
-   { label: "Home", href: "/" },
    { label: "About", href: "#" },
    {
       label: "Resources",
@@ -59,6 +57,7 @@ export const mainMenu: NavItem[] = [
          },
       ],
    },
+   { label: "Careers", href: "#" },
 ];
 
 export const footerMenu: NavGroup[] = [
