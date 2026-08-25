@@ -46,11 +46,19 @@
       var(--primitive-neutral-0),
       var(--primitive-neutral-900)
    );
+   --color-text-error: light-dark(
+      var(--primitive-error),
+      var(--primitive-error)
+   );
 
    /* -- Borders */
    --color-border: light-dark(
       color-mix(in srgb, var(--primitive-neutral-900) 12%, transparent),
       color-mix(in srgb, var(--primitive-neutral-100) 12%, transparent)
+   );
+   --color-border-error: light-dark(
+      var(--primitive-error),
+      var(--primitive-error)
    );
 
    /* Typography */

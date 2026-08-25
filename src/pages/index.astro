@@ -319,7 +319,11 @@ import ArrowRight from "@assets/icons/ArrowRight.astro";
       <div class="container">
          <p class="eyebrow">Components</p>
          <h2>Form</h2>
-         <Form style="max-width: 480px; margin-top: 2rem;">
+         <Form
+            id="demo-form"
+            error="Something went wrong. Please check your details and try again."
+            style="max-width: 480px; margin-top: 2rem;"
+         >
             <div class="input-group">
                <label class="input-label" for="demo-name">Full name</label>
                <input
@@ -338,8 +342,14 @@ import ArrowRight from "@assets/icons/ArrowRight.astro";
                   id="demo-email"
                   name="email"
                   placeholder="jane@example.com"
+                  value="jane@example"
+                  aria-invalid="true"
+                  aria-describedby="demo-email-error"
                />
             </div>
+            <span class="field-error" id="demo-email-error">
+               Enter a valid email address.
+            </span>
 
             <div class="input-group cc-textarea">
                <label class="input-label" for="demo-message">Message</label>
@@ -396,10 +406,6 @@ import ArrowRight from "@assets/icons/ArrowRight.astro";
                   <span>Subscribe to product updates and news</span>
                </label>
             </div>
-
-            <p class="form-error">
-               Something went wrong. Please check your details and try again.
-            </p>
          </Form>
       </div>
    </section>
@@ -442,7 +448,7 @@ import ArrowRight from "@assets/icons/ArrowRight.astro";
                         {name}
                      </code>
                      <div
-                        style={`height: 6px; width: var(${name}); min-width: 2px; background: var(--color-accent); border-radius: 3px; flex-shrink: 0;`}
+                        style={`height: 6px; width: var(${name}); min-width: 2px; background: var(--color-text-accent); border-radius: 3px; flex-shrink: 0;`}
                      />
                      <span style="font-size: 0.8125rem; color: red; white-space: nowrap;">
                         {min === max ? `${min}px` : `${min}–${max}px`}
