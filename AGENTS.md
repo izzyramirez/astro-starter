@@ -1,4 +1,20 @@
-# CLAUDE.md
+# AGENTS.md
+
+## This is NOT the Astro you know
+
+This project runs **Astro 7**. APIs, conventions, and file structure may all differ
+from your training data. Astro does not ship docs inside `node_modules`, so before
+writing any Astro-specific code (config, content collections, actions, sessions,
+adapters, image/font APIs, middleware), verify against one of these — in order:
+
+1. The installed type definitions: `node_modules/astro/dist/types/public/*.d.ts`,
+   and the feature's own folder (e.g. `node_modules/astro/dist/actions/`).
+2. The current docs at <https://docs.astro.build> — fetch them, don't recall them.
+3. The Astro releases page for what changed in the installed version:
+   <https://github.com/withastro/astro/releases>.
+
+Check the installed version first (`package.json` / `node_modules/astro/package.json`),
+and heed deprecation notices in the types and release notes.
 
 Work-in-progress. Only the rules below are established — do not infer others.
 

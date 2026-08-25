@@ -4,6 +4,7 @@ import Button from "@components/Button.astro";
 import AccordionList from "@components/AccordionList.astro";
 import AccordionItem from "@components/AccordionItem.astro";
 import Dialog from "@components/Dialog.astro";
+import Form from "@components/Form.astro";
 import ArrowRight from "@assets/icons/ArrowRight.astro";
 ---
 
@@ -318,11 +319,7 @@ import ArrowRight from "@assets/icons/ArrowRight.astro";
       <div class="container">
          <p class="eyebrow">Components</p>
          <h2>Form</h2>
-         <form
-            class="form"
-            novalidate
-            style="max-width: 480px; margin-top: 2rem;"
-         >
+         <Form style="max-width: 480px; margin-top: 2rem;">
             <div class="input-group">
                <label class="input-label" for="demo-name">Full name</label>
                <input
@@ -403,7 +400,7 @@ import ArrowRight from "@assets/icons/ArrowRight.astro";
             <p class="form-error">
                Something went wrong. Please check your details and try again.
             </p>
-         </form>
+         </Form>
       </div>
    </section>
 
@@ -456,19 +453,6 @@ import ArrowRight from "@assets/icons/ArrowRight.astro";
          </div>
       </div>
    </section>
-
-   <script>
-      // Update file input label with selected filename
-      document
-         .querySelectorAll<HTMLInputElement>(".input-file-hidden")
-         .forEach((input) => {
-            const nameEl = document.getElementById(input.id + "-name");
-            if (!nameEl) return;
-            input.addEventListener("change", () => {
-               nameEl.textContent = input.files?.[0]?.name ?? "";
-            });
-         });
-   </script>
 </BaseLayout>
 
 <style>
