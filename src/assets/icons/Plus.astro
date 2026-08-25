@@ -3,6 +3,7 @@ interface Props {
    width?: number | string;
    height?: number | string;
    class?: string;
+   stroke?: number;
    "aria-hidden"?: "true" | "false";
 }
 const {
@@ -10,6 +11,7 @@ const {
    height = 24,
    class: className,
    "aria-hidden": ariaHidden = "true",
+   stroke = 2,
 } = Astro.props;
 ---
 
@@ -25,7 +27,7 @@ const {
    <path
       d="M12 5V19M5 12H19"
       stroke="currentColor"
-      stroke-width="2"
+      stroke-width={stroke}
       stroke-linecap="round"
       stroke-linejoin="round"></path>
 </svg>
