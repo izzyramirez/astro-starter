@@ -273,8 +273,7 @@
       position: absolute;
       inset: 0;
       width: 100%;
-      /*TODO: duration token*/
-      transition: border-color 0.3s var(--ease-out-quart);
+      transition: border-color 0.3s var(--ease-out-power-2);
    }
 
    .input:focus {
@@ -353,8 +352,8 @@
    }
 
    [type="checkbox"].choice-input:checked {
-      border-color: var(--color-accent);
-      background-color: var(--color-accent);
+      border-color: var(--color-text-accent);
+      background-color: var(--color-text-accent);
    }
 
    [type="radio"].choice-input:checked::after {
