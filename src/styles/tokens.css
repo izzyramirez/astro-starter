@@ -25,6 +25,10 @@
       color-mix(in srgb, var(--primitive-neutral-900) 88%, transparent),
       color-mix(in srgb, var(--primitive-neutral-900) 92%, transparent)
    );
+   --color-bg-accent: light-dark(
+      var(--primitive-brand),
+      var(--primitive-brand)
+   );
    /* -- Text */
    --color-text-accent: light-dark(
       var(--primitive-brand),

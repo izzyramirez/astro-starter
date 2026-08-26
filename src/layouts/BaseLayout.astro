@@ -3,6 +3,7 @@ import { Font } from "astro:assets";
 import SEO from "./SEO.astro";
 import Nav from "@components/Nav.astro";
 import Footer from "@components/Footer.astro";
+import SkipLink from "@components/SkipLink.astro";
 import "@/styles/global.css";
 
 interface Props {
@@ -34,9 +35,11 @@ const { lang = "en", ...seoProps } = Astro.props;
       <slot name="head" />
    </head>
    <body>
+      <SkipLink />
       <div class="page-wrap">
+         <slot name="banner" />
          <Nav />
-         <main id="main-content">
+         <main id="main-content" tabindex="-1">
             <slot />
          </main>
          <Footer />

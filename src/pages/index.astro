@@ -7,12 +7,19 @@ import Dialog from "@components/Dialog.astro";
 import Form from "@components/Form.astro";
 import ArrowRight from "@assets/icons/ArrowRight.astro";
 import ChevronDown from "@assets/icons/ChevronDown.astro";
+import TopBanner from "@components/TopBanner.astro";
 ---
 
 <BaseLayout
    title="Astro Starter"
    description="A modern Astro 7 starter with CSS layers, General Sans, GSAP, and utility components."
 >
+   <TopBanner
+      slot="banner"
+      text="Boilerplate is a lightweight Astro framework"
+      href="/"
+   />
+
    <!-- Hero -->
    <section class="section cc-hero">
       <div class="container">
