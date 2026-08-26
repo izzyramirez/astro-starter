@@ -1,17 +1,20 @@
 ---
+import { banner } from "@/data/banner";
+
 interface Props {
-   text: string;
+   text?: string;
    href?: string;
    show?: boolean;
    label?: string;
    class?: string;
 }
 
+// Content falls back to src/data/banner.ts. Pass props to override one instance
 const {
-   text,
-   href,
-   show = true,
-   label = "Announcement",
+   text = banner.text,
+   href = banner.href,
+   show = banner.enabled,
+   label = banner.label ?? "Announcement",
    class: className,
 } = Astro.props;
 

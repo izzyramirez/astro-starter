@@ -4,6 +4,7 @@ import SEO from "./SEO.astro";
 import Nav from "@components/Nav.astro";
 import Footer from "@components/Footer.astro";
 import SkipLink from "@components/SkipLink.astro";
+import TopBanner from "@components/TopBanner.astro";
 import "@/styles/global.css";
 
 interface Props {
@@ -22,9 +23,18 @@ interface Props {
    articleAuthor?: string;
    breadcrumbItem?: string;
    lang?: string;
+   topBanner?: boolean;
+   nav?: boolean;
+   footer?: boolean;
 }
 
-const { lang = "en", ...seoProps } = Astro.props;
+const {
+   lang = "en",
+   topBanner = true,
+   nav = true,
+   footer = true,
+   ...seoProps
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -37,12 +47,19 @@ const { lang = "en", ...seoProps } = Astro.props;
    <body>
       <SkipLink />
       <div class="page-wrap">
-         <slot name="banner" />
-         <Nav />
+         {
+            topBanner &&
+               (Astro.slots.has("banner") ? (
+                  <slot name="banner" />
+               ) : (
+                  <TopBanner />
+               ))
+         }
+         {nav && <Nav />}
          <main id="main-content" tabindex="-1">
             <slot />
          </main>
-         <Footer />
+         {footer && <Footer />}
       </div>
       <script>
          import "@/scripts/main";
