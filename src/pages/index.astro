@@ -6,6 +6,7 @@ import AccordionItem from "@components/AccordionItem.astro";
 import Dialog from "@components/Dialog.astro";
 import Form from "@components/Form.astro";
 import ArrowRight from "@assets/icons/ArrowRight.astro";
+import ChevronDown from "@assets/icons/ChevronDown.astro";
 ---
 
 <BaseLayout
@@ -360,8 +361,21 @@ import ArrowRight from "@assets/icons/ArrowRight.astro";
                   placeholder="Your message..."></textarea>
             </div>
 
-            <div class="input-group cc-choice">
-               <span class="choice-label">Please select inquiry type</span>
+            <div class="input-group cc-select">
+               <label class="input-label" for="demo-budget">Budget</label>
+               <select class="input" id="demo-budget" name="budget">
+                  <option value="" selected>Select a range…</option>
+                  <option value="sm">Under $5,000</option>
+                  <option value="md">$5,000 – $20,000</option>
+                  <option value="lg">$20,000+ </option>
+               </select>
+               <span class="select-icon">
+                  <ChevronDown stroke={1.5} />
+               </span>
+            </div>
+
+            <fieldset class="input-group cc-choice">
+               <legend class="choice-label">Please select inquiry type</legend>
                <div class="choice-list">
                   <label class="choice-item">
                      <input
@@ -392,7 +406,7 @@ import ArrowRight from "@assets/icons/ArrowRight.astro";
                      <span>Sales</span>
                   </label>
                </div>
-            </div>
+            </fieldset>
 
             <Button type="submit" full>Send message</Button>
 

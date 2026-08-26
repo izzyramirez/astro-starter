@@ -18,7 +18,7 @@
       );
       padding: var(--space-8) var(--space-12);
       border-radius: var(--radius-md);
-      margin-top: 1rem;
+      margin-top: var(--space-16);
    }
 
    /* Inputs */
@@ -37,7 +37,6 @@
 
    .form .input-group.cc-textarea .input-label {
       position: absolute;
-      pointer-events: none;
    }
 
    .form .input-group.cc-textarea .input {
@@ -86,6 +85,7 @@
       padding-top: 0.75rem;
       padding-bottom: 0.25rem;
       position: relative;
+      pointer-events: none;
    }
 
    /* Field errors */
@@ -101,7 +101,46 @@
       margin-bottom: var(--space-4);
    }
 
+   /* Select */
+   .form .input-group.cc-select .input {
+      padding-right: 3rem;
+      cursor: pointer;
+      text-overflow: ellipsis;
+   }
+
+   .form .select-icon {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--color-text-strong);
+      pointer-events: none;
+   }
+
+   .form .input-group.cc-select .input:has(option[value=""]:checked) {
+      color: var(--color-text-soft);
+   }
+
    /* Radio & checkbox */
+
+   /* Reset fieldset */
+   .form fieldset {
+      border: 0;
+      margin: 0;
+      padding: 0;
+      min-inline-size: 0;
+   }
+
+   .form legend {
+      padding: 0;
+   }
+
    .form .input-group.cc-choice {
       padding-bottom: var(--space-8);
    }
