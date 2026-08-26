@@ -56,7 +56,7 @@
    );
 
    /* -- Borders */
-   --color-border: light-dark(
+   --color-border-default: light-dark(
       color-mix(in srgb, var(--primitive-neutral-900) 12%, transparent),
       color-mix(in srgb, var(--primitive-neutral-100) 12%, transparent)
    );

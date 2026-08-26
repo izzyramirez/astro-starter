@@ -240,7 +240,7 @@ const { logoHref = "/" } = Astro.props;
    @layer component {
       .nav {
          z-index: 999;
-         border-bottom: 1px solid var(--color-border);
+         border-bottom: 1px solid var(--color-border-default);
          background-color: var(--color-bg-page);
          padding: var(--space-16) var(--section-padding);
          position: sticky;
@@ -278,7 +278,7 @@ const { logoHref = "/" } = Astro.props;
          overscroll-behavior: contain;
          overflow-y: auto;
          background-color: var(--color-bg-page);
-         border-bottom: 1px solid var(--color-border);
+         border-bottom: 1px solid var(--color-border-default);
       }
 
       .nav-backdrop {
@@ -323,7 +323,7 @@ const { logoHref = "/" } = Astro.props;
          justify-content: center;
          padding: var(--space-4);
          border-radius: var(--radius-md);
-         border: solid 1px var(--color-border);
+         border: solid 1px var(--color-border-default);
       }
 
       .nav-burger-icon--close {
