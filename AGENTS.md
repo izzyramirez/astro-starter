@@ -16,7 +16,39 @@ adapters, image/font APIs, middleware), verify against one of these — in order
 Check the installed version first (`package.json` / `node_modules/astro/package.json`),
 and heed deprecation notices in the types and release notes.
 
-Work-in-progress. Only the rules below are established — do not infer others.
+Work-in-progress. Only what is written below is established — do not infer other
+conventions from the code.
+
+## How this project is layered
+
+Three layers, with different rules about who may change them. Knowing which one you
+are touching answers most "should I change this?" questions.
+
+| Layer | Lives in | Who owns it |
+| :-- | :-- | :-- |
+| **Tokens** | `src/styles/tokens.css` | The designer. Compose from these; never invent a parallel scale. |
+| **Contracts** | Class names, semantics, ARIA wiring, component props | Frozen. Other code and the skills depend on these names. |
+| **Implementation** | The CSS behind a contract (`form.css`, component `<style>`) | Disposable. Restyle it freely — the contract is what survives. |
+
+`src/styles/form.css` is the clearest example: it is meant to be replaced wholesale,
+while the markup contract it styles (`.input-group`, `.input`, `.field-error`) stays
+put. See `.claude/skills/create-form/SKILL.md`.
+
+## Enforcement
+
+The CSS rules below are **not advisory** — `stylelint.config.js` and
+`.stylelint/plugins.js` enforce them, and `pnpm build` runs the linter before
+`astro check`. A violation fails the build.
+
+Everything in "Working with tokens" is guidance rather than a lint rule, because it
+needs judgement. Follow it anyway.
+
+Deliberate exceptions are fine when you say why:
+
+```css
+/* stylelint-disable-next-line declaration-property-value-disallowed-list -- Slack brand blue, not themed */
+background-color: #4a154b;
+```
 
 ## Rules
 
@@ -68,3 +100,58 @@ Never write a bare `:hover` rule:
 ```
 
 The media query goes inside the `@layer` block, not around it.
+
+### CSS: no hardcoded colors on theme-reactive properties
+
+`color`, `background*`, `border*`, `fill`, `stroke`, `outline-color`, and
+`text-decoration-color` must take their value from a token, never a hex literal.
+
+```css
+/* wrong — renders fine in light, silently breaks in dark */
+color: #202020;
+
+/* right */
+color: var(--color-text-strong);
+```
+
+Every color in the system resolves through `light-dark()` in `tokens.css`. A hex
+literal opts out of that: the page looks correct in light mode, breaks in dark, and
+nothing catches it — the build passes, `astro check` passes, and a review done in
+light mode sees nothing wrong.
+
+Gradient stops, shadows, and third-party brand colors are not theme-reactive and are
+not covered by this rule.
+
+## Working with tokens
+
+`src/styles/tokens.css` is the design system. It is the vocabulary — compose from it
+rather than inventing values beside it.
+
+| Group | Tokens | Use for |
+| :-- | :-- | :-- |
+| Color | `--color-text-*`, `--color-bg-*`, `--color-border-*` | All themed color. Semantic layer only — reach for `--primitive-*` only when defining a semantic token. |
+| Type size | `--text-h1`…`--text-h6`, `--text-xs`…`--text-xl`, `--text-eyebrow` | Font sizes. Fluid; do not write raw `font-size` values. |
+| Type style | `--weight-*`, `--leading-*`, `--tracking-*` | Weight, line-height, letter-spacing. |
+| Space | `--space-2`…`--space-96` | Padding and margin on the page rhythm. |
+| Space (relative) | `--space-em-*` | Spacing that should scale with the element's own font size. |
+| Gap | `--gap-xs`…`--gap-xl` | Flex/grid `gap`. |
+| Layout | `--page-gutter`, `--container-max-default` | Page gutters and max widths. |
+| Radius | `--radius-sm/md/lg` | Corner radii. |
+| Motion | `--duration-*`, `--ease-*` | Transitions. `--duration-*` collapses to ~0 under `prefers-reduced-motion`, so use it rather than a literal. |
+
+**Never invent a value where a token exists.** `padding: var(--space-24)`, not
+`padding: 1.5rem`. This is not enforced by the linter — a rule banning raw lengths
+fires on ~64 legitimate uses in this repo — so it is on you.
+
+**Raw lengths are fine where no token applies.** Hairline borders (`1px`), icon
+box sizing (`1em`), optical nudges (`0.05em`), and one-off layout constraints
+(`max-width: 40rem`, `65ch`) are not scale decisions and have no token. Use a
+literal and move on.
+
+**The space scale is static below `--space-12` and fluid at or above it.** So there
+is no token for a *constant* large value — if you need a fixed `4rem` that must not
+scale with the viewport, write it literally.
+
+**Adding a token is a design decision, not an implementation one.** If something
+genuinely needs a new token, say so and let the designer add it. Do not add it to
+`tokens.css` as a side effect of building a component.
