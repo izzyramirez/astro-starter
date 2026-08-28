@@ -535,7 +535,7 @@
    );
 
    /* Layout */
-   --section-padding: max(4vw, 1.25rem);
+   --page-gutter: max(4vw, 1.25rem);
    --container-max-default: 80rem;
 
    /* Easing */

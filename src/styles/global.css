@@ -192,8 +192,8 @@
    }
 
    section {
-      padding-left: var(--section-padding);
-      padding-right: var(--section-padding);
+      padding-left: var(--page-gutter);
+      padding-right: var(--page-gutter);
    }
 
    .container {
