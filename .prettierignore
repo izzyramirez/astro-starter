@@ -1,0 +1,19 @@
+# Build output & generated types
+dist/
+.astro/
+node_modules/
+
+# Lockfiles
+pnpm-lock.yaml
+
+# Vendored skills — pinned by hash in skills-lock.json.
+# Reformatting these would invalidate `computedHash` and break verification.
+.agents/
+
+# Markdown is hand-wrapped agent-facing prose (AGENTS.md, .claude/skills/**).
+# Line breaks there are deliberate; leaving it unformatted keeps diffs meaningful.
+*.md
+
+# Binary / vendor assets
+public/
+src/assets/fonts/

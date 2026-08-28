@@ -1,0 +1,22 @@
+# Canonical whitespace rules. Prettier owns formatting for the file types it
+# supports; this covers everything else and any editor without the plugin.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 3
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{json,jsonc,yaml,yml}]
+indent_size = 2
+
+[*.md]
+# Two trailing spaces are a hard line break in Markdown.
+trim_trailing_whitespace = false
+
+[pnpm-lock.yaml]
+indent_size = 2
+insert_final_newline = false
