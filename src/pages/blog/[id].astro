@@ -42,7 +42,7 @@ const dateFormat = new Intl.DateTimeFormat("en-US", {
    breadcrumbItem={title}
 >
    <section class="section">
-      <article class="article">
+      <article class="container article">
          <header>
             <p class="eyebrow u-text-soft">Blog</p>
 
@@ -81,12 +81,14 @@ const dateFormat = new Intl.DateTimeFormat("en-US", {
 </BaseLayout>
 
 <style>
-   .section {
-      /* TODO: Update global margins */
-      padding: 4rem 5vw;
-   }
-   .article {
-      max-width: 40rem;
-      margin: 0 auto;
+   @layer base, component, utility;
+
+   @layer component {
+      .section {
+         padding: 4rem var(--section-padding);
+      }
+      .article {
+         max-width: 40rem;
+      }
    }
 </style>
