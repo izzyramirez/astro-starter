@@ -4,21 +4,27 @@ import Close from "@assets/icons/Close.astro";
 
 interface Props {
    triggerLabel?: string;
+   label?: string; //Accessible name for dialog. Gets announced when opened
    class?: string;
 }
 
-const { triggerLabel = "Open", class: className } = Astro.props;
+const {
+   triggerLabel = "Open",
+   label = triggerLabel,
+   class: className,
+} = Astro.props;
 ---
 
 <div class:list={["dialog-component", className]} data-module="dialog">
-   <Button type="button" aria-controls="">
+   <Button type="button" data-dialog-trigger aria-haspopup="dialog">
       {triggerLabel}
    </Button>
-   <dialog>
+   <dialog data-dialog-panel aria-label={label}>
       <div class="modal">
          <button
             class="modal_close-button"
             type="button"
+            data-dialog-close
             aria-label="Close dialog"
          >
             <Close stroke={1.5} />
@@ -29,38 +35,25 @@ const { triggerLabel = "Open", class: className } = Astro.props;
 </div>
 
 <script>
-   // TODO: Check code
-   let modalCount = 0;
-
    document
       .querySelectorAll<HTMLElement>('[data-module="dialog"]')
       .forEach((module) => {
-         const id = `modal-${++modalCount}`;
-         const dialogEl = module.querySelector<HTMLDialogElement>("dialog");
-         const btnOpen = module.querySelector<HTMLElement>("[aria-controls]");
-         const btnClose =
-            module.querySelector<HTMLButtonElement>("dialog button");
+         const panel = module.querySelector<HTMLDialogElement>(
+            "[data-dialog-panel]",
+         );
+         const trigger = module.querySelector<HTMLElement>(
+            "[data-dialog-trigger]",
+         );
+         if (!panel || !trigger) return;
 
-         if (!dialogEl || !btnOpen || !btnClose) return;
+         trigger.addEventListener("click", () => panel.showModal());
 
-         dialogEl.id = id;
-         btnOpen.setAttribute("aria-controls", id);
-         btnOpen.id = `trigger-${id}`;
+         module
+            .querySelectorAll<HTMLElement>("[data-dialog-close]")
+            .forEach((el) => el.addEventListener("click", () => panel.close()));
 
-         btnOpen.addEventListener("click", () => dialogEl.showModal());
-
-         btnClose.addEventListener("click", () => dialogEl.close());
-
-         dialogEl.addEventListener("click", (e) => {
-            const rect = dialogEl.getBoundingClientRect();
-            if (
-               e.clientX < rect.left ||
-               e.clientX > rect.right ||
-               e.clientY < rect.top ||
-               e.clientY > rect.bottom
-            ) {
-               dialogEl.close();
-            }
+         panel.addEventListener("click", (e) => {
+            if (e.target === panel) panel.close();
          });
       });
 </script>

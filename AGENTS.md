@@ -135,7 +135,7 @@ rather than inventing values beside it.
 | Space | `--space-2`…`--space-96` | Padding and margin on the page rhythm. |
 | Space (relative) | `--space-em-*` | Spacing that should scale with the element's own font size. |
 | Gap | `--gap-xs`…`--gap-xl` | Flex/grid `gap`. |
-| Layout | `--page-gutter`, `--container-max-default` | Page gutters and max widths. |
+| Layout | `--page-gutter`, `--section-padding-default`, `--container-max-default` | Page gutters, vertical section rhythm, and max widths. |
 | Radius | `--radius-sm/md/lg` | Corner radii. |
 | Motion | `--duration-*`, `--ease-*` | Transitions. `--duration-*` collapses to ~0 under `prefers-reduced-motion`, so use it rather than a literal. |
 

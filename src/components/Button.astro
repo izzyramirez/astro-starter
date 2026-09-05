@@ -17,7 +17,7 @@ interface Props {
    "aria-controls"?: string;
    "aria-expanded"?: "true" | "false";
    "aria-haspopup"?: boolean | "dialog" | "listbox" | "tree" | "grid" | "menu";
-   "data-module"?: string;
+   [key: `data-${string}`]: string | boolean | undefined; //For data attributes
 }
 
 const {
