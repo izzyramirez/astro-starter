@@ -23,8 +23,8 @@ const {
    // TODO: Replace default title with your site/brand name
    title = "Your Site Name",
    description,
-   // TODO: Add your default OG image at /images/og/og-image.jpg
-   ogImage = "/images/og/og-image.jpg",
+   // TODO: Replace with real artwork (1200x630)
+   ogImage = "/og-image.jpg",
    ogImageWidth = 1200,
    ogImageHeight = 630,
    ogImageAlt = description ?? "",
@@ -33,7 +33,7 @@ const {
    locale = "en_US",
    // TODO: Replace with your site name
    siteName = "Your Site Name",
-   // TODO: Add your social profile URLs
+   // TODO: Add social profile URLs
    sameAs = [
       // 'https://linkedin.com/in/your-handle',
       // 'https://github.com/your-handle',
@@ -145,8 +145,8 @@ const schema = { "@context": "https://schema.org", "@graph": graph };
 {robots && <meta name="robots" content={robots} />}
 
 <!-- Favicons -->
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="icon" href="/favicon.ico" />
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
 <!-- Open Graph -->

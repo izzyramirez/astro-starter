@@ -1,0 +1,114 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const posts: CollectionEntry<"blog">[] = await getCollection("blog");
+
+const published = posts
+   .filter((post) => !post.data.draft)
+   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const dateFormat = new Intl.DateTimeFormat("en-US", {
+   year: "numeric",
+   month: "long",
+   day: "numeric",
+   timeZone: "UTC",
+});
+---
+
+<BaseLayout
+   title="Blog"
+   description="Writing, notes, and release announcements."
+>
+   <section class="section">
+      <div class="container">
+         <header class="header">
+            <p class="eyebrow kicker">Blog</p>
+            <h1 class="h2">Writing and release notes</h1>
+         </header>
+
+         {
+            published.length === 0 ? (
+               <p class="paragraph-lg empty">No posts published yet.</p>
+            ) : (
+               <ul class="post-list" role="list">
+                  {published.map((post) => (
+                     <li class="post">
+                        <article>
+                           <h2 class="h4 post-title">
+                              <a href={`/blog/${post.id}`}>{post.data.title}</a>
+                           </h2>
+                           <p class="paragraph-sm post-desc">
+                              {post.data.description}
+                           </p>
+                           <time
+                              class="paragraph-xs post-date"
+                              datetime={post.data.pubDate.toISOString()}
+                           >
+                              {dateFormat.format(post.data.pubDate)}
+                           </time>
+                        </article>
+                     </li>
+                  ))}
+               </ul>
+            )
+         }
+      </div>
+   </section>
+</BaseLayout>
+
+<style>
+   @layer base, component, utility;
+
+   @layer component {
+      .section {
+         padding-block: var(--section-padding-default);
+      }
+
+      .header {
+         margin-bottom: var(--space-48);
+      }
+
+      .kicker {
+         color: var(--color-text-soft);
+         margin-bottom: var(--space-em-050);
+      }
+
+      .empty {
+         color: var(--color-text-soft);
+      }
+
+      .post-date {
+         color: var(--color-text-fade);
+      }
+
+      .post-list {
+         display: grid;
+         gap: var(--gap-lg);
+         max-width: 44rem;
+      }
+
+      .post {
+         border-top: 1px solid var(--color-border-default);
+         padding-top: var(--space-24);
+      }
+
+      .post-title a {
+         text-decoration: none;
+      }
+
+      .post-desc {
+         color: var(--color-text-soft);
+         margin-top: var(--space-em-050);
+         margin-bottom: var(--space-em-075);
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+         .post-title a:hover {
+            text-decoration: underline;
+            text-underline-offset: 0.05em;
+            text-underline-position: under;
+         }
+      }
+   }
+</style>

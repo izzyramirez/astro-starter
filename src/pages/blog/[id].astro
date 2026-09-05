@@ -15,7 +15,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
    return posts
       .filter((post) => !post.data.draft)
       .map((post) => ({
-         params: { id: post.data.slug },
+         params: { id: post.id },
          props: { post },
       }));
 };
@@ -44,15 +44,15 @@ const dateFormat = new Intl.DateTimeFormat("en-US", {
    <section class="section">
       <article class="container article">
          <header>
-            <p class="eyebrow u-text-soft">Blog</p>
+            <p class="eyebrow kicker">Blog</p>
 
             <h1 style="margin-top: 1rem;">{title}</h1>
 
-            <p class="paragraph-lg u-text-soft" style="margin-top: 1rem;">
+            <p class="paragraph-lg lede" style="margin-top: 1rem;">
                {description}
             </p>
 
-            <p class="paragraph-sm u-text-soft" style="margin-top: 1.5rem;">
+            <p class="paragraph-sm byline" style="margin-top: 1.5rem;">
                By {author} ·{" "}
                <time datetime={pubDate.toISOString()}
                   >{dateFormat.format(pubDate)}</time
@@ -89,6 +89,13 @@ const dateFormat = new Intl.DateTimeFormat("en-US", {
       }
       .article {
          max-width: 40rem;
+      }
+      .kicker,
+      .lede {
+         color: var(--color-text-soft);
+      }
+      .byline {
+         color: var(--color-text-fade);
       }
    }
 </style>

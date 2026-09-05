@@ -1,10 +1,13 @@
 // @ts-check
 import { defineConfig, fontProviders } from "astro/config";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
    // TODO: Replace with your site URL before deploying
    site: "https://your-site.com",
+
+   integrations: [sitemap()],
 
    fonts: [
       {

@@ -301,6 +301,12 @@
       height: auto;
    }
 
+   .u-svg-absolute-stroke path,
+   .u-svg-absolute-stroke rect,
+   .u-svg-absolute-stroke circle {
+      vector-effect: non-scaling-stroke;
+   }
+
    /* Text wrapping */
    .u-text-pretty {
       text-wrap: pretty;

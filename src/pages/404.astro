@@ -1,0 +1,56 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Button from "@components/Button.astro";
+import FaceNeutral from "@assets/icons/FaceNeutral.astro";
+---
+
+<BaseLayout
+   title="Page not found"
+   description="That page doesn't exist."
+   robots="noindex"
+   topBanner={false}
+   nav={false}
+   footer={false}
+>
+   <section class="section">
+      <div class="container inner">
+         <span class="icon" aria-hidden="true">
+            <FaceNeutral
+               stroke={1.5}
+               class="u-svg-fluid u-svg-absolute-stroke"
+            />
+         </span>
+         <h1 class="u-sr-only">
+            The page doesn't exist, or it moved somewhere else
+         </h1>
+         <Button variant="outline" href="/">Go back to home</Button>
+      </div>
+   </section>
+</BaseLayout>
+
+<style>
+   @layer base, component, utility;
+
+   @layer component {
+      .section {
+         padding-block: var(--section-padding-default);
+         min-height: 100svh;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+      }
+
+      .inner {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         text-align: center;
+      }
+
+      .icon {
+         display: block;
+         width: var(--space-80);
+         margin-bottom: var(--space-20);
+      }
+   }
+</style>
