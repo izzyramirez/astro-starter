@@ -16,7 +16,7 @@ const { logoHref = "/" } = Astro.props;
 <header class="nav" data-module="nav">
    <div class="container inner-nav">
       <div class="nav-backdrop" aria-hidden="true"></div>
-      <a class="nav-logo" href="/" aria-label="Home">
+      <a class="nav-logo" href={logoHref} aria-label="Home">
          <Company class="u-svg-fluid" />
       </a>
 

@@ -10,20 +10,22 @@ const { class: className } = Astro.props;
    <slot />
 </div>
 
-<!-- TODO: Review code -->
 <script>
    import gsap from "gsap";
    import { ScrollTrigger } from "gsap/ScrollTrigger";
 
    gsap.registerPlugin(ScrollTrigger);
 
+   // Counter lives outside the module loop on purpose so two components can work together
+   let count = 0;
+
    document
       .querySelectorAll<HTMLElement>('[data-module="accordion"]')
       .forEach((module) => {
          const items = module.querySelectorAll<HTMLElement>(".accordion-item");
 
-         items.forEach((item, i) => {
-            const id = `accordion-${i + 1}`;
+         items.forEach((item) => {
+            const id = `accordion-${++count}`;
             const btn =
                item.querySelector<HTMLButtonElement>(".accordion-trigger");
             const content =
@@ -36,20 +38,22 @@ const { class: className } = Astro.props;
             btn.setAttribute("aria-controls", `content-${id}`);
             btn.setAttribute("aria-expanded", "false");
             content.id = `content-${id}`;
+            content.setAttribute("role", "region");
             content.setAttribute("aria-labelledby", `trigger-${id}`);
-            content.setAttribute("aria-hidden", "true");
+            // Inert hides focus from contents before accordion is expanded
+            content.setAttribute("inert", "");
 
             gsap.set(content, { height: 0 });
 
             let tl: gsap.core.Timeline | undefined;
 
-            btn.addEventListener("click", (e) => {
-               e.preventDefault();
+            btn.addEventListener("click", () => {
                if (tl) tl.kill();
 
                const isExpanded = btn.getAttribute("aria-expanded") === "true";
                btn.setAttribute("aria-expanded", String(!isExpanded));
-               content.setAttribute("aria-hidden", String(isExpanded));
+               if (isExpanded) content.setAttribute("inert", "");
+               else content.removeAttribute("inert");
 
                if (!isExpanded) item.setAttribute("data-open", "");
 
@@ -65,7 +69,6 @@ const { class: className } = Astro.props;
                   duration: 0.4,
                   ease: "power2.inOut",
                });
-               // Can we add class to icon instead? better perf?
                if (icon) {
                   tl.to(
                      icon,

@@ -46,13 +46,13 @@ const dateFormat = new Intl.DateTimeFormat("en-US", {
          <header>
             <p class="eyebrow kicker">Blog</p>
 
-            <h1 style="margin-top: 1rem;">{title}</h1>
+            <h1 class="title">{title}</h1>
 
-            <p class="paragraph-lg lede" style="margin-top: 1rem;">
+            <p class="paragraph-lg lede">
                {description}
             </p>
 
-            <p class="paragraph-sm byline" style="margin-top: 1.5rem;">
+            <p class="paragraph-sm byline">
                By {author} ·{" "}
                <time datetime={pubDate.toISOString()}
                   >{dateFormat.format(pubDate)}</time
@@ -70,10 +70,10 @@ const dateFormat = new Intl.DateTimeFormat("en-US", {
                }
             </p>
 
-            <span class="u-divider" style="margin: 2.5rem 0;"></span>
+            <span class="u-divider rule"></span>
          </header>
 
-         <div class="rich-text" style="max-width: 65ch;">
+         <div class="rich-text body">
             <Content />
          </div>
       </article>
@@ -90,12 +90,25 @@ const dateFormat = new Intl.DateTimeFormat("en-US", {
       .article {
          max-width: 40rem;
       }
+      .title {
+         margin-top: var(--space-16);
+      }
       .kicker,
       .lede {
          color: var(--color-text-soft);
       }
+      .lede {
+         margin-top: var(--space-16);
+      }
+      .rule {
+         margin-block: var(--space-40);
+      }
+      .body {
+         max-width: 65ch;
+      }
       .byline {
          color: var(--color-text-fade);
+         margin-top: var(--space-24);
       }
    }
 </style>
