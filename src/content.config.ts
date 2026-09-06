@@ -5,12 +5,11 @@ import { z } from "astro/zod";
 const blog = defineCollection({
    loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
    schema: z.object({
-      slug: z.string(),
       title: z.string(),
       description: z.string(),
       pubDate: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),
-      // TODO: Replace with your name
+      // bp-placeholder: Default post author, used when a post omits `author`.
       author: z.string().default("Astro boi"),
       ogImage: z.string().optional(),
       draft: z.boolean().default(false),

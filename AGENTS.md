@@ -122,6 +122,32 @@ light mode sees nothing wrong.
 Gradient stops, shadows, and third-party brand colors are not theme-reactive and are
 not covered by this rule.
 
+## Marking placeholders
+
+Starter values that are *wrong until someone sets them* — a brand name, the site
+URL, a default author — carry a `bp-placeholder:` comment beside them. The text
+after the colon is the instruction, and it may wrap onto following comment lines.
+
+```js
+// bp-placeholder: Site URL. Feeds canonical tags, absolute OG image URLs,
+// robots.txt and the sitemap — set this before any deploy.
+site: "https://your-site.com",
+```
+
+`scripts/check-placeholders.mjs` collects them. `pnpm build` reports them and
+carries on; `pnpm build:release` fails while any remain.
+
+**Introducing a placeholder value means adding the marker.** The script matches
+only `bp-placeholder:` and reads the hint from the comment, so it never needs
+editing — but an unmarked placeholder is invisible to it and will ship.
+
+**A `bp-placeholder` is not a TODO.** A TODO is work to do eventually; a
+placeholder is a value that is incorrect right now. Ordinary TODOs are not
+gated — a release should not be blocked by a "review this code" note.
+
+The prefix is deliberate: a bare `placeholder` would collide with the HTML
+attribute and the `::placeholder` pseudo-element used throughout the form CSS.
+
 ## Working with tokens
 
 `src/styles/tokens.css` is the design system. It is the vocabulary — compose from it

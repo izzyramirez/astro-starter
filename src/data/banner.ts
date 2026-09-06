@@ -5,7 +5,7 @@ export interface Banner {
    label?: string;
 }
 
-// TODO: Replace with your announcement, or set enabled: false
+// bp-placeholder: Announcement bar copy — replace it, or set enabled: false.
 export const banner: Banner = {
    enabled: true,
    text: "Boilerplate is a lightweight Astro framework",

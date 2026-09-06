@@ -4,7 +4,8 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-   // TODO: Replace with your site URL before deploying
+   // bp-placeholder: Site URL. Feeds canonical tags, absolute OG image URLs,
+   // robots.txt and the sitemap — set this before any deploy.
    site: "https://your-site.com",
 
    integrations: [sitemap()],

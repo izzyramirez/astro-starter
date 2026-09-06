@@ -1,5 +1,4 @@
 ---
-slug: template
 title: Sample web post
 description: Every sensible typographic element, styled out of the box — headings, lists, links, block quotes, inline code, images, and captions.
 pubDate: 2026-08-17

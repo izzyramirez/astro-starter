@@ -9,9 +9,7 @@ interface Props {
    ogType?: string;
    robots?: string;
    locale?: string;
-   // TODO: Set your site name
    siteName?: string;
-   // TODO: Add your social profile URLs
    sameAs?: string[];
    datePublished?: Date;
    dateModified?: Date;
@@ -20,10 +18,11 @@ interface Props {
 }
 
 const {
-   // TODO: Replace default title with your site/brand name
+   // bp-placeholder: Fallback <title> for pages that pass no title.
    title = "Your Site Name",
    description,
-   // TODO: Replace with real artwork (1200x630)
+   // bp-placeholder: Default social share image — public/og-image.jpg is
+   // generated placeholder artwork. Replace with a real 1200x630 design.
    ogImage = "/og-image.jpg",
    ogImageWidth = 1200,
    ogImageHeight = 630,
@@ -31,21 +30,22 @@ const {
    ogType = "website",
    robots,
    locale = "en_US",
-   // TODO: Replace with your site name
+   // bp-placeholder: Brand name, used for og:site_name and JSON-LD WebSite.
    siteName = "Your Site Name",
-   // TODO: Add social profile URLs
+   // bp-placeholder: Social profile URLs for the JSON-LD Person `sameAs`.
    sameAs = [
       // 'https://linkedin.com/in/your-handle',
       // 'https://github.com/your-handle',
    ],
    datePublished,
    dateModified,
-   // TODO: Replace with your site URL
+   // bp-placeholder: Author URL stamped onto article:author meta tags.
    articleAuthor = "https://your-site.com",
    breadcrumbItem,
 } = Astro.props;
 
-// TODO: Replace with your profile image path
+// bp-placeholder: JSON-LD Person image. This path does not exist yet —
+// point it at a real file, or remove the Person image from the graph.
 const personImage = "/images/profile.jpg";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -74,7 +74,7 @@ const graph: unknown[] = [
    {
       "@type": "Person",
       "@id": `${siteId}/Person`,
-      // TODO: Replace with your name
+      // bp-placeholder: Your name, for the JSON-LD Person entity.
       name: "Your Name",
       url: siteURL,
       image: {
