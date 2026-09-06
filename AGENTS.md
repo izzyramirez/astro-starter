@@ -34,6 +34,22 @@ are touching answers most "should I change this?" questions.
 while the markup contract it styles (`.input-group`, `.input`, `.field-error`) stays
 put. See `.claude/skills/create-form/SKILL.md`.
 
+## Toolchain is pinned
+
+Formatting and linting must produce identical results on every machine, so the
+tools that decide pass/fail are pinned to exact versions in `package.json`:
+`prettier`, `prettier-plugin-astro`, `stylelint`, `postcss-html`, `typescript`,
+`@astrojs/check`. Prettier can change its output in a minor release — on a
+caret range one `pnpm update` reformats the whole repo and buries a real diff.
+Feature dependencies (`astro`, `gsap`, `@astrojs/sitemap`) keep caret ranges;
+the committed lockfile covers reproducibility there.
+
+Do not widen these to `^` or `~`. To upgrade one, change the exact version
+deliberately and commit the reformat separately from any other change.
+
+`pnpm build` runs `format:check` first, so unformatted code fails the build
+regardless of whether the author's editor has a Prettier plugin.
+
 ## Enforcement
 
 The CSS rules below are **not advisory** — `stylelint.config.js` and
