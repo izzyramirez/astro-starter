@@ -152,6 +152,29 @@ refuses to grow and you get mystery whitespace either side.
 
 Do not add `u-svg-fluid` to normal UI icons; they should keep their intrinsic size.
 
+## Scaling a stroked icon
+
+Stroke width is in user units, so it scales with the artwork. Blow a 24x24 icon
+up to 96px and a `stroke-width` of 2 renders as 8 — the icon reads as a much
+heavier weight than the rest of the set.
+
+`u-svg-absolute-stroke` pins the stroke to its authored width at any size:
+
+```astro
+<FaceNeutral stroke={1.5} class="u-svg-fluid u-svg-absolute-stroke" />
+```
+
+It sets `vector-effect: non-scaling-stroke` on every descendant of the SVG.
+
+Use it whenever a stroked icon renders far from its intrinsic size — a hero
+glyph, an empty-state illustration, anything paired with `u-svg-fluid`. Normal
+UI icons at their natural size do not need it, and it does nothing on
+fill-based icons since they have no stroke to preserve.
+
+The class name is the odd one in the `u-*` set: "absolute" here means the stroke
+is absolute rather than relative to scale, matching the CSS keyword
+`non-scaling-stroke`.
+
 ## Converting an export
 
 SVG exported from Figma or copied from an icon set needs normalizing:

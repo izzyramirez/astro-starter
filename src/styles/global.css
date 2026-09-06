@@ -301,9 +301,7 @@
       height: auto;
    }
 
-   .u-svg-absolute-stroke path,
-   .u-svg-absolute-stroke rect,
-   .u-svg-absolute-stroke circle {
+   .u-svg-absolute-stroke * {
       vector-effect: non-scaling-stroke;
    }
 
